@@ -1,0 +1,86 @@
+GOAL
+
+This is an app that will price, post, and manage sales of my collection of Silver Age Marvel comics.  The app will do all these things by itself, with only a simple email or text confirmation I will have to send to authorize a post or respond to a buyer.  You will pick the next batch to sell, determine a fair price, post on eBay and maybe elsewhere, negotiate with buyers, complete the sale, and print the shipping label.  Your goal in all this is to get the best price for a comic.  
+
+PRICING 
+
+Pricing is based on asking and sold data from eBay and other sources.  To figure the fair market value of a comic, the date of sale is an important factor.  The standard eBay API call does not return date of sale but we can use the close of the listing as a close-enough proxy for date of sale.  
+
+There is a general downward trend on prices over the last decade.  We should be able to quantify that trend by analysing the sold data we gather from ebay.  This might let us apply a function to the sold data to adjust for the trend, giving us a normalized price for comics sold in past years.
+
+If there are enough data points for the current grade, we can project the graph of sales over time to determine its value.  This is the Happy Path.  If there are not enough data points, we will use the nearby grades to determine its value by interpolation.  When there is no sales data, there are still pricing guides that can be consulted.
+
+We also look at asking prices for the same grade and condition.  This can be used to determine how the asking price should be calculated from the market value. 
+
+The ebay sold listings are for the last 3 months, so new ones show up and old ones disappear.  We should save the data we gather and add to our local cache by doing a daily check for new sales.  Any new sale may change our Fair Market Value.
+
+POSTING 
+
+The post should be straightforward now that we have the fair market value.  The asking price can be set at a constant percentage of the market price, determined by analysis of the data we are gathering, with guardrails to make sure the recommended ask is not an outlier on the sales over time graph.
+
+MANAGING SALES
+
+To manage sales, you need access to the ebay account email we are using for this experiment.  You will be reading and responding to buyers' requests for information or to make a bid.  It should be enough to check email once a day.  
+
+DAILY JOB
+
+There are 3 daily tasks:
+  - Check ebay for new sales.  
+  - Check email for offers on our comics.  
+  - Update our ebay listings when prices change.
+
+COMMUNICATION
+
+The primary communication to the user (me) will be text messages and email.  You will let me know at each stage of a process, and wait for my autorization to do anything that contacts the buyer.
+
+THE UI OF THE APP
+
+The UI presents the comics as cards or as a list of rows and columns.  Thumbnails are always included.  For cards, the thumbnail fills the height.  
+
+For lists, we need all the usual spreadsheet controls for selecting and sorting.  Google does it well, with controls on each column header.
+
+The should be a clickable list of titles like "Spider-Man" to filter by title.
+
+EVIDENCE PAGE
+
+Each comic has an evidence page.  This shows all the ebay data we found, and graphs showing sales price over grade.  We should use normalized prices for this, which take into account the general price reduction year-over-year. 
+
+Four graphs:  
+
+  - sold price / time for the close-grade listings
+  - sold price / grade in case we need to interpolate
+  - asking price / time
+  - asking price / grade  
+  
+Each graph shows both slabbed and raw in two different colors.  Show our recommended asking price as a big black dot on the asking graphs, and our calculated market value for the sold graphs.
+
+Display the recommended fair market value at the top of the page, with a short description of how it was calculated.
+
+DATA SOURCES
+
+The spreadsheet is in the public directory, and the images are in the comic-photos directory also in public.  The PleaseGradeMe directory has the reduced-size images that were submitted to the CGC forum for community grades.  The images directory has the full-size photos.
+
+CATEGORIES OF GRADES
+
+slabbed -- these comics were graded by CGC and are encased in plastic slabs.  The front and back covers are visible but the inside cannot be read without breaking the slab and invalidating the grade.  These are the best candidates for sale anywhere.
+
+raw and community graded -- these comics are not in slabs.  They were submitted to the CGC forum for community grading.  The community grades are stored in the spreadsheet.  We may decide to send them to CGC for grading at some point, if the estimated value when slabbed is high enough to justify the cost.  It may be possible to sell these as raw comics for a price close to what they would fetch slabbed, but I have not done this yet.
+
+raw and ungraded -- these comics are not in slabs and have not been submitted to the CGC forum for community grading.  I have assigned them estimated grades.  Before posting for sale, I intend to submit them all for community grading, so the claim is not by me alone.
+
+QUALIFIED GRADES
+
+Most CGC slabs have universal grades.  But 5 or so are missing pages (pin-ups) and have qualified grades.  That reduces the value by some percentage.  Please analyze the ebay listings to see by how much, based on past sales.
+
+CATEGORIES OF SALES
+
+sell on ebay -- not all slabbed comics can be sold on ebay.  We have created three listings for comics with a value around $100 and have had no offers yet, after about 10 days.  It may be that ebay sales can be done for comics worth more than X, where X may be $400.  
+
+sell by consignment on shortboxed -- I have done this for the first 19 comics.  Not sure the prices have been the best.  The best strategy in general may be to try posting to ebay, and for the ones that do not result in sales, submit them to shortboxed for consignment sale.
+
+sell on other platforms -- not tried yet.  There are alternative platforms for auctions, like Heritage.  There is the Facebook Marketplace.  There is hipcomic.  And others.  I hope you can help find the best platform for each comic.
+
+
+
+
+

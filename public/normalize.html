@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Comics Price Normalization</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0e1020; color: #e8e9f0; font-family: -apple-system, sans-serif; padding: 20px; }
+  h1 { font-size: 18px; color: #f5a623; margin-bottom: 12px; }
+
+  .controls {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap;
+  }
+  select {
+    background: #1a1d2e; color: #e8e9f0; border: 1px solid #2c3150;
+    padding: 6px 10px; border-radius: 6px; font-size: 14px; min-width: 220px;
+  }
+  button {
+    background: #f5a623; color: #000; border: none; padding: 7px 18px;
+    border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer;
+  }
+  button:hover { background: #ffb84d; }
+  button.secondary { background: #2c3150; color: #e8e9f0; font-weight: 500; }
+  button.secondary:hover { background: #3a4060; }
+
+  .stat { font-size: 13px; color: #8890aa; }
+  .stat span { color: #e8e9f0; font-weight: 600; }
+
+  #chart { display: block; }
+
+  .dot { transition: none; }
+  .axis path, .axis line { stroke: #2c3150; }
+  .axis text { fill: #5a5f7a; font-size: 11px; }
+  .grid line { stroke: rgba(44,49,80,0.5); stroke-dasharray: 3,3; }
+  .refline { stroke: #f5a623; stroke-dasharray: 5,4; stroke-width: 1.5; opacity: 0.6; }
+  .reflabel { fill: #f5a623; font-size: 11px; }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: #8890aa; margin-top: 8px; }
+  .leg-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+  .mode-label {
+    font-size: 13px; color: #5a5f7a; margin-left: 4px;
+    transition: color 0.3s;
+  }
+  .mode-label.active { color: #f5a623; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Comics Price Normalization</h1>
+
+<div class="controls">
+  <select id="comicSelect"></select>
+  <button id="btnNormalize">Normalize →</button>
+  <button id="btnActual" class="secondary">← Actual</button>
+  <span class="mode-label" id="modeLabel">Actual prices</span>
+</div>
+<div class="controls" style="margin-top:-8px; margin-bottom: 14px;">
+  <span class="stat">Our grade: <span id="statGrade">—</span></span>
+  <span class="stat">Sold median: <span id="statSoldMed">—</span></span>
+  <span class="stat">CV: <span id="statCV">—</span></span>
+  <span class="stat">β_grade: <span id="statBeta">—</span></span>
+</div>
+
+<svg id="chart"></svg>
+
+<div class="legend">
+  <span><span class="leg-dot" style="background:#f5a623"></span>Sold slabbed</span>
+  <span><span class="leg-dot" style="background:#4a90d9"></span>Sold raw</span>
+  <span><span class="leg-dot" style="background:#f5a623;opacity:0.35"></span>Asking slabbed</span>
+  <span><span class="leg-dot" style="background:#4a90d9;opacity:0.35"></span>Asking raw</span>
+</div>
+
+<script>
+const W = Math.min(900, window.innerWidth - 40);
+const H = 420;
+const margin = { top: 30, right: 30, bottom: 50, left: 70 };
+const iW = W - margin.left - margin.right;
+const iH = H - margin.top - margin.bottom;
+
+const svg = d3.select('#chart')
+  .attr('width', W)
+  .attr('height', H);
+
+const g = svg.append('g')
+  .attr('transform', `translate(${margin.left},${margin.top})`);
+
+// Axes
+const xScale = d3.scaleLinear().domain([0, 10]).range([0, iW]);
+const yScale = d3.scaleLinear().range([iH, 0]);
+
+const xAxis = g.append('g').attr('class', 'axis').attr('transform', `translate(0,${iH})`);
+const yAxis = g.append('g').attr('class', 'axis');
+
+// Grid lines
+const yGrid = g.append('g').attr('class', 'grid');
+const xGrid = g.append('g').attr('class', 'grid');
+
+// Reference lines
+const fmvLine = g.append('line').attr('class', 'refline').attr('x1', 0).attr('x2', iW);
+const fmvLabel = g.append('text').attr('class', 'reflabel');
+const gradeLine = g.append('line').attr('class', 'refline').attr('stroke', '#8890aa').attr('stroke-dasharray', '3,4');
+const gradeLabel = g.append('text').attr('class', 'reflabel').attr('fill', '#8890aa');
+
+// Axis labels
+g.append('text').attr('x', iW/2).attr('y', iH+40).attr('text-anchor','middle').attr('fill','#5a5f7a').attr('font-size',12).text('CGC Grade');
+g.append('text').attr('transform','rotate(-90)').attr('x',-iH/2).attr('y',-55).attr('text-anchor','middle').attr('fill','#5a5f7a').attr('font-size',12).text('Price ($)');
+
+// Dots group
+const dotsG = g.append('g');
+
+let allData = [];
+let currentComic = null;
+let normalized = false;
+
+function dotColor(d) {
+  const base = d.slabbed ? '#f5a623' : '#4a90d9';
+  return d.type === 'asking' ? base + '59' : base;  // hex opacity 35% for asking
+}
+function dotOpacity(d) { return d.type === 'asking' ? 0.35 : 0.85; }
+
+function updateStats(comic, norm) {
+  const sold = comic.points.filter(p => p.type === 'sold');
+  const vals = sold.map(p => norm ? p.normalized : p.price);
+  const med = d3.median(vals);
+  const cv = vals.length > 1 ? d3.deviation(vals) / d3.mean(vals) * 100 : null;
+  document.getElementById('statGrade').textContent = comic.our_grade.toFixed(1);
+  document.getElementById('statSoldMed').textContent = med ? `$${Math.round(med).toLocaleString()}` : '—';
+  document.getElementById('statCV').textContent = cv != null ? `${cv.toFixed(1)}%` : '—';
+  document.getElementById('statBeta').textContent = comic.beta_grade.toFixed(3);
+}
+
+function render(comic, animateToNorm) {
+  currentComic = comic;
+  normalized = animateToNorm;
+
+  const pts = comic.points;
+  const yVals = pts.map(p => animateToNorm ? p.normalized : p.price);
+  const yMin = d3.min(yVals) * 0.85;
+  const yMax = d3.max(yVals) * 1.15;
+
+  yScale.domain([Math.max(0, yMin), yMax]);
+
+  xAxis.call(d3.axisBottom(xScale).ticks(10));
+  yAxis.call(d3.axisLeft(yScale).tickFormat(d => `$${d3.format(',.0f')(d)}`));
+
+  // Grid
+  yGrid.selectAll('line').remove();
+  yGrid.call(d3.axisLeft(yScale).tickSize(-iW).tickFormat('')).selectAll('line').attr('stroke','rgba(44,49,80,0.4)').attr('stroke-dasharray','3,3');
+  yGrid.select('.domain').remove();
+
+  // FMV line
+  const fmvY = yScale(comic.intrinsic);
+  fmvLine.attr('y1', fmvY).attr('y2', fmvY).attr('visibility', 'visible');
+  fmvLabel.attr('x', 4).attr('y', fmvY - 4).text(`Intrinsic $${Math.round(comic.intrinsic).toLocaleString()}`).attr('visibility', 'visible');
+
+  // Grade line
+  const gx = xScale(comic.our_grade);
+  gradeLine.attr('x1', gx).attr('x2', gx).attr('y1', 0).attr('y2', iH).attr('visibility', 'visible');
+  gradeLabel.attr('x', gx + 3).attr('y', 14).text(`Our grade ${comic.our_grade}`).attr('visibility', 'visible');
+
+  // Dots
+  const dots = dotsG.selectAll('.dot').data(pts, (d, i) => i);
+
+  dots.enter()
+    .append('circle')
+    .attr('class', 'dot')
+    .attr('r', 5)
+    .attr('cx', d => xScale(d.grade))
+    .attr('cy', d => yScale(d.price))
+    .attr('fill', dotColor)
+    .attr('opacity', dotOpacity)
+    .append('title')
+      .text(d => `${d.type} ${d.slabbed?'slabbed':'raw'}\nGrade: ${d.grade}\nActual: $${d.price}\nPredicted: $${d.predicted}\nNormalized: $${d.normalized}`);
+
+  // Animate existing dots
+  dotsG.selectAll('.dot')
+    .data(pts)
+    .transition()
+    .duration(800)
+    .ease(d3.easeCubicInOut)
+    .attr('cx', d => xScale(animateToNorm ? comic.our_grade : d.grade))
+    .attr('cy', d => yScale(animateToNorm ? d.normalized : d.price))
+    .attr('fill', dotColor)
+    .attr('opacity', dotOpacity);
+
+  dots.exit().remove();
+
+  updateStats(comic, animateToNorm);
+
+  document.getElementById('modeLabel').textContent = animateToNorm
+    ? 'Normalized to today + your grade'
+    : 'Actual prices (raw eBay data)';
+  document.getElementById('modeLabel').className = 'mode-label' + (animateToNorm ? ' active' : '');
+}
+
+// Load data
+d3.json('/norm-data.json').then(data => {
+  allData = data;
+
+  const sel = document.getElementById('comicSelect');
+  data.forEach((c, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${c.title} #${c.number} (gr ${c.our_grade}) — ${c.points.length} listings`;
+    sel.appendChild(opt);
+  });
+
+  // Default to X-Men #7
+  const xmen7idx = data.findIndex(c => c.title === 'X-Men' && c.number === '7');
+  if (xmen7idx >= 0) sel.value = xmen7idx;
+
+  function loadComic() {
+    const idx = parseInt(sel.value);
+    dotsG.selectAll('.dot').remove();
+    render(allData[idx], false);
+  }
+
+  sel.addEventListener('change', loadComic);
+  loadComic();
+
+  document.getElementById('btnNormalize').addEventListener('click', () => {
+    if (currentComic) render(currentComic, true);
+  });
+  document.getElementById('btnActual').addEventListener('click', () => {
+    if (currentComic) render(currentComic, false);
+  });
+});
+</script>
+</body>
+</html>

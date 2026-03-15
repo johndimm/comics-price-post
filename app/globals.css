@@ -1,26 +1,1443 @@
-@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap");
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0d0f1a;
+  --bg2: #151828;
+  --bg3: #1e2236;
+  --border: #2c3150;
+  --red: #e8272b;
+  --gold: #f5a623;
+  --gold2: #ffd166;
+  --blue: #4a90d9;
+  --text: #e8e9f0;
+  --text-muted: #8b8fa8;
+  --text-dim: #5a5f7a;
+  --slabbed: #f5a623;
+  --community: #4a90d9;
+  --raw-col: #6b7280;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+
+.page-header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.page-header-logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 28px;
+  color: var(--red);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.page-header-logo span {
+  color: var(--gold);
+}
+
+.page-header-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.page-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 32px;
+}
+
+/* ── Toolbar ─────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.toolbar-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-block {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.stat-block strong {
+  color: var(--text);
+}
+
+.saved-queries-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.saved-query-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #1e3a5f;
+  border: 1px solid #3b6ea8;
+  border-radius: 16px;
+  padding: 3px 10px 3px 12px;
+  font-size: 13px;
+  color: #90c4f9;
+  cursor: default;
+}
+
+.saved-query-chip > span {
+  cursor: pointer;
+}
+
+.saved-query-chip > span:hover {
+  color: #fff;
+}
+
+.saved-query-chip > button {
+  background: none;
+  border: none;
+  color: #90c4f9;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.saved-query-chip > button:hover {
+  color: #ff6b6b;
+}
+
+/* ── Filter & Toggle Buttons ────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.btn:hover {
+  background: var(--bg3);
+  border-color: var(--text-muted);
+}
+
+.btn.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.btn.active-gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #000;
+}
+
+.btn.active-blue {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+/* ── Search Input ────────────────────────────────── */
+
+.search-input {
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 220px;
+}
+
+.search-input:focus {
+  border-color: var(--blue);
+}
+
+.search-input::placeholder {
+  color: var(--text-dim);
+}
+
+/* ── Card Grid ───────────────────────────────────── */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+/* ── Comic Card ──────────────────────────────────── */
+
+.comic-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.comic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--gold);
+}
+
+.comic-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  overflow: hidden;
+  background: #0a0b12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comic-card-qualified {
+  display: inline-block;
+  margin-top: 4px;
+  background: #eab308;
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.qualified-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #eab308;
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.comic-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.comic-card:hover .comic-card-image img {
+  transform: scale(1.04);
+}
+
+.comic-card-no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  background: var(--bg3);
+  min-height: 200px;
+}
+
+.comic-card-body {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.comic-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.comic-card-number {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.comic-card-year {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.comic-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.comic-card-grade {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.comic-card-fmv {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f5a623;
+  margin-top: 6px;
+}
+
+/* ── Badges ──────────────────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.badge-detail {
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.badge-slabbed {
+  background: rgba(245, 166, 35, 0.18);
+  color: var(--gold);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+}
+
+.badge-community {
+  background: rgba(74, 144, 217, 0.18);
+  color: var(--blue);
+  border: 1px solid rgba(74, 144, 217, 0.3);
+}
+
+.badge-raw {
+  background: rgba(107, 114, 128, 0.18);
+  color: var(--raw-col);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* ── Status Badge ────────────────────────────────── */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.status-nfs {
+  background: rgba(90, 95, 122, 0.2);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.status-sale {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.status-sold {
+  background: rgba(232, 39, 43, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(232, 39, 43, 0.3);
+}
+
+/* ── Table ───────────────────────────────────────── */
+
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100vh - 180px);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.comic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.comic-table thead {
+  background: var(--bg3);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.comic-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.comic-table th.sortable {
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.comic-table th.sortable:hover {
+  color: var(--text);
+}
+
+.comic-table tbody tr {
+  border-bottom: 1px solid rgba(44, 49, 80, 0.5);
+  transition: background 0.1s;
+}
+
+.comic-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.comic-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.comic-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.comic-table tbody tr:nth-child(even):hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.comic-table tbody tr.selected {
+  background: rgba(74, 144, 217, 0.15) !important;
+}
+
+.comic-table tbody tr.selected:hover {
+  background: rgba(74, 144, 217, 0.2) !important;
+}
+
+.comic-table td {
+  padding: 10px 14px;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.thumb-cell {
+  width: 48px;
+  padding: 6px 10px 6px 14px !important;
+}
+
+.table-thumb {
+  width: 38px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.table-thumb-empty {
+  width: 38px;
+  height: 56px;
+  background: var(--bg3);
+  border-radius: 4px;
+}
+
+.table-link {
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.table-link:hover {
+  color: var(--gold);
+}
+
+.num-cell {
+  color: var(--text-muted);
+}
+
+.artist-cell {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ── Evidence Page ───────────────────────────────── */
+
+.evidence-header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px;
+}
+
+.evidence-back {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  transition: color 0.15s;
+}
+
+.evidence-back:hover {
+  color: var(--text);
+}
+
+.evidence-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.evidence-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+
+.evidence-issue {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.evidence-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.evidence-year {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.fmv-block {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.12), rgba(232, 39, 43, 0.08));
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 32px;
+}
+
+.fmv-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.fmv-value {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 52px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.fmv-prices-row {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.fmv-ask {
+  color: #4a90d9;
+}
+
+.fmv-explanation {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.evidence-body {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 40px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .evidence-body {
+    grid-template-columns: 1fr;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.evidence-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.evidence-photo-main img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.evidence-photo-thumbs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.evidence-photo-thumbs img {
+  width: 56px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.evidence-photo-thumbs img:hover {
+  border-color: var(--gold);
+}
+
+.evidence-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 1000px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px 12px;
+}
+
+.chart-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.chart-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.chart-empty {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+
+/* ── Comic Details Table (Evidence) ─── */
+
+.evidence-details {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.evidence-details h3 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(44, 49, 80, 0.4);
+  font-size: 13px;
+  gap: 12px;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-key {
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.detail-val {
+  color: var(--text);
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ── Main Layout with Sidebar ───────────────────── */
+.main-with-sidebar {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.title-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 110px;
+  /* Below header + padding */
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-item {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  width: 100%;
+  font-family: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.sidebar-item.active {
+  background: var(--bg3);
+  color: var(--gold);
+  border: 1px solid var(--border);
+}
+
+.sidebar-count {
+  font-size: 10px;
+  opacity: 0.6;
+  background: var(--bg3);
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── Selection & Checkboxes ──────────────────────── */
+
+.selection-cell {
+  width: 40px;
+  padding: 10px 0 10px 18px !important;
+  text-align: center;
+}
+
+.custom-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg3);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  display: block;
+}
+
+.custom-checkbox:checked {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.custom-checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.custom-checkbox:hover {
+  border-color: var(--text-muted);
+}
+
+.selection-summary {
+  background: rgba(74, 144, 217, 0.1);
+  border: 1px solid rgba(74, 144, 217, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selection-fmv {
+  color: var(--gold);
+  font-weight: 700;
+  border-left: 1px solid rgba(74, 144, 217, 0.3);
+  padding-left: 8px;
+}
+
+.selection-clear {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.selection-clear:hover {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .main-with-sidebar {
+    flex-direction: column;
+  }
+
+  .title-sidebar {
+    width: 100%;
+    position: static;
+    max-height: none;
+  }
+
+  .sidebar-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-item {
+    width: auto;
+  }
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+.qualified-sub-tag {
+  color: #eab308;
+  font-weight: 800;
+  font-size: 0.9em;
+  margin-left: 4px;
+}
+
+/* ── Column Filtering ────────────────────────────── */
+
+.sortable-header {
+  position: relative;
+  padding: 10px 12px !important;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.header-content>span {
+  cursor: pointer;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.filter-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.filter-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  margin-top: 5px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+}
+
+.filter-dropdown-header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  background: var(--bg3);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-weight: 600;
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+.filter-dropdown-list {
+  overflow-y: auto;
+  padding: 8px 0;
+  flex: 1;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.1s;
+}
+
+.filter-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter-dropdown-footer {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-checkbox-small {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg3);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.custom-checkbox-small:checked {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.custom-checkbox-small:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.listing-grid-container {
+  margin-top: 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.listing-grid-container h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.listing-grid-container .table-wrapper {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.status-badge.for-sale {
+  background: rgba(30, 64, 175, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(30, 64, 175, 0.3);
+}
+
+.comic-table tr.selected {
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+/* ── Simulated eBay Listing ───────────────────────── */
+
+.listing-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.listing-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.listing-nav-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(245,166,35,0.15);
+  border: 1px solid rgba(245,166,35,0.3);
+  padding: 2px 10px;
+  border-radius: 12px;
+  color: var(--gold);
+}
+
+.ebay-listing {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+
+.ebay-header-bar {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ebay-breadcrumb { color: var(--blue); }
+
+.ebay-body {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-top: none;
+  background: var(--bg2);
+}
+
+.ebay-photos {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+}
+
+.ebay-main-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #0a0b14;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.ebay-main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ebay-no-photo {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.ebay-thumbs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ebay-thumb {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s, border-color 0.15s;
+}
+
+.ebay-thumb.active,
+.ebay-thumb:hover {
+  opacity: 1;
+  border-color: var(--blue);
+}
+
+.ebay-details {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ebay-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ebay-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  flex: 1;
+}
+
+.ebay-char-count {
+  margin-top: -12px;
+}
+
+.ebay-price-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ebay-price-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ebay-price {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.ebay-condition {
+  font-size: 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ebay-field-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.ebay-field-value {
+  color: var(--text);
+}
+
+.ebay-specifics {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.ebay-specifics-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.ebay-specifics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ebay-specifics-table tr + tr td {
+  border-top: 1px solid var(--border);
+}
+
+.ebay-spec-key {
+  padding: 6px 12px 6px 0;
+  color: var(--text-muted);
+  width: 40%;
+  vertical-align: top;
+}
+
+.ebay-spec-val {
+  padding: 6px 0;
+  color: var(--text);
+}
+
+.ebay-description-section {
+  border: 1px solid var(--border);
+  border-top: none;
+  background: var(--bg2);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.ebay-description-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ebay-description-header h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ebay-description {
+  padding: 24px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.ebay-description h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.ebay-description h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 16px 0 6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ebay-description p {
+  margin-bottom: 10px;
+}
+
+.ebay-description ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.ebay-description li {
+  margin-bottom: 4px;
+}
+
+.btn-sm {
+  font-size: 11px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.ebay-description a {
+  color: var(--blue);
+  word-break: break-all;
+}
+
+.ebay-description a:hover {
+  color: var(--text);
+  text-decoration: underline;
 }

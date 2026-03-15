@@ -1,0 +1,626 @@
+
+> comics-price-post@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.243:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 2.8s
+ GET /comic/12447 200 in 1903ms (compile: 1338ms, generate-params: 933ms, render: 566ms)
+ GET /comic/12447 200 in 349ms (compile: 97ms, generate-params: 6ms, render: 251ms)
+✓ Compiled in 47ms
+✓ Compiled in 14ms
+✓ Compiled in 12ms
+✓ Compiled in 15ms
+✓ Compiled in 13ms
+✓ Compiled in 39ms
+✓ Compiled in 332ms
+✓ Compiled in 15ms
+✓ Compiled in 15ms
+✓ Compiled in 13ms
+ GET /comic/12447 200 in 447ms (compile: 117ms, generate-params: 9ms, render: 329ms)
+ GET /comic/12447 200 in 356ms (compile: 59ms, generate-params: 4ms, render: 297ms)
+ GET /comic/12447 200 in 664ms (compile: 106ms, generate-params: 6ms, render: 558ms)
+✓ Compiled in 31ms
+✓ Compiled in 7ms
+✓ Compiled in 19ms
+✓ Compiled in 36ms
+✓ Compiled in 15ms
+✓ Compiled in 18ms
+✓ Compiled in 33ms
+ GET /comic/12447 200 in 1073ms (compile: 204ms, generate-params: 13ms, render: 869ms)
+ GET /comic/12414 200 in 139ms (compile: 12ms, generate-params: 5ms, render: 126ms)
+ GET /comic/12447 200 in 207ms (compile: 12ms, generate-params: 4ms, render: 194ms)
+ GET / 200 in 98ms (compile: 53ms, render: 44ms)
+ GET /comic/6693 200 in 56ms (compile: 12ms, generate-params: 3ms, render: 44ms)
+ GET /comic/6693 200 in 264ms (compile: 11ms, generate-params: 3ms, render: 253ms)
+ GET / 200 in 47ms (compile: 5ms, render: 42ms)
+ GET /comic/12414 200 in 48ms (compile: 13ms, generate-params: 4ms, render: 35ms)
+ GET /comic/12414 200 in 434ms (compile: 106ms, generate-params: 23ms, render: 329ms)
+ GET /comic/12414 200 in 191ms (compile: 17ms, generate-params: 5ms, render: 173ms)
+ GET /comic/12414 200 in 600ms (compile: 170ms, generate-params: 5ms, render: 430ms)
+ GET /comic/12414 200 in 96ms (compile: 8ms, generate-params: 231µs, render: 88ms)
+ GET /comic/12414 200 in 377ms (compile: 83ms, generate-params: 3ms, render: 294ms)
+ GET /comic/12521 200 in 414ms (compile: 11ms, generate-params: 4ms, render: 403ms)
+✓ Compiled in 213ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 43ms
+⨯ ReferenceError: NormalizedChart is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:283:18)
+  281 |             {/* Row 1b: Normalized chart */}
+  282 |             {normalizedPoints.length > 0 && (
+> 283 |                 <NormalizedChart
+      |                  ^
+  284 |                     normalizedPoints={normalizedPoints}
+  285 |                     marketValue={marketValue}
+  286 |                     currentGrade={currentGrade} {
+  digest: '3342470910'
+}
+ GET /comic/12414 500 in 1034ms (compile: 231ms, generate-params: 4ms, render: 803ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 37ms
+⨯ ReferenceError: NormalizedChart is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:292:18)
+  290 |             {/* Row 1b: Normalized chart */}
+  291 |             {normalizedPoints.length > 0 && (
+> 292 |                 <NormalizedChart
+      |                  ^
+  293 |                     normalizedPoints={normalizedPoints}
+  294 |                     marketValue={marketValue}
+  295 |                     currentGrade={currentGrade} {
+  digest: '804447708'
+}
+ GET /comic/12414 500 in 683ms (compile: 98ms, generate-params: 4ms, render: 585ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 81ms
+ GET /comic/12414 200 in 688ms (compile: 103ms, generate-params: 4ms, render: 585ms)
+ GET /comic/12521 200 in 130ms (compile: 7ms, generate-params: 3ms, render: 122ms)
+ GET /comic/12414 200 in 399ms (compile: 108ms, generate-params: 4ms, render: 291ms)
+✓ Compiled in 726ms
+ GET /comic/12414 200 in 506ms (compile: 24ms, generate-params: 9ms, render: 482ms)
+ GET /comic/12414 200 in 488ms (compile: 140ms, generate-params: 3ms, render: 348ms)
+ GET /comic/12414 200 in 64ms (compile: 6ms, generate-params: 33µs, render: 58ms)
+⨯ ReferenceError: normalizedPoints is not defined
+    at EvidencePage (app/comic/[id]/page.tsx:186:43)
+  184 |                         currentGrade={comic.grade}
+  185 |                         listings={listings}
+> 186 |                         normalizedPoints={normalizedPoints}
+      |                                           ^
+  187 |                     />
+  188 |                 </div>
+  189 |             </div> {
+  digest: '401578938'
+}
+ GET /comic/12414 200 in 347ms (compile: 92ms, generate-params: 4ms, render: 255ms)
+ GET /comic/12414 200 in 726ms (compile: 91ms, generate-params: 3ms, render: 635ms)
+✓ Compiled in 12ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 7ms
+ GET /comic/12414 200 in 1105ms (compile: 146ms, generate-params: 6ms, render: 959ms)
+✓ Compiled in 34ms
+ GET /comic/12414 200 in 609ms (compile: 105ms, generate-params: 3ms, render: 504ms)
+✓ Compiled in 3ms
+✓ Compiled in 16ms
+ GET /comic/12414 200 in 621ms (compile: 113ms, generate-params: 8ms, render: 508ms)
+✓ Compiled in 47ms
+✓ Compiled in 45ms
+✓ Compiled in 496ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /comic/12414 200 in 968ms (compile: 115ms, generate-params: 3ms, render: 853ms)
+✓ Compiled in 131ms
+ GET /comic/12521 200 in 590ms (compile: 158ms, generate-params: 3ms, render: 432ms)
+ GET /comic/12521 200 in 126ms (compile: 5ms, generate-params: 3ms, render: 121ms)
+ GET /comic/12414 200 in 175ms (compile: 12ms, generate-params: 4ms, render: 163ms)
+ GET /comic/12521 200 in 133ms (compile: 8ms, generate-params: 3ms, render: 125ms)
+ GET /comic/12521 200 in 141ms (compile: 6ms, generate-params: 3ms, render: 135ms)
+ GET /comic/12414 200 in 132ms (compile: 7ms, generate-params: 3ms, render: 125ms)
+ GET /comic/12414 200 in 150ms (compile: 12ms, generate-params: 4ms, render: 139ms)
+✓ Compiled in 59ms
+✓ Compiled in 18ms
+ GET / 200 in 335ms (compile: 114ms, render: 221ms)
+ GET /comic/16883 200 in 359ms (compile: 113ms, generate-params: 6ms, render: 245ms)
+ GET /comic/16883 200 in 322ms (compile: 12ms, generate-params: 8ms, render: 310ms)
+ GET /comic/16883 200 in 126ms (compile: 7ms, generate-params: 3ms, render: 120ms)
+ GET /comic/12521 200 in 257ms (compile: 43ms, generate-params: 13ms, render: 215ms)
+ GET /comic/9691 200 in 679ms (compile: 145ms, generate-params: 2ms, render: 534ms)
+ GET /comic/9691 200 in 134ms (compile: 8ms, generate-params: 5ms, render: 126ms)
+ GET /comic/9691 200 in 131ms (compile: 9ms, generate-params: 4ms, render: 123ms)
+ GET /comic/9691 200 in 132ms (compile: 7ms, generate-params: 4ms, render: 125ms)
+ GET /comic/9691 200 in 427ms (compile: 83ms, generate-params: 3ms, render: 344ms)
+ GET /comic/9691 200 in 138ms (compile: 4ms, generate-params: 34µs, render: 135ms)
+✓ Compiled in 13ms
+✓ Compiled in 16ms
+ GET /comic/9691 200 in 709ms (compile: 83ms, generate-params: 3ms, render: 626ms)
+✓ Compiled in 20ms
+ GET /comic/12521 200 in 520ms (compile: 97ms, generate-params: 3ms, render: 423ms)
+ GET /comic/6494 200 in 133ms (compile: 7ms, generate-params: 3ms, render: 126ms)
+ GET / 200 in 254ms (compile: 82ms, render: 172ms)
+ GET /comic/12414 200 in 37ms (compile: 6ms, generate-params: 3ms, render: 32ms)
+ GET / 200 in 32ms (compile: 4ms, render: 28ms)
+ GET / 200 in 1389ms (compile: 254ms, render: 1135ms)
+ GET / 200 in 555ms (compile: 501ms, render: 54ms)
+ GET /comic/9691 200 in 570ms (compile: 298ms, generate-params: 7ms, render: 271ms)
+ GET /comic/9691 200 in 32ms (compile: 2ms, generate-params: 17µs, render: 29ms)
+✓ Compiled in 26ms
+ GET /comic/9691 200 in 316ms (compile: 89ms, generate-params: 4ms, render: 227ms)
+ GET / 200 in 361ms (compile: 2ms, render: 359ms)
+ GET /comic/9691 200 in 452ms (compile: 14ms, generate-params: 7ms, render: 438ms)
+ GET / 200 in 921ms (compile: 102ms, render: 819ms)
+ GET / 200 in 601ms (compile: 2ms, render: 599ms)
+ GET /comic/9691 200 in 623ms (compile: 129ms, generate-params: 5ms, render: 494ms)
+ GET /comic/9691 200 in 147ms (compile: 11ms, generate-params: 30µs, render: 136ms)
+✓ Compiled in 23ms
+ GET / 200 in 356ms (compile: 3ms, render: 354ms)
+ GET /comic/9691 200 in 323ms (compile: 78ms, generate-params: 3ms, render: 245ms)
+ GET /comic/9691 200 in 286ms (compile: 74ms, generate-params: 2ms, render: 212ms)
+ GET / 200 in 319ms (compile: 3ms, render: 317ms)
+✓ Compiled in 18ms
+ GET / 200 in 49ms (compile: 1917µs, render: 47ms)
+ GET /comic/9691 200 in 300ms (compile: 76ms, generate-params: 2ms, render: 224ms)
+ GET / 200 in 83ms (compile: 3ms, render: 79ms)
+ GET /comic/6560 200 in 47ms (compile: 9ms, generate-params: 4ms, render: 38ms)
+✓ Compiled in 320ms
+✓ Compiled in 115ms
+ GET / 200 in 710ms (compile: 121ms, render: 589ms)
+ GET / 200 in 376ms (compile: 3ms, render: 374ms)
+ GET /comic/13256 200 in 48ms (compile: 9ms, generate-params: 4ms, render: 39ms)
+ GET / 200 in 39ms (compile: 5ms, render: 35ms)
+ GET /comic/13256 200 in 44ms (compile: 8ms, generate-params: 4ms, render: 36ms)
+✓ Compiled in 14ms
+ GET /comic/13256 200 in 421ms (compile: 124ms, generate-params: 4ms, render: 297ms)
+ GET /comic/13256 200 in 47ms (compile: 3ms, generate-params: 24µs, render: 44ms)
+ GET /comic/13256 200 in 412ms (compile: 81ms, generate-params: 2ms, render: 331ms)
+ GET /comic/13256 200 in 113ms (compile: 2ms, generate-params: 26µs, render: 110ms)
+✓ Compiled in 19ms
+ GET /comic/13256 200 in 362ms (compile: 99ms, generate-params: 3ms, render: 263ms)
+ GET / 200 in 1602ms (compile: 763ms, render: 839ms)
+ GET /comic/13256 200 in 112ms (compile: 22ms, generate-params: 11ms, render: 90ms)
+ GET / 200 in 437ms (compile: 8ms, render: 429ms)
+ GET /comic/13256 200 in 426ms (compile: 10ms, generate-params: 3ms, render: 416ms)
+✓ Compiled in 98ms
+✓ Compiled in 20ms
+✓ Compiled in 23ms
+⨯ ./lib/db.ts:169:9
+Ecmascript file had an error
+[0m [90m 167 |[39m
+ [90m 168 |[39m   [90m// 4. Wider ±1.0 sold (fallback when no grade curve available)[39m
+[31m[1m>[22m[39m[90m 169 |[39m   [36mconst[39m nearSold [33m=[39m gradeFilteredPrices(ebaySold[33m,[39m targetGrade[33m,[39m [35m1.0[39m)[33m;[39m
+ [90m     |[39m         [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 170 |[39m   [36mif[39m (nearSold[33m.[39mlength [33m>=[39m [35m2[39m [33m||[39m (nearSold[33m.[39mlength [33m>=[39m [35m1[39m [33m&&[39m spreadsheetSold[33m.[39mlength [33m>=[39m [35m1[39m)) {
+ [90m 171 |[39m     [36mconst[39m combined [33m=[39m [[33m...[39mspreadsheetSold[33m,[39m [33m...[39mnearSold][33m;[39m
+ [90m 172 |[39m     [36mreturn[39m {[0m
+
+the name `nearSold` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./lib/db.ts
+    ./app/comic/[id]/page.tsx
+
+
+ GET /comic/13256 500 in 588ms (compile: 410ms, render: 178ms)
+ GET /comic/13256 200 in 1192ms (compile: 204ms, generate-params: 3ms, render: 989ms)
+ GET /comic/13256 200 in 143ms (compile: 3ms, generate-params: 22µs, render: 140ms)
+ GET /comic/13256 200 in 103ms (compile: 3ms, generate-params: 21µs, render: 100ms)
+✓ Compiled in 57ms
+✓ Compiled in 38ms
+✓ Compiled in 103ms
+✓ Compiled in 19ms
+✓ Compiled in 21ms
+✓ Compiled in 26ms
+ GET /comic/13256 200 in 358ms (compile: 98ms, generate-params: 4ms, render: 260ms)
+ GET /comic/13256 200 in 40ms (compile: 2ms, generate-params: 19µs, render: 38ms)
+ GET /comic/13256 200 in 341ms (compile: 86ms, generate-params: 4ms, render: 255ms)
+ GET /comic/13256 200 in 45ms (compile: 3ms, generate-params: 23µs, render: 42ms)
+ GET /comic/13256 200 in 363ms (compile: 82ms, generate-params: 2ms, render: 281ms)
+ GET /comic/13256 200 in 65ms (compile: 2ms, generate-params: 25µs, render: 62ms)
+ GET /comic/13256 200 in 259ms (compile: 5ms, generate-params: 3ms, render: 254ms)
+✓ Compiled in 21ms
+✓ Compiled in 69ms
+✓ Compiled in 21ms
+✓ Compiled in 28ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 22ms
+⨯ ReferenceError: soldTipVisible is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:331:65)
+  329 |                                             x={currentGrade}
+  330 |                                             y={soldDotY}
+> 331 |                                             shape={makeDotShape(soldTipVisible, setSoldTipVisible, soldDotY, askingDotY)}
+      |                                                                 ^
+  332 |                                         />
+  333 |                                     )}
+  334 |                                 </ScatterChart> {
+  digest: '181778089'
+}
+⨯ ReferenceError: soldTipVisible is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:331:65)
+  329 |                                             x={currentGrade}
+  330 |                                             y={soldDotY}
+> 331 |                                             shape={makeDotShape(soldTipVisible, setSoldTipVisible, soldDotY, askingDotY)}
+      |                                                                 ^
+  332 |                                         />
+  333 |                                     )}
+  334 |                                 </ScatterChart> {
+  digest: '181778089'
+}
+ GET /comic/13256 500 in 1214ms (compile: 200ms, generate-params: 9ms, render: 1014ms)
+ GET /comic/13256 500 in 166ms (compile: 8ms, generate-params: 32µs, render: 159ms)
+✓ Compiled in 58ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: askingTipVisible is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:466:65)
+  464 |                                             x={currentGrade}
+  465 |                                             y={askingDotY}
+> 466 |                                             shape={makeDotShape(askingTipVisible, setAskingTipVisible, soldDotY, askingDotY)}
+      |                                                                 ^
+  467 |                                         />
+  468 |                                     )}
+  469 |                                 </ScatterChart> {
+  digest: '353391140'
+}
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ReferenceError: askingTipVisible is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:466:65)
+  464 |                                             x={currentGrade}
+  465 |                                             y={askingDotY}
+> 466 |                                             shape={makeDotShape(askingTipVisible, setAskingTipVisible, soldDotY, askingDotY)}
+      |                                                                 ^
+  467 |                                         />
+  468 |                                     )}
+  469 |                                 </ScatterChart> {
+  digest: '353391140'
+}
+ GET /comic/13256 500 in 997ms (compile: 219ms, generate-params: 4ms, render: 779ms)
+ GET /comic/13256 500 in 197ms (compile: 4ms, generate-params: 39µs, render: 193ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 57ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /comic/13256 200 in 989ms (compile: 171ms, generate-params: 7ms, render: 818ms)
+ GET /comic/13256 200 in 234ms (compile: 7ms, generate-params: 40µs, render: 227ms)
+✓ Compiled in 69ms
+✓ Compiled in 61ms
+✓ Compiled in 27ms
+✓ Compiled in 22ms
+✓ Compiled in 21ms
+ GET / 200 in 967ms (compile: 231ms, render: 736ms)
+✓ Compiled in 67ms
+✓ Compiled in 70ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 63ms
+⨯ ReferenceError: makeDotShape is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:324:52)
+  322 |                                             x={currentGrade}
+  323 |                                             y={soldDotY}
+> 324 |                                             shape={makeDotShape()}
+      |                                                    ^
+  325 |                                         />
+  326 |                                     )}
+  327 |                                 </ScatterChart> {
+  digest: '3978420960'
+}
+⨯ ReferenceError: makeDotShape is not defined
+    at EvidenceCharts (components/EvidenceCharts.tsx:324:52)
+  322 |                                             x={currentGrade}
+  323 |                                             y={soldDotY}
+> 324 |                                             shape={makeDotShape()}
+      |                                                    ^
+  325 |                                         />
+  326 |                                     )}
+  327 |                                 </ScatterChart> {
+  digest: '3978420960'
+}
+ GET / 200 in 1539ms (compile: 12ms, render: 1528ms)
+ GET /comic/13256 500 in 1558ms (compile: 239ms, generate-params: 7ms, render: 1319ms)
+ GET /comic/13256 500 in 651ms (compile: 2ms, generate-params: 33µs, render: 649ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 40ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /comic/13256 200 in 1111ms (compile: 156ms, generate-params: 5ms, render: 955ms)
+ GET /comic/13256 200 in 332ms (compile: 8ms, generate-params: 68µs, render: 325ms)
+ GET /comic/13256 200 in 52ms (compile: 9ms, generate-params: 6ms, render: 43ms)
+ GET / 200 in 403ms (compile: 6ms, render: 398ms)
+ GET /comic/13256 200 in 57ms (compile: 14ms, generate-params: 6ms, render: 44ms)
+ GET /comic/13256 200 in 919ms (compile: 108ms, generate-params: 3ms, render: 811ms)
+ GET /comic/13256 200 in 923ms (compile: 384ms, generate-params: 32µs, render: 540ms)
+ GET /comic/13256 200 in 148ms (compile: 3ms, generate-params: 23µs, render: 145ms)
+ GET /comic/13256 200 in 67ms (compile: 5ms, generate-params: 30µs, render: 61ms)
+ GET /comic/13256 200 in 428ms (compile: 10ms, generate-params: 6ms, render: 418ms)
+✓ Compiled in 46ms
+ GET /comic/13256 200 in 2.1s (compile: 875ms, generate-params: 32ms, render: 1194ms)
+ GET /comic/13256 200 in 366ms (compile: 15ms, generate-params: 79µs, render: 351ms)
+ GET /comic/13256 200 in 276ms (compile: 12ms, generate-params: 1130µs, render: 263ms)
+ GET /comic/13256 200 in 129ms (compile: 13ms, generate-params: 26µs, render: 115ms)
+ GET /comic/13256 200 in 1097ms (compile: 114ms, generate-params: 2ms, render: 984ms)
+ GET /comic/13256 200 in 1101ms (compile: 400ms, generate-params: 58µs, render: 701ms)
+ GET /comic/13256 200 in 132ms (compile: 55ms, generate-params: 43µs, render: 77ms)
+ GET /comic/13256 200 in 145ms (compile: 22ms, generate-params: 7ms, render: 123ms)
+ GET /comic/13256 200 in 577ms (compile: 12ms, generate-params: 7ms, render: 565ms)
+ GET /comic/13256 200 in 1124ms (compile: 111ms, generate-params: 2ms, render: 1013ms)
+ GET /comic/13256 200 in 756ms (compile: 3ms, generate-params: 26µs, render: 752ms)
+ GET /comic/13256 200 in 842ms (compile: 3ms, generate-params: 19µs, render: 839ms)
+ GET /comic/13256 200 in 833ms (compile: 29ms, generate-params: 29µs, render: 804ms)
+ GET /comic/13256 200 in 122ms (compile: 8ms, generate-params: 103µs, render: 114ms)
+ GET /comic/13256 200 in 575ms (compile: 106ms, generate-params: 3ms, render: 469ms)
+ GET /comic/13256 200 in 244ms (compile: 3ms, generate-params: 21µs, render: 241ms)
+ GET /comic/13256 200 in 211ms (compile: 3ms, generate-params: 20µs, render: 208ms)
+ GET /comic/13256 200 in 213ms (compile: 37ms, generate-params: 33µs, render: 176ms)
+ GET /comic/13256 200 in 281ms (compile: 6ms, generate-params: 3ms, render: 276ms)
+ GET /comic/13256 200 in 151ms (compile: 12ms, generate-params: 8ms, render: 139ms)
+ GET /comic/13256 200 in 564ms (compile: 376ms, generate-params: 25µs, render: 187ms)
+ GET /comic/13256 200 in 564ms (compile: 127ms, generate-params: 5ms, render: 437ms)
+ GET /comic/13256 200 in 138ms (compile: 10ms, generate-params: 44µs, render: 128ms)
+ GET /comic/13256 200 in 133ms (compile: 70ms, generate-params: 23µs, render: 63ms)
+ GET /comic/13256 200 in 544ms (compile: 98ms, generate-params: 3ms, render: 445ms)
+ GET /comic/13256 200 in 544ms (compile: 397ms, generate-params: 26µs, render: 146ms)
+ GET /comic/13256 200 in 96ms (compile: 53ms, generate-params: 21µs, render: 43ms)
+ GET /comic/13256 200 in 100ms (compile: 6ms, generate-params: 25µs, render: 94ms)
+ GET /comic/13256 200 in 742ms (compile: 94ms, generate-params: 2ms, render: 648ms)
+ GET /comic/13256 200 in 392ms (compile: 5ms, generate-params: 69µs, render: 387ms)
+ GET /comic/13256 200 in 407ms (compile: 6ms, generate-params: 31µs, render: 401ms)
+ GET /comic/13256 200 in 134ms (compile: 11ms, generate-params: 29µs, render: 123ms)
+ GET /comic/13256 200 in 371ms (compile: 15ms, generate-params: 11ms, render: 356ms)
+ GET / 200 in 969ms (compile: 406ms, render: 562ms)
+ GET /comic/6682 200 in 106ms (compile: 15ms, generate-params: 7ms, render: 91ms)
+ GET / 200 in 61ms (compile: 15ms, render: 46ms)
+✓ Compiled in 36ms
+ GET /comic/13257 200 in 58ms (compile: 9ms, generate-params: 4ms, render: 49ms)
+✓ Compiled in 20ms
+✓ Compiled in 19ms
+ GET /comic/6483 200 in 202ms (compile: 14ms, generate-params: 7ms, render: 188ms)
+ GET / 200 in 848ms (compile: 264ms, render: 584ms)
+✓ Compiled in 168ms
+✓ Compiled in 77ms
+✓ Compiled in 130ms
+✓ Compiled in 23ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 17ms
+ GET / 200 in 1574ms (compile: 198ms, render: 1376ms)
+✓ Compiled in 22ms
+✓ Compiled in 19ms
+✓ Compiled in 46ms
+✓ Compiled in 11ms
+ GET / 200 in 1251ms (compile: 109ms, render: 1141ms)
+ GET / 200 in 796ms (compile: 5ms, render: 792ms)
+ GET /comic/13256 200 in 763ms (compile: 294ms, generate-params: 5ms, render: 470ms)
+ GET /comic/13256 200 in 142ms (compile: 3ms, generate-params: 36µs, render: 139ms)
+✓ Compiled in 57ms
+ GET / 200 in 1334ms (compile: 107ms, render: 1227ms)
+ GET / 200 in 886ms (compile: 16ms, render: 870ms)
+ GET /comic/13256 200 in 924ms (compile: 422ms, generate-params: 4ms, render: 502ms)
+ GET /comic/13256 200 in 165ms (compile: 3ms, generate-params: 31µs, render: 162ms)
+✓ Compiled in 127ms
+ GET / 200 in 529ms (compile: 6ms, render: 523ms)
+ GET /comic/13256 200 in 501ms (compile: 111ms, generate-params: 4ms, render: 390ms)
+✓ Compiled in 27ms
+ GET / 200 in 69ms (compile: 4ms, render: 64ms)
+ GET /comic/13256 404 in 239ms (compile: 198ms, render: 40ms)
+ GET /comic/13256 200 in 1577ms (compile: 204ms, generate-params: 4ms, render: 1373ms)
+✓ Compiled in 81ms
+✓ Compiled in 100ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 34ms
+ GET / 200 in 2.8s (compile: 713ms, render: 2.1s)
+✓ Compiled in 47ms
+ GET /comic/6594 200 in 1098ms (compile: 177ms, generate-params: 55ms, render: 920ms)
+✓ Compiled in 145ms
+✓ Compiled in 19ms
+✓ Compiled in 268ms
+ GET /comic/6594 200 in 643ms (compile: 23ms, generate-params: 6ms, render: 621ms)
+✓ Compiled in 74ms
+ GET /comic/6594 200 in 2.8s (compile: 1224ms, generate-params: 3ms, render: 1594ms)
+ GET /comic/13256 200 in 217ms (compile: 21ms, generate-params: 1770µs, render: 196ms)
+ GET /comic/6594 200 in 3.6s (compile: 163ms, generate-params: 3ms, render: 3.4s)
+ GET /comic/6594 200 in 2.3s (compile: 47ms, generate-params: 21ms, render: 2.2s)
+ GET /comic/13256 200 in 115ms (compile: 7ms, generate-params: 4ms, render: 108ms)
+ GET /comic/13256 200 in 49ms (compile: 4ms, generate-params: 21µs, render: 45ms)
+ GET / 200 in 4.8s (compile: 3.4s, render: 1326ms)
+ GET /comic/6594 200 in 180ms (compile: 51ms, generate-params: 15ms, render: 129ms)
+ GET /comic/6594 200 in 2.7s (compile: 833ms, generate-params: 6ms, render: 1827ms)
+ GET /comic/13256 200 in 161ms (compile: 16ms, generate-params: 26µs, render: 146ms)
+ GET / 200 in 119ms (compile: 46ms, render: 73ms)
+ GET / 200 in 1516ms (compile: 176ms, render: 1339ms)
+ GET / 200 in 1065ms (compile: 6ms, render: 1059ms)
+ GET /comic/13256 200 in 1012ms (compile: 211ms, generate-params: 4ms, render: 801ms)
+ GET /comic/13256 200 in 121ms (compile: 8ms, generate-params: 55µs, render: 112ms)
+✓ Compiled in 751ms
+ GET / 200 in 7.1s (compile: 1590ms, render: 5.5s)
+ GET / 200 in 497ms (compile: 17ms, render: 480ms)
+ GET /comic/13256 200 in 7.1s (compile: 316ms, generate-params: 3ms, render: 6.8s)
+ GET /comic/13256 200 in 341ms (compile: 13ms, generate-params: 9ms, render: 328ms)
+✓ Compiled in 222ms
+✓ Compiled in 99ms
+✓ Compiled in 35ms
+✓ Compiled in 28ms
+✓ Compiled in 230ms
+ GET /comic/6671 200 in 288ms (compile: 63ms, generate-params: 21ms, render: 226ms)
+✓ Compiled in 168ms
+✓ Compiled in 95ms
+ GET /comic/6671 200 in 2.9s (compile: 1546ms, generate-params: 9ms, render: 1383ms)
+ GET /comic/13256 200 in 221ms (compile: 96ms, generate-params: 89µs, render: 125ms)
+ GET /comic/6671 200 in 70ms (compile: 7ms, generate-params: 38µs, render: 63ms)
+ GET /comic/13256 200 in 98ms (compile: 14ms, generate-params: 68µs, render: 84ms)
+ GET /comic/6671 200 in 1901ms (compile: 241ms, generate-params: 4ms, render: 1660ms)
+ GET /comic/13256 200 in 639ms (compile: 9ms, generate-params: 69µs, render: 630ms)
+ GET /comic/13256 200 in 641ms (compile: 124ms, generate-params: 33µs, render: 517ms)
+ GET /comic/6671 200 in 566ms (compile: 349ms, generate-params: 37µs, render: 217ms)
+ GET / 200 in 561ms (compile: 209ms, render: 352ms)
+ GET / 200 in 810ms (compile: 8ms, render: 802ms)
+ GET /comic/9693 200 in 105ms (compile: 16ms, generate-params: 3ms, render: 90ms)
+✓ Compiled in 194ms
+✓ Compiled in 42ms
+✓ Compiled in 70ms
+ GET /comic/9693 200 in 1990ms (compile: 179ms, generate-params: 4ms, render: 1811ms)
+✓ Compiled in 91ms
+✓ Compiled in 41ms
+ GET /comic/9693 200 in 1878ms (compile: 568ms, generate-params: 7ms, render: 1309ms)
+✓ Compiled in 85ms
+✓ Compiled in 669ms
+✓ Compiled in 42ms
+✓ Compiled in 74ms
+✓ Compiled in 32ms
+✓ Compiled in 48ms
+✓ Compiled in 51ms
+✓ Compiled in 46ms
+ GET /comic/9693 200 in 1861ms (compile: 280ms, generate-params: 17ms, render: 1582ms)
+ GET / 200 in 110ms (compile: 12ms, render: 98ms)
+ GET /comic/12414 200 in 56ms (compile: 9ms, generate-params: 3ms, render: 46ms)
+ GET / 200 in 43ms (compile: 3ms, render: 40ms)
+ GET /comic/12447 200 in 47ms (compile: 7ms, generate-params: 4ms, render: 40ms)
+ GET / 200 in 160ms (compile: 27ms, render: 133ms)
+✓ Compiled in 159ms
+ GET /comic/12950 200 in 126ms (compile: 9ms, generate-params: 4ms, render: 117ms)
+✓ Compiled in 61ms
+✓ Compiled in 121ms
+✓ Compiled in 145ms
+✓ Compiled in 16ms
+✓ Compiled in 22ms
+ GET / 200 in 1777ms (compile: 1014ms, render: 763ms)
+ GET /comic/13261 200 in 216ms (compile: 26ms, generate-params: 13ms, render: 189ms)
+✓ Compiled in 101ms
+✓ Compiled in 58ms
+✓ Compiled in 121ms
+✓ Compiled in 55ms
+✓ Compiled in 93ms
+ GET / 200 in 82ms (compile: 8ms, render: 73ms)
+✓ Compiled in 95ms
+✓ Compiled in 734ms
+✓ Compiled in 90ms
+ GET / 200 in 604ms (compile: 9ms, render: 595ms)
+ GET /comic/13261 200 in 2.1s (compile: 582ms, generate-params: 13ms, render: 1563ms)
+ GET / 200 in 40ms (compile: 4ms, render: 35ms)
+✓ Compiled in 120ms
+ GET / 200 in 8.9s (compile: 2.5s, render: 6.4s)
+ GET /comic/12414 200 in 854ms (compile: 65ms, generate-params: 17ms, render: 788ms)
+ GET / 200 in 168ms (compile: 22ms, render: 145ms)
+ GET /comic/13264 200 in 127ms (compile: 12ms, generate-params: 3ms, render: 114ms)
+ GET / 200 in 175ms (compile: 34ms, render: 140ms)
+ GET / 200 in 93ms (compile: 7ms, render: 85ms)
+ GET / 200 in 150ms (compile: 2ms, render: 148ms)
+ GET / 200 in 122ms (compile: 3ms, render: 120ms)
+ GET / 200 in 203ms (compile: 3ms, render: 201ms)
+ GET / 200 in 218ms (compile: 4ms, render: 214ms)
+ GET / 200 in 220ms (compile: 26ms, render: 194ms)
+ GET / 200 in 154ms (compile: 3ms, render: 151ms)
+ GET / 200 in 113ms (compile: 4ms, render: 108ms)
+ GET / 200 in 62ms (compile: 6ms, render: 57ms)
+ GET /comic/13256 200 in 135ms (compile: 16ms, generate-params: 5ms, render: 119ms)
+ GET /comic/13256 200 in 77ms (compile: 14ms, generate-params: 3ms, render: 63ms)
+ GET /comic/13256 200 in 51ms (compile: 3ms, generate-params: 17µs, render: 48ms)
+ GET /comic/13256 200 in 118ms (compile: 4ms, generate-params: 34µs, render: 114ms)
+ GET /comic/13256 200 in 65ms (compile: 10ms, generate-params: 32µs, render: 55ms)
+ GET /comic/13256 200 in 265ms (compile: 4ms, generate-params: 60µs, render: 261ms)
+ GET /comic/13256 200 in 188ms (compile: 8ms, generate-params: 29µs, render: 180ms)
+ GET /comic/13256 200 in 134ms (compile: 7ms, generate-params: 32µs, render: 128ms)
+ GET /comic/13256 200 in 135ms (compile: 51ms, generate-params: 27µs, render: 84ms)
+ GET /comic/12961 200 in 95ms (compile: 13ms, generate-params: 5ms, render: 81ms)
+✓ Compiled in 1216ms
+✓ Compiled in 86ms
+ GET /comic/12961 200 in 2.6s (compile: 1471ms, generate-params: 6ms, render: 1130ms)
+ GET /comic/13256 200 in 125ms (compile: 9ms, generate-params: 32µs, render: 116ms)
+ GET /comic/12961 200 in 4.6s (compile: 22ms, generate-params: 11ms, render: 4.6s)
+ GET /comic/12961 200 in 484ms (compile: 20ms, generate-params: 10ms, render: 464ms)
+ GET /comic/12961 200 in 2.1s (compile: 399ms, generate-params: 8ms, render: 1677ms)
+ GET /comic/13256 200 in 175ms (compile: 13ms, generate-params: 61µs, render: 161ms)
+○ Compiling /comic/[id]/listing ...
+ GET /comic/12961/listing 200 in 20.2s (compile: 19.8s, generate-params: 3.5s, render: 409ms)
+✓ Compiled in 245ms
+ GET /comic/12961/listing 200 in 476ms (compile: 35ms, generate-params: 9ms, render: 442ms)
+✓ Compiled in 10ms
+ GET /comic/12961/listing 200 in 105ms (compile: 18ms, generate-params: 12ms, render: 87ms)
+ GET /comic/13256 200 in 6.5s (compile: 2.8s, generate-params: 31ms, render: 3.7s)
+ GET /comic/13256 200 in 909ms (compile: 200ms, generate-params: 7ms, render: 709ms)
+ GET /comic/12961/listing 200 in 678ms (compile: 127ms, generate-params: 3ms, render: 551ms)
+ GET /comic/13256 200 in 102ms (compile: 15ms, generate-params: 5ms, render: 88ms)
+ GET /comic/12961/listing 200 in 481ms (compile: 89ms, generate-params: 3ms, render: 392ms)
+ GET /comic/13256 200 in 93ms (compile: 9ms, generate-params: 3ms, render: 84ms)
+ GET /comic/12961/listing 200 in 2.5s (compile: 175ms, generate-params: 3ms, render: 2.3s)
+ GET /comic/13256 200 in 2.9s (compile: 92ms, generate-params: 54ms, render: 2.8s)
+✓ Compiled in 87ms
+ GET /comic/12961/listing 200 in 1104ms (compile: 585ms, generate-params: 7ms, render: 519ms)
+ GET /comic/13256 200 in 158ms (compile: 6ms, generate-params: 2ms, render: 152ms)
+ GET /comic/12961 200 in 134ms (compile: 27ms, generate-params: 10ms, render: 107ms)
+ GET / 200 in 129ms (compile: 64ms, render: 64ms)
+ GET /comic/13252 200 in 49ms (compile: 8ms, generate-params: 3ms, render: 41ms)
+✓ Compiled in 479ms
+✓ Compiled in 38ms
+ GET /comic/13252 200 in 125ms (compile: 15ms, generate-params: 3ms, render: 110ms)
+ GET /comic/13256 200 in 58ms (compile: 4ms, generate-params: 22µs, render: 54ms)
+✓ Compiled in 94ms
+ GET /comic/13252 200 in 212ms (compile: 15ms, generate-params: 7ms, render: 197ms)
+ GET /comic/13256 200 in 205ms (compile: 5ms, generate-params: 25µs, render: 200ms)
+ GET /comic/13252 200 in 2.4s (compile: 18ms, generate-params: 6ms, render: 2.4s)
+ GET /comic/13252/listing 200 in 110ms (compile: 19ms, generate-params: 3ms, render: 91ms)
+ GET /comic/13252/listing 200 in 1441ms (compile: 568ms, generate-params: 3ms, render: 872ms)
+ GET /comic/13256 200 in 134ms (compile: 12ms, generate-params: 4ms, render: 122ms)
+ GET /comic/13252/listing 200 in 1389ms (compile: 147ms, generate-params: 9ms, render: 1242ms)
+ GET /comic/13256 200 in 65ms (compile: 8ms, generate-params: 4ms, render: 57ms)
+ GET /comic/13252/listing 200 in 899ms (compile: 145ms, generate-params: 26ms, render: 754ms)
+ GET /comic/13252/listing 200 in 306ms (compile: 34ms, generate-params: 10ms, render: 272ms)
+ GET /comic/13252/listing 200 in 727ms (compile: 186ms, generate-params: 82ms, render: 541ms)
+ GET /comic/13252/listing 200 in 363ms (compile: 42ms, generate-params: 8ms, render: 321ms)
+✓ Compiled in 253ms
+ GET /comic/13252/listing 200 in 5.6s (compile: 1125ms, generate-params: 3ms, render: 4.5s)
+ GET /comic/13252/listing 200 in 3.7s (compile: 14ms, generate-params: 29µs, render: 3.6s)
+ GET /comic/13252/listing 200 in 3.1s (compile: 25ms, generate-params: 9ms, render: 3.1s)
+ GET /comic/13256 200 in 3.2s (compile: 1836ms, generate-params: 6ms, render: 1341ms)
+ GET /comic/13256 200 in 1173ms (compile: 12ms, generate-params: 3ms, render: 1161ms)
+ GET /comic/13256 200 in 711ms (compile: 7ms, generate-params: 81µs, render: 704ms)
+✓ Compiled in 466ms
+ GET /comic/13252/listing 200 in 8.3s (compile: 700ms, generate-params: 20ms, render: 7.6s)
+ GET /comic/13252/listing 200 in 10.9s (compile: 52ms, generate-params: 31µs, render: 10.8s)
+ GET /comic/13252/listing 200 in 4.9s (compile: 22ms, generate-params: 6ms, render: 4.9s)
+ GET /comic/13256 200 in 5.0s (compile: 1585ms, generate-params: 14ms, render: 3.4s)
+ GET /comic/13252/listing 200 in 1875ms (compile: 36ms, generate-params: 44µs, render: 1839ms)
+ GET /comic/13256 200 in 1112ms (compile: 10ms, generate-params: 5ms, render: 1102ms)
+ GET /comic/13256 200 in 1113ms (compile: 649ms, generate-params: 43µs, render: 463ms)
+ GET /comic/13252 200 in 453ms (compile: 7ms, generate-params: 4ms, render: 445ms)
+ GET /comic/13252/listing 200 in 232ms (compile: 11ms, generate-params: 3ms, render: 221ms)
+ GET /comic/13252 200 in 237ms (compile: 6ms, generate-params: 3ms, render: 231ms)
+ GET / 200 in 500ms (compile: 205ms, render: 295ms)
+ GET /comic/12447 200 in 242ms (compile: 6ms, generate-params: 3ms, render: 236ms)
+ GET /comic/12447/listing 200 in 206ms (compile: 9ms, generate-params: 3ms, render: 197ms)
+✓ Compiled in 206ms
+ GET /comic/12447/listing 200 in 574ms (compile: 107ms, generate-params: 2ms, render: 467ms)
+ GET /comic/13256 200 in 207ms (compile: 9ms, generate-params: 2ms, render: 198ms)
+ GET /comic/12447/listing 200 in 400ms (compile: 19ms, generate-params: 15ms, render: 380ms)
+ GET /comic/13256 200 in 1917ms (compile: 534ms, generate-params: 4ms, render: 1383ms)
+ GET /comic/12447 200 in 253ms (compile: 7ms, generate-params: 3ms, render: 245ms)
+ GET / 200 in 1356ms (compile: 68ms, render: 1288ms)
+ GET /comic/11302 200 in 508ms (compile: 18ms, generate-params: 7ms, render: 490ms)
+ GET / 200 in 1210ms (compile: 162ms, render: 1048ms)
+ GET /comic/13252 200 in 436ms (compile: 44ms, generate-params: 13ms, render: 392ms)
+ GET /comic/13252/listing 200 in 934ms (compile: 74ms, generate-params: 5ms, render: 860ms)
+✓ Compiled in 1278ms
+ GET /comic/13252 200 in 3.1s (compile: 2.2s, generate-params: 10ms, render: 896ms)
+ GET / 200 in 805ms (compile: 47ms, render: 758ms)
+ GET / 200 in 1688ms (compile: 16ms, render: 1672ms)
+✓ Compiled in 281ms
+ GET /comic/6483 200 in 381ms (compile: 23ms, generate-params: 11ms, render: 357ms)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.244:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 1356ms
+ GET /comic/6483 200 in 2.4s (compile: 1211ms, generate-params: 692ms, render: 1158ms)
+ GET /comic/13256 200 in 1834ms (compile: 1363ms, generate-params: 1359ms, render: 471ms)
+✓ Compiled in 37ms
+ GET /comic/6483 200 in 989ms (compile: 680ms, generate-params: 44µs, render: 309ms)
+ GET /comic/13256 200 in 867ms (compile: 173ms, generate-params: 6ms, render: 694ms)
+✓ Compiled in 1ms
+✓ Compiled in 565ms
+✓ Compiled in 34ms
+✓ Compiled in 11ms
+✓ Compiled in 10ms
+✓ Compiled in 11ms
+ GET / 200 in 337ms (compile: 47ms, render: 290ms)
+ GET /comic/6638 200 in 404ms (compile: 100ms, generate-params: 7ms, render: 305ms)
+ GET /comic/6638 200 in 655ms (compile: 8ms, generate-params: 4ms, render: 647ms)
+ GET / 200 in 875ms (compile: 11ms, render: 864ms)
+ GET /comic/6494 200 in 245ms (compile: 9ms, generate-params: 4ms, render: 237ms)

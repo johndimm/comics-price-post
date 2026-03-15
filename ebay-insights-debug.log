@@ -1,0 +1,3 @@
+Testing Insights URL: https://api.ebay.com/buy/marketplace_insights/v1/item_sales/search?q=Amazing%20Spider-Man%2011%20(1964)&limit=5
+Status: 404
+Response: {"timestamp":"2026-03-10T23:27:49.498+00:00","status":404,"error":"Not Found","path":"/buy/marketplace_insights/v1/item_sales/search"}
