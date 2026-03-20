@@ -326,14 +326,13 @@ export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[]
     }
   }
 
-  // 6. Single near-grade sold + spreadsheet, or just spreadsheet
-  if (spreadsheetSold.length > 0 || nearSold.length > 0) {
-    const combined = [...spreadsheetSold, ...nearSold];
+  // 6. Spreadsheet price only
+  if (spreadsheetSold.length > 0) {
     return {
-      value: Math.round(median(combined)),
+      value: Math.round(median(spreadsheetSold)),
       low: null,
       high: null,
-      method: method + `Limited sold data (${combined.length} point(s)).`,
+      method: method + `Spreadsheet sale only.`,
       source: 'sold',
     };
   }

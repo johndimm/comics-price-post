@@ -152,7 +152,7 @@ export async function searchActiveItems(query: string, limit: number = 20, issue
             price: parseFloat(item.price?.value || "0"),
             currency: item.price?.currency || "USD",
             saleDate,
-            listingUrl: item.itemWebUrl?.replace(/[?&]epid=[^&]+/, (m) => m.startsWith('?') ? '?' : ''),
+            listingUrl: item.itemWebUrl?.replace(/[?&]epid=[^&]+/, (m: string) => m.startsWith('?') ? '?' : ''),
             imageUrl: item.image?.imageUrl,
             isSlabbed,
             grade,
