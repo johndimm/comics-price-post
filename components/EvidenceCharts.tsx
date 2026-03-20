@@ -13,6 +13,25 @@ import {
     ReferenceLine,
 } from "recharts";
 
+// Spread overlapping grade-chart points with a small deterministic x-jitter
+// so stacked dots don't hide each other. Step = 0.08 grade units.
+function jitterGrade(points: ChartPoint[]): ChartPoint[] {
+    const STEP = 0.08;
+    const key = (p: ChartPoint) => `${p.x}|${Math.round(p.y / 5)}`;
+    const groups = new Map<string, ChartPoint[]>();
+    for (const p of points) {
+        const k = key(p);
+        if (!groups.has(k)) groups.set(k, []);
+        groups.get(k)!.push(p);
+    }
+    return points.map(p => {
+        const group = groups.get(key(p))!;
+        const idx = group.indexOf(p);
+        const offset = (idx - (group.length - 1) / 2) * STEP;
+        return offset === 0 ? p : { ...p, x: Math.round((p.x + offset) * 1000) / 1000 };
+    });
+}
+
 interface ChartPoint {
     x: number;
     y: number;
@@ -297,16 +316,17 @@ export default function EvidenceCharts({
                                         tickFormatter={(v) => `$${v}`}
                                     />
                                     <Tooltip content={<DotTooltip />} />
+                                    {(() => { const jg = jitterGrade(soldByGrade); return (<>
                                     <Scatter
-                                        data={soldByGrade.filter((p) => p.type === "slabbed")}
+                                        data={jg.filter((p) => p.type === "slabbed")}
                                         fill={SLABBED_COLOR}
                                         opacity={0.8}
                                     />
                                     <Scatter
-                                        data={soldByGrade.filter((p) => p.type === "raw")}
+                                        data={jg.filter((p) => p.type === "raw")}
                                         fill={RAW_COLOR}
                                         opacity={0.8}
-                                    />
+                                    /></>); })()}
                                     {gradeCurve?.sold.slabbed && gradeCurve.sold.slabbed.length > 1 && (
                                         <Scatter
                                             data={gradeCurve.sold.slabbed}

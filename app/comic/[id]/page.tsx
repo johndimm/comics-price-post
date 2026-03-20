@@ -22,7 +22,8 @@ export default async function EvidencePage({ params }: Params) {
     const comic = getComicById(id);
     if (!comic) notFound();
 
-    const listings = getListingsByComic(id);
+    const isReplica = /replica|facsimile|reprint/i.test(comic.title);
+    const listings = isReplica ? [] : getListingsByComic(id);
     const metadata = getComicMetadata(id);
     const soldListings = listings.filter(l => l.type === 'sold');
     const askingListings = listings.filter(l => l.type === 'asking');
@@ -34,9 +35,16 @@ export default async function EvidencePage({ params }: Params) {
     // Prefer asking curve as recommendedAsk; fall back to 15% markup on FMV
     // Apply same qualified discount to recommended ask
     const rawRecommendedAsk = baseFmv.recommendedAsk ?? (fmvValue ? Math.round(fmvValue * 1.15) : undefined);
-    const recommendedAsk = rawRecommendedAsk != null ? Math.round(rawRecommendedAsk * comic.fmv_multiplier) : undefined;
+    const rawAskWithMultiplier = rawRecommendedAsk != null ? Math.round(rawRecommendedAsk * comic.fmv_multiplier) : undefined;
+    const recommendedAsk = rawAskWithMultiplier != null && fmvValue != null
+        ? Math.min(Math.max(rawAskWithMultiplier, Math.round(fmvValue * 1.1)), Math.round(fmvValue * 1.2))
+        : rawAskWithMultiplier;
+    const fmvLow = baseFmv.low !== null ? Math.round(baseFmv.low * comic.fmv_multiplier) : null;
+    const fmvHigh = baseFmv.high !== null ? Math.round(baseFmv.high * comic.fmv_multiplier) : null;
     const fmv = {
         value: fmvValue,
+        low: fmvLow,
+        high: fmvHigh,
         method: comic.is_qualified
             ? `${baseFmv.method} (Adjusted by ${Math.round((1 - comic.fmv_multiplier) * 100)}% for Qualified grade)`
             : baseFmv.method,
@@ -193,12 +201,29 @@ export default async function EvidencePage({ params }: Params) {
                             ["Sold Date", comic.sold_date || "—"],
                             ["Notes", comic.notes || "—"],
                             ["eBay Listings", listings.length > 0 ? listings.length.toString() : "None synced"],
-                        ].map(([k, v]) => (
-                            <div key={k} className="detail-row">
-                                <span className="detail-key">{k}</span>
-                                <span className="detail-val">{v}</span>
-                            </div>
-                        ))}
+                        ["PC Ungraded", comic.pc_ungraded ? `$${comic.pc_ungraded.toLocaleString()}` : "—"],
+                        ["PC Graded", comic.pc_graded ? `$${comic.pc_graded.toLocaleString()}` : "—"],
+                        ].flatMap(([k, v]) => {
+                            const row = (
+                                <div key={k} className="detail-row">
+                                    <span className="detail-key">{k}</span>
+                                    <span className="detail-val">{v}</span>
+                                </div>
+                            );
+                            if (k === "Community High" && comic.community_url) {
+                                return [row, (
+                                    <div key="community-chat" className="detail-row">
+                                        <span className="detail-key">Community Chat</span>
+                                        <span className="detail-val">
+                                            <a href={comic.community_url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>
+                                                View ↗
+                                            </a>
+                                        </span>
+                                    </div>
+                                )];
+                            }
+                            return [row];
+                        })}
                         {/* CGC cert with lookup link */}
                         <div className="detail-row">
                             <span className="detail-key">CGC Slab</span>
@@ -217,12 +242,19 @@ export default async function EvidencePage({ params }: Params) {
 
                 {/* Right: charts + grid */}
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24 }}>
+                    {isReplica && (
+                        <div style={{ padding: '12px 16px', background: '#2a1a00', border: '1px solid #7a4a00', borderRadius: 8, color: '#f5a623', fontSize: 14 }}>
+                            Replica / facsimile edition — no market price data available.
+                        </div>
+                    )}
                     <EvidenceClient
                         soldByTime={soldByTime}
                         soldByGrade={soldByGrade}
                         askingByTime={askingByTime}
                         askingByGrade={askingByGrade}
                         marketValue={fmv.value ?? undefined}
+                        fmvLow={fmv.low ?? undefined}
+                        fmvHigh={fmv.high ?? undefined}
                         recommendedAsk={recommendedAsk}
                         soldDotY={soldDotY}
                         askingDotY={askingDotY}

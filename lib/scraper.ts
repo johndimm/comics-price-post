@@ -23,6 +23,13 @@ function parseGrade(title: string, issueNumber?: string, year?: string | number)
         if (val >= 0.5 && val <= 10.0) return val;
     }
 
+    // CGC/CBCS/PGX integer grade like "CGC 6" or "CGC 6.5"
+    const slabMatch = t.match(/\b(?:CGC|CBCS|PGX)\s+(\d+(?:\.\d)?)\b/);
+    if (slabMatch) {
+        const val = parseFloat(slabMatch[1]);
+        if (val >= 0.5 && val <= 10.0) return val;
+    }
+
     if (t.includes('VERY FINE/NEAR MINT') || t.includes('VF/NM')) return 9.0;
     if (t.includes('FINE/VERY FINE') || t.includes('FN/VF') || t.includes('F/VF')) return 7.0;
     if (t.includes('VERY GOOD/FINE') || t.includes('VG/FN') || t.includes('VG/F')) return 5.0;
@@ -46,7 +53,7 @@ function parseGrade(title: string, issueNumber?: string, year?: string | number)
     return undefined;
 }
 
-export async function scrapeSoldItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number): Promise<eBayListing[]> {
+export async function scrapeSoldItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number, requiredWords?: string[]): Promise<eBayListing[]> {
     const encodedQuery = encodeURIComponent(query);
     // LH_Sold=1 and LH_Complete=1 are required to view completed/sold listings
     const url = `https://www.ebay.com/sch/i.html?_nkw=${encodedQuery}&LH_Sold=1&LH_Complete=1&_ipg=60`;
@@ -91,6 +98,9 @@ export async function scrapeSoldItems(query: string, limit: number = 20, issueNu
                     const priceMatch = priceText.match(/[\d,]+\.\d{2}/);
                     const price = priceMatch ? parseFloat(priceMatch[0].replace(/,/g, '')) : 0;
 
+                    // Skip product-page links (/p/) — they don't point to a specific sold item
+                    if (!linkEl.href.includes('/itm/')) return;
+
                     let itemId = '';
                     const urlMatch = linkEl.href.match(/\/itm\/(\d+)/);
                     if (urlMatch) {
@@ -110,7 +120,7 @@ export async function scrapeSoldItems(query: string, limit: number = 20, issueNu
                         title,
                         price,
                         currency: 'USD',
-                        listingUrl: linkEl.href,
+                        listingUrl: linkEl.href.replace(/&epid=[^&]+/, ''),
                         imageUrl: imgEl ? imgEl.src : undefined,
                         dateSoldRaw: dateSold
                     });
@@ -147,7 +157,7 @@ export async function scrapeSoldItems(query: string, limit: number = 20, issueNu
                 imageUrl: raw.imageUrl,
                 isSlabbed,
                 grade,
-                type: 'sold'
+                type: formattedDate ? 'sold' : 'asking'
             };
         });
 
@@ -155,6 +165,10 @@ export async function scrapeSoldItems(query: string, limit: number = 20, issueNu
         return listings.filter(l => {
             if (l.price <= 0 || l.itemId.length <= 5) return false;
             if (issueNumber && !new RegExp(`\\b${issueNumber}\\b`).test(l.title)) return false;
+            if (requiredWords) {
+                const t = l.title.toLowerCase();
+                if (!requiredWords.every(w => t.includes(w.toLowerCase()))) return false;
+            }
             return true;
         }).slice(0, limit);
 

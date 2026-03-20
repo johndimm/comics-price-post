@@ -26,8 +26,19 @@ function parseComicsCSV(): Record<string, Omit<Comic, "photos" | "grade_category
 
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
-    const marvel_id = row[idx("marvel_id")]?.trim() ?? "";
-    if (!marvel_id || marvel_id === "#N/A") continue;
+    let marvel_id = row[idx("marvel_id")]?.trim() ?? "";
+    if (!marvel_id) continue;
+    if (marvel_id === "#N/A") {
+      // Generate a stable local ID from title + number
+      const title = row[idx("title")]?.trim() ?? "";
+      const number = row[idx("number")]?.trim() ?? "";
+      if (!title) continue;
+      const slug = (title + "-" + number)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+      marvel_id = "local-" + slug;
+    }
 
     comics[marvel_id] = {
       marvel_id,
@@ -74,9 +85,12 @@ function parseImagesCSV(): Record<string, string[]> {
   for (let i = 1; i < rows.length; i++) {
     const [comic_id, , photo] = rows[i];
     if (!comic_id || !photo) continue;
+    const p = photo.trim();
+    // Skip local paths — only keep absolute URLs (GitHub raw etc.)
+    if (!p.startsWith("http")) continue;
     const id = comic_id.trim();
     if (!images[id]) images[id] = [];
-    images[id].push(photo.trim());
+    images[id].push(p);
   }
   return images;
 }
@@ -115,7 +129,35 @@ function classifyGrade(comic: Omit<Comic, "photos" | "grade_category" | "is_qual
   return "raw";
 }
 
+function evalCurve(pts: { x: number; y: number }[], grade: number): number | null {
+  if (!pts || pts.length < 2) return null;
+  const sorted = [...pts].sort((a, b) => a.x - b.x);
+  if (grade < sorted[0].x - 1 || grade > sorted[sorted.length - 1].x + 1) return null;
+  if (grade <= sorted[0].x) return sorted[0].y;
+  if (grade >= sorted[sorted.length - 1].x) return sorted[sorted.length - 1].y;
+  for (let i = 0; i < sorted.length - 1; i++) {
+    if (sorted[i].x <= grade && grade <= sorted[i + 1].x) {
+      const t = (grade - sorted[i].x) / (sorted[i + 1].x - sorted[i].x);
+      return Math.round(sorted[i].y + t * (sorted[i + 1].y - sorted[i].y));
+    }
+  }
+  return null;
+}
+
 let _cache: Comic[] | null = null;
+
+function loadPricechartingMap(): Record<string, { used: number | null; graded: number | null }> {
+  const pcPath = path.join(process.cwd(), 'data', 'pricecharting.json');
+  if (!fs.existsSync(pcPath)) return {};
+  try {
+    const raw = JSON.parse(fs.readFileSync(pcPath, 'utf-8'));
+    const map: Record<string, { used: number | null; graded: number | null }> = {};
+    for (const [id, val] of Object.entries(raw as Record<string, any>)) {
+      map[id] = { used: val.used ?? null, graded: val.graded ?? null };
+    }
+    return map;
+  } catch { return {}; }
+}
 
 export function getAllComics(): Comic[] {
   if (_cache && process.env.NODE_ENV !== "development") return _cache;
@@ -123,6 +165,7 @@ export function getAllComics(): Comic[] {
   const comicsMap = parseComicsCSV();
   const imagesMap = parseImagesCSV();
   const thumbsMap = parseMarvelThumbnails();
+  const pcMap = loadPricechartingMap();
 
   _cache = Object.values(comicsMap).map((c) => {
     const rawPhotos = imagesMap[c.marvel_id] ?? [];
@@ -160,9 +203,30 @@ export function getAllComics(): Comic[] {
       const finalFmv = baseFmv.value !== null ? Math.round(baseFmv.value * resultComic.fmv_multiplier) : null;
 
       resultComic.fmv = finalFmv;
-      resultComic.recommended_ask = baseFmv.recommendedAsk
-        ? Math.round(baseFmv.recommendedAsk * resultComic.fmv_multiplier)
-        : null;
+      resultComic.fmv_low = baseFmv.low !== null ? Math.round(baseFmv.low * resultComic.fmv_multiplier) : null;
+      resultComic.fmv_high = baseFmv.high !== null ? Math.round(baseFmv.high * resultComic.fmv_multiplier) : null;
+      if (baseFmv.recommendedAsk && finalFmv) {
+        const rawAsk = Math.round(baseFmv.recommendedAsk * resultComic.fmv_multiplier);
+        resultComic.recommended_ask = Math.min(Math.max(rawAsk, Math.round(finalFmv * 1.1)), Math.round(finalFmv * 1.2));
+      } else {
+        resultComic.recommended_ask = null;
+      }
+
+      // PriceCharting reference prices
+      const pc = pcMap[c.marvel_id];
+      if (pc) {
+        resultComic.pc_ungraded = pc.used;
+        resultComic.pc_graded = pc.graded;
+      }
+
+      // Slab upside: difference between slabbed and raw FMV curves at this grade (non-slabbed only)
+      if (resultComic.grade_category !== 'slabbed' && c.grade > 0) {
+        const slabbedFmv = evalCurve(gradeCurves.sold.slabbed, c.grade);
+        const rawFmv = evalCurve(gradeCurves.sold.raw, c.grade) ?? resultComic.fmv ?? null;
+        if (slabbedFmv != null && rawFmv != null) {
+          resultComic.slab_upside = slabbedFmv - rawFmv;
+        }
+      }
     } catch (e) {
       // Handle gracefully if DB isn't initialized yet
     }

@@ -149,7 +149,10 @@ export default async function ListingPage({ params }: Params) {
     const baseFmv = calcFMV(comic.sold_price, soldListings, askingListings, comic.grade, gradeCurve, isSlabbed);
     const fmvValue = baseFmv.value !== null ? Math.round(baseFmv.value * comic.fmv_multiplier) : null;
     const rawAsk = baseFmv.recommendedAsk ?? (fmvValue ? Math.round(fmvValue * 1.15) : null);
-    const askPrice = rawAsk != null ? Math.round(rawAsk * comic.fmv_multiplier) : null;
+    const rawAskWithMultiplier = rawAsk != null ? Math.round(rawAsk * comic.fmv_multiplier) : null;
+    const askPrice = rawAskWithMultiplier != null && fmvValue != null
+        ? Math.min(Math.max(rawAskWithMultiplier, Math.round(fmvValue * 1.1)), Math.round(fmvValue * 1.2))
+        : rawAskWithMultiplier;
 
     const gradeLabel = getGradeLabel(comic.grade);
     const title = ebayTitle(comic, gradeLabel);

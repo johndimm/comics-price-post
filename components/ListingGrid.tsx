@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import Image from "next/image";
 import { eBayListing } from "@/lib/db";
 
-type SortKey = "type" | "price" | "grade" | "sale_date" | "is_slabbed";
+type SortKey = "type" | "price" | "grade" | "sale_date" | "is_slabbed" | "source";
 type RangeFilter = { min?: number; max?: number };
 
 // ── Module-level filter components ──────────────────────────────────────────
@@ -18,16 +19,17 @@ function FilterIcon({ active }: { active: boolean }) {
     );
 }
 
-function RangeFilterDropdown({ initialMin, initialMax, onApply, onClear, onClose }: {
+function RangeFilterDropdown({ initialMin, initialMax, onApply, onClear, onClose, containerRef }: {
     initialMin?: number; initialMax?: number;
     onApply: (min?: number, max?: number) => void;
     onClear: () => void;
     onClose: () => void;
+    containerRef?: React.RefObject<HTMLDivElement | null>;
 }) {
     const [min, setMin] = useState(initialMin != null ? String(initialMin) : "");
     const [max, setMax] = useState(initialMax != null ? String(initialMax) : "");
     return (
-        <div className="filter-dropdown" onClick={(e) => e.stopPropagation()}>
+        <div className="filter-dropdown" ref={containerRef} onMouseDown={e => e.stopPropagation()}>
             <div className="filter-dropdown-header">
                 <span style={{ fontWeight: 600 }}>Range</span>
                 <button className="btn-text" onClick={() => { setMin(""); setMax(""); onClear(); }}>Clear</button>
@@ -51,13 +53,14 @@ function RangeFilterDropdown({ initialMin, initialMax, onApply, onClear, onClose
     );
 }
 
-function CheckboxFilterDropdown({ uniqueValues, selected, onUpdate, onClose }: {
+function CheckboxFilterDropdown({ uniqueValues, selected, onUpdate, onClose, containerRef }: {
     uniqueValues: string[]; selected: Set<string>;
     onUpdate: (vals: Set<string>) => void;
     onClose: () => void;
+    containerRef?: React.RefObject<HTMLDivElement | null>;
 }) {
     return (
-        <div className="filter-dropdown" onClick={(e) => e.stopPropagation()}>
+        <div className="filter-dropdown" ref={containerRef} onMouseDown={e => e.stopPropagation()}>
             <div className="filter-dropdown-header">
                 <button className="btn-text" onClick={() => onUpdate(new Set())}>Clear</button>
                 <button className="btn-text" onClick={() => onUpdate(new Set(uniqueValues))}>Select All</button>
@@ -83,6 +86,77 @@ function CheckboxFilterDropdown({ uniqueValues, selected, onUpdate, onClose }: {
     );
 }
 
+// ── Listing modal ────────────────────────────────────────────────────────────
+
+function ListingModal({ listing, onClose }: { listing: eBayListing; onClose: () => void }) {
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+        document.addEventListener("keydown", handler);
+        return () => document.removeEventListener("keydown", handler);
+    }, [onClose]);
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-card" onClick={e => e.stopPropagation()}>
+                <button className="modal-close" onClick={onClose}>✕</button>
+                {listing.image_url && (
+                    <div className="modal-image-wrap">
+                        <Image
+                            src={listing.image_url}
+                            alt={listing.raw_title || ""}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            unoptimized
+                        />
+                    </div>
+                )}
+                <div className="modal-body">
+                    <div className="modal-badges">
+                        <span className={`status-badge ${listing.type === "sold" ? "status-sold" : "for-sale"}`}>
+                            {listing.type}
+                        </span>
+                        {listing.is_slabbed && <span className="status-badge status-slabbed">Slabbed</span>}
+                    </div>
+                    <p className="modal-title">{listing.raw_title || "—"}</p>
+                    <div className="modal-stats">
+                        <div className="modal-stat">
+                            <span className="modal-stat-label">Price</span>
+                            <span className="modal-stat-value">${listing.price.toLocaleString()}</span>
+                        </div>
+                        {listing.grade != null && (
+                            <div className="modal-stat">
+                                <span className="modal-stat-label">Grade</span>
+                                <span className="modal-stat-value">{listing.grade.toFixed(1)}</span>
+                            </div>
+                        )}
+                        <div className="modal-stat">
+                            <span className="modal-stat-label">{listing.type === "sold" ? "Sold" : "Listed"}</span>
+                            <span className="modal-stat-value">
+                                {listing.sale_date
+                                    ? new Date(listing.sale_date).toLocaleDateString()
+                                    : new Date(listing.synced_at).toLocaleDateString()}
+                            </span>
+                        </div>
+                    </div>
+                    {listing.listing_url && (
+                        <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 12 }}>
+                            <a href={listing.listing_url} target="_blank" rel="noopener noreferrer"
+                                className="btn btn-blue" style={{ display: "inline-block" }}>
+                                {listing.source === 'heritage' ? 'Open on Heritage ↗' : 'Open on eBay ↗'}
+                            </a>
+                            {listing.type === "sold" && listing.source !== 'heritage' && (
+                                <span style={{ fontSize: 11, color: "var(--text-muted)" }}>
+                                    Sold links may have expired.
+                                </span>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
+
 // ── Main component ───────────────────────────────────────────────────────────
 
 interface ListingGridProps {
@@ -98,19 +172,37 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
     const [sortKey, setSortKey] = useState<SortKey>("sale_date");
     const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
     const [activeFilterCol, setActiveFilterCol] = useState<string | null>(null);
+    const openDropdownRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!activeFilterCol) return;
+        const handler = (e: MouseEvent) => {
+            if (openDropdownRef.current && openDropdownRef.current.contains(e.target as Node)) return;
+            setActiveFilterCol(null);
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, [activeFilterCol]);
     const [rangeFilters, setRangeFilters] = useState<Record<string, RangeFilter>>({});
     const [columnFilters, setColumnFilters] = useState<Record<string, Set<string>>>({});
     const rowRefs = useRef<Map<string, HTMLTableRowElement>>(new Map());
 
     useEffect(() => {
         if (!scrollToId) return;
-        const el = rowRefs.current.get(scrollToId);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Ensure the row is visible by switching to "all" filter
+        setTypeFilter("all");
+        // Defer scroll until after re-render with the updated filter
+        setTimeout(() => {
+            const el = rowRefs.current.get(scrollToId);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
     }, [scrollToId]);
 
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [lastClickedId, setLastClickedId] = useState<string | null>(null);
     const [typeFilter, setTypeFilter] = useState<"all" | "sold" | "asking">("all");
+    const [sourceFilter, setSourceFilter] = useState<"all" | "ebay" | "heritage">("all");
+    const [modalListing, setModalListing] = useState<eBayListing | null>(null);
 
     function handleSort(key: SortKey) {
         if (key === sortKey) setSortDir(d => d === "asc" ? "desc" : "asc");
@@ -129,6 +221,7 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
 
     const sorted = useMemo(() => {
         let filtered = typeFilter === "all" ? listings : listings.filter(l => l.type === typeFilter);
+        if (sourceFilter !== "all") filtered = filtered.filter(l => l.source === sourceFilter);
 
         // Apply range filters
         const priceRange = rangeFilters["price"];
@@ -151,6 +244,9 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
             if (sortKey === "price" || sortKey === "grade" || sortKey === "is_slabbed") {
                 av = Number(av) || 0;
                 bv = Number(bv) || 0;
+            } else if (sortKey === "sale_date") {
+                av = new Date(a.sale_date ?? a.synced_at).getTime();
+                bv = new Date(b.sale_date ?? b.synced_at).getTime();
             } else {
                 av = String(av).toLowerCase();
                 bv = String(bv).toLowerCase();
@@ -159,7 +255,7 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
             if (av > bv) return sortDir === "asc" ? 1 : -1;
             return 0;
         });
-    }, [listings, sortKey, sortDir, typeFilter, rangeFilters, columnFilters]);
+    }, [listings, sortKey, sortDir, typeFilter, sourceFilter, rangeFilters, columnFilters]);
 
     const allSelected = sorted.length > 0 && selectedIds.size === sorted.length;
 
@@ -229,6 +325,7 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
                             onApply={(min, max) => updateRangeFilter(key, { min, max })}
                             onClear={() => updateRangeFilter(key, {})}
                             onClose={() => setActiveFilterCol(null)}
+                            containerRef={openDropdownRef}
                         />
                     )}
                     {isOpen && !isNumeric && (
@@ -238,6 +335,7 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
                             selected={columnFilters[key] || new Set()}
                             onUpdate={(vals) => updateColumnFilter(key, vals)}
                             onClose={() => setActiveFilterCol(null)}
+                            containerRef={openDropdownRef}
                         />
                     )}
                 </div>
@@ -247,15 +345,25 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
 
     const soldCount = listings.filter(l => l.type === "sold").length;
     const askCount = listings.filter(l => l.type === "asking").length;
+    const heritageCount = listings.filter(l => l.source === "heritage").length;
+    const ebayCount = listings.filter(l => l.source === "ebay").length;
 
     return (
+        <>
         <div className="listing-grid-container">
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, flexWrap: "wrap" }}>
-                <h3 style={{ margin: 0 }}>eBay Source Data</h3>
+                <h3 style={{ margin: 0 }}>Source Data</h3>
                 <div className="toolbar-group">
                     {(["all", "sold", "asking"] as const).map(f => (
                         <button key={f} className={`btn ${typeFilter === f ? "active" : ""}`} onClick={() => setTypeFilter(f)}>
                             {f === "all" ? `All (${listings.length})` : f === "sold" ? `Sold (${soldCount})` : `Asking (${askCount})`}
+                        </button>
+                    ))}
+                </div>
+                <div className="toolbar-group">
+                    {(["all", "ebay", "heritage"] as const).map(f => (
+                        <button key={f} className={`btn ${sourceFilter === f ? "active" : ""}`} onClick={() => setSourceFilter(f)}>
+                            {f === "all" ? "All Sources" : f === "ebay" ? `eBay (${ebayCount})` : `Heritage (${heritageCount})`}
                         </button>
                     ))}
                 </div>
@@ -278,6 +386,7 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
                             {renderHeader("Grade", "grade", true)}
                             {renderHeader("Date", "sale_date")}
                             {renderHeader("Slab", "is_slabbed", true)}
+                            {renderHeader("Source", "source")}
                             <th>Title</th>
                             <th>Link</th>
                         </tr>
@@ -318,16 +427,18 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
                                     {l.sale_date ? new Date(l.sale_date).toLocaleDateString() : new Date(l.synced_at).toLocaleDateString()}
                                 </td>
                                 <td className="num-cell">{l.is_slabbed ? "Yes" : "No"}</td>
+                                <td style={{ fontSize: 11, color: l.source === 'heritage' ? '#f5a623' : 'var(--text-muted)' }}>
+                                    {l.source === 'heritage' ? 'Heritage' : 'eBay'}
+                                </td>
                                 <td className="artist-cell" title={l.raw_title || ""}>
                                     {l.raw_title ? (l.raw_title.length > 55 ? l.raw_title.substring(0, 55) + "…" : l.raw_title) : "—"}
                                 </td>
                                 <td>
-                                    {l.listing_url && (
-                                        <a href={l.listing_url} target="_blank" rel="noopener noreferrer"
-                                            className="table-link" onClick={e => e.stopPropagation()}>
-                                            View
-                                        </a>
-                                    )}
+                                    <button className="table-link btn-reset"
+                                        onClick={e => { e.stopPropagation(); setModalListing(l); }}
+                                        style={{ color: "var(--blue)" }}>
+                                        View
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -335,5 +446,7 @@ export default function ListingGrid({ listings, highlightedId, scrollToId, onHov
                 </table>
             </div>
         </div>
+        {modalListing && <ListingModal listing={modalListing} onClose={() => setModalListing(null)} />}
+        </>
     );
 }

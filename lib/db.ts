@@ -18,6 +18,7 @@ db.exec(`
     item_id TEXT PRIMARY KEY,
     marvel_id TEXT NOT NULL,
     type TEXT NOT NULL, -- 'sold' or 'asking'
+    source TEXT DEFAULT 'ebay', -- 'ebay' or 'heritage'
     price REAL NOT NULL,
     currency TEXT DEFAULT 'USD',
     sale_date TEXT,
@@ -36,6 +37,14 @@ db.exec(`
   );
 
   CREATE INDEX IF NOT EXISTS idx_ebay_marvel_id ON ebay_listings(marvel_id);
+`);
+
+// Migrate: add source column if it doesn't exist yet
+try {
+  db.exec(`ALTER TABLE ebay_listings ADD COLUMN source TEXT DEFAULT 'ebay'`);
+} catch { /* column already exists */ }
+
+db.exec(`
 
   CREATE TABLE IF NOT EXISTS comic_metadata (
     marvel_id TEXT PRIMARY KEY,
@@ -55,6 +64,7 @@ export interface eBayListing {
   item_id: string;
   marvel_id: string;
   type: 'sold' | 'asking';
+  source: 'ebay' | 'heritage';
   price: number;
   currency: string;
   sale_date: string | null;
@@ -66,11 +76,19 @@ export interface eBayListing {
   synced_at: string;
 }
 
-const FACSIMILE_KEYWORDS = ['facsimile', 'reprint', 'replica', ' svg ', 'facsimile edition'];
+const FACSIMILE_KEYWORDS = ['facsimile', 'reprint', 'replica', ' svg ', 'facsimile edition', 'golden record'];
 function isFacsimile(title: string | null): boolean {
   if (!title) return false;
   const t = title.toLowerCase();
   return FACSIMILE_KEYWORDS.some(kw => t.includes(kw));
+}
+
+// CGC SS = Signature Series (signed by creator) — commands a large premium, not a valid unsignedcomp
+function isSigned(title: string | null): boolean {
+  if (!title) return false;
+  const t = title.toUpperCase();
+  // "CGC SS" or "CBCS SS" or "SS " at word boundary, or explicit "signed" keyword
+  return /\b(?:CGC|CBCS|PGX)\s+SS\b/.test(t) || /\bSIGNED\b/.test(t) || /\bSIGNATURE SERIES\b/.test(t);
 }
 
 export interface ComicMetadata {
@@ -92,7 +110,7 @@ export function getComicMetadata(marvelId: string): ComicMetadata | null {
 export function getListingsByComic(marvelId: string): eBayListing[] {
   const stmt = db.prepare('SELECT * FROM ebay_listings WHERE marvel_id = ? ORDER BY sale_date DESC, synced_at DESC');
   const all = stmt.all(marvelId) as eBayListing[];
-  return all.filter(l => !isFacsimile(l.raw_title));
+  return all.filter(l => !isFacsimile(l.raw_title) && !isSigned(l.raw_title));
 }
 
 function median(prices: number[]): number {
@@ -101,14 +119,31 @@ function median(prices: number[]): number {
   return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
-function gradeFilteredPrices(listings: eBayListing[], targetGrade: number, windowSize: number): number[] {
+function gradeFilteredPrices(
+  listings: eBayListing[],
+  targetGrade: number,
+  downWindow: number,   // how far below target grade to include
+  upWindow: number,     // how far above target grade to include (use 0 normally)
+  coeffs?: NormCoeffs | null,
+  marvelId?: string
+): number[] {
   return listings
-    .filter(l => l.grade !== null && l.grade !== undefined && Math.abs(l.grade - targetGrade) <= windowSize)
-    .map(l => l.price);
+    .filter(l => l.grade !== null && l.grade !== undefined &&
+      l.grade >= targetGrade - downWindow && l.grade <= targetGrade + upWindow)
+    .map(l => {
+      if (coeffs && l.grade !== null && l.grade !== undefined && l.grade !== targetGrade) {
+        return normalizePrice(l.price, l.grade, l.sale_date, targetGrade, coeffs, marvelId);
+      }
+      return l.price;
+    });
 }
 
-export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[], ebayAsking: eBayListing[], targetGrade: number, gradeCurves?: GradeCurves, isSlabbed?: boolean): { value: number | null; method: string; source: 'sold' | 'asking' | 'none', recommendedAsk?: number } {
+export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[], ebayAsking: eBayListing[], targetGrade: number, gradeCurves?: GradeCurves, isSlabbed?: boolean): { value: number | null; low: number | null; high: number | null; method: string; source: 'sold' | 'asking' | 'none', recommendedAsk?: number } {
   let method = "";
+
+  // Load norm coefficients for grade normalization (normalize nearby comps to target grade)
+  const normCoeffs = getNormCoeffs();
+  const marvelId = ebaySold[0]?.marvel_id ?? ebayAsking[0]?.marvel_id;
 
   // Interpolate a grade curve (array of {x,y} points) at a given grade
   function evalCurve(pts: GradeCurvePoint[], grade: number): number | null {
@@ -144,36 +179,81 @@ export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[]
     }
   }
 
-  // 2. Tight near-grade eBay sold (±0.5) — same type only
-  const tightSold = gradeFilteredPrices(typedSold, targetGrade, 0.5);
-  if (tightSold.length >= 2 || (tightSold.length >= 1 && spreadsheetSold.length >= 1)) {
-    const combined = [...spreadsheetSold, ...tightSold];
-    let fmvValue = Math.round(median(combined));
+  // Recency cutoff: 24 months
+  const twoYearsAgo = new Date();
+  twoYearsAgo.setMonth(twoYearsAgo.getMonth() - 24);
+  const recentSold = typedSold.filter(l => l.sale_date && new Date(l.sale_date) >= twoYearsAgo);
 
-    // Floor FMV at the highest recent sale (last 90 days) at this grade
-    const ninetyDaysAgo = Date.now() - 90 * 24 * 60 * 60 * 1000;
-    const recentTight = typedSold.filter(l =>
-      l.grade !== null && l.grade !== undefined &&
-      Math.abs(l.grade - targetGrade) <= 0.5 &&
-      l.sale_date && new Date(l.sale_date).getTime() >= ninetyDaysAgo
-    );
-    let recentFloorNote = '';
-    if (recentTight.length > 0) {
-      const maxRecent = Math.max(...recentTight.map(l => l.price));
-      if (maxRecent > fmvValue) {
-        fmvValue = maxRecent;
-        recentFloorNote = ` Floored at recent high $${maxRecent.toLocaleString()} (${recentTight.length} sale${recentTight.length > 1 ? 's' : ''} in 90 days).`;
-      }
+  // 2. Price from sold data: exact grade first, then interpolate floor/ceiling
+  function pricedFromPool(pool: eBayListing[]): { value: number; low: number | null; high: number | null; note: string } | null {
+    const withGrade = pool.filter(l => l.grade != null);
+
+    // Exact grade (within 0.1 to handle float)
+    const exact = withGrade.filter(l => Math.abs(l.grade! - targetGrade) <= 0.1);
+    const exactPrices = [...spreadsheetSold, ...exact.map(l => l.price)];
+    if (exactPrices.length >= 1) {
+      return {
+        value: Math.round(Math.max(...exactPrices)),
+        low: Math.round(Math.min(...exactPrices)),
+        high: Math.round(Math.max(...exactPrices)),
+        note: `exact grade sold (${exact.length})`,
+      };
     }
 
+    // No exact match — find nearest lower (floor) and nearest higher (ceiling)
+    const lower = withGrade.filter(l => l.grade! < targetGrade - 0.1).sort((a, b) => b.grade! - a.grade!);
+    const upper = withGrade.filter(l => l.grade! > targetGrade + 0.1).sort((a, b) => a.grade! - b.grade!);
+
+    const nearestFloorGrade = lower[0]?.grade ?? null;
+    const nearestCeilGrade  = upper[0]?.grade ?? null;
+
+    const floorGroup = nearestFloorGrade != null ? lower.filter(l => Math.abs(l.grade! - nearestFloorGrade) <= 0.1) : [];
+    const ceilGroup  = nearestCeilGrade  != null ? upper.filter(l => Math.abs(l.grade! - nearestCeilGrade)  <= 0.1) : [];
+
+    const floorPrice = floorGroup.length > 0 ? median(floorGroup.map(l => l.price)) : null;
+    const ceilPrice  = ceilGroup.length  > 0 ? median(ceilGroup.map(l => l.price))  : null;
+
+    if (floorPrice !== null && ceilPrice !== null) {
+      const t = (targetGrade - nearestFloorGrade!) / (nearestCeilGrade! - nearestFloorGrade!);
+      const interpolated = Math.round(floorPrice + t * (ceilPrice - floorPrice));
+      return {
+        value: interpolated,
+        low: Math.round(floorPrice),
+        high: Math.round(ceilPrice),
+        note: `interpolated gr${nearestFloorGrade}–${nearestCeilGrade} (floor $${Math.round(floorPrice)}, ceil $${Math.round(ceilPrice)})`,
+      };
+    }
+
+    if (floorPrice !== null) {
+      // Only lower-grade data — use as floor (conservative)
+      return {
+        value: Math.round(floorPrice),
+        low: Math.round(floorPrice),
+        high: null,
+        note: `floor from gr${nearestFloorGrade} sold (${floorGroup.length})`,
+      };
+    }
+
+    // Only higher-grade data — not usable as FMV, fall through
+    return null;
+  }
+
+  const recentPriced = pricedFromPool(recentSold);
+  const allTimePriced = pricedFromPool(typedSold);
+  const priced = recentPriced ?? allTimePriced;
+
+  if (priced) {
+    const recencyNote = recentPriced ? ' (last 24mo)' : '';
     return {
-      value: fmvValue,
-      method: method + `Grade-matched eBay sold ±0.5 (${tightSold.length}).${recentFloorNote}`,
+      value: priced.value,
+      low: priced.low,
+      high: priced.high,
+      method: method + priced.note + recencyNote + '.',
       source: 'sold',
     };
   }
 
-  // 3. Grade curve prediction — type-aware: slabbed books must not fall back to raw curve
+  // 4. Grade curve prediction — fallback when insufficient nearby sold data
   //    For slabbed: sold_slabbed → asking_slabbed (discounted) → nothing
   //    For raw:     sold_raw → asking_raw (discounted) → nothing
   //    Unknown:     sold_slabbed → sold_raw (old behaviour)
@@ -182,8 +262,10 @@ export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[]
   let curveFromAsking = false;
 
   if (isSlabbed === true) {
-    soldCurvePred = evalCurve(gradeCurves?.sold.slabbed ?? [], targetGrade);
-    askingCurvePred = evalCurve(gradeCurves?.asking.slabbed ?? [], targetGrade);
+    soldCurvePred = evalCurve(gradeCurves?.sold.slabbed ?? [], targetGrade)
+      ?? evalCurve(gradeCurves?.sold.raw ?? [], targetGrade);
+    askingCurvePred = evalCurve(gradeCurves?.asking.slabbed ?? [], targetGrade)
+      ?? evalCurve(gradeCurves?.asking.raw ?? [], targetGrade);
     if (soldCurvePred === null && askingCurvePred !== null) {
       soldCurvePred = Math.round(askingCurvePred * 0.85);
       curveFromAsking = true;
@@ -208,50 +290,35 @@ export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[]
     const combined = spreadsheetSold.length > 0 ? [...spreadsheetSold, soldCurvePred] : [soldCurvePred];
     const extra = spreadsheetSold.length > 0 ? ' blended with spreadsheet sale' : '';
     const src = curveFromAsking ? 'asking curve (15% discount)' : 'sold curve';
+    const curveType = isSlabbed === true && !gradeCurves?.sold.slabbed?.length && !gradeCurves?.asking.slabbed?.length
+      ? ' (raw curve, no slabbed data)' : '';
     return {
       value: Math.round(median(combined)),
-      method: method + `Grade ${src} prediction at gr${targetGrade}${extra}.`,
+      low: null,
+      high: null,
+      method: method + `Grade ${src} prediction at gr${targetGrade}${extra}${curveType}.`,
       source: curveFromAsking ? 'asking' : 'sold',
       recommendedAsk: askingCurvePred ?? undefined,
     };
   }
 
-  // 4. Wider ±1.0 sold (fallback when no grade curve available)
-  const nearSold = gradeFilteredPrices(typedSold, targetGrade, 1.0);
-  if (nearSold.length >= 2 || (nearSold.length >= 1 && spreadsheetSold.length >= 1)) {
-    const combined = [...spreadsheetSold, ...nearSold];
-    let fmvValue = Math.round(median(combined));
-
-    const ninetyDaysAgo = Date.now() - 90 * 24 * 60 * 60 * 1000;
-    const recentNear = typedSold.filter(l =>
-      l.grade !== null && l.grade !== undefined &&
-      Math.abs(l.grade - targetGrade) <= 1.0 &&
-      l.sale_date && new Date(l.sale_date).getTime() >= ninetyDaysAgo
-    );
-    let recentFloorNote = '';
-    if (recentNear.length > 0) {
-      const maxRecent = Math.max(...recentNear.map(l => l.price));
-      if (maxRecent > fmvValue) {
-        fmvValue = maxRecent;
-        recentFloorNote = ` Floored at recent high $${maxRecent.toLocaleString()} (${recentNear.length} sale${recentNear.length > 1 ? 's' : ''} in 90 days).`;
-      }
-    }
-
-    return {
-      value: fmvValue,
-      method: method + `Grade-matched eBay sold ±1.0 (${nearSold.length}).${recentFloorNote}`,
-      source: 'sold',
-    };
-  }
+  // Pre-filter asking by type, same as typedSold
+  const typedAsking = isSlabbed === true
+    ? ebayAsking.filter(l => l.is_slabbed === 1)
+    : isSlabbed === false
+    ? ebayAsking.filter(l => l.is_slabbed === 0)
+    : ebayAsking;
 
   // 5. Grade-filtered asking prices — better than all-grade sold for high-grade books
   const askWindows = [0.5, 1.0, 2.0];
   for (const window of askWindows) {
-    const prices = gradeFilteredPrices(ebayAsking, targetGrade, window);
+    const prices = gradeFilteredPrices(typedAsking, targetGrade, window, window);
     if (prices.length >= 3) {
       const med = median(prices);
       return {
         value: Math.round(med * 0.85),
+        low: null,
+        high: null,
         method: `Median of ${prices.length} asking prices within ±${window} grade. Applied 15% market discount.`,
         source: 'asking',
         recommendedAsk: Math.round(med),
@@ -264,25 +331,29 @@ export function calcFMV(spreadsheetPrice: string | null, ebaySold: eBayListing[]
     const combined = [...spreadsheetSold, ...nearSold];
     return {
       value: Math.round(median(combined)),
+      low: null,
+      high: null,
       method: method + `Limited sold data (${combined.length} point(s)).`,
       source: 'sold',
     };
   }
 
-  // 7. All-grade asking as last resort
-  const allAsking = ebayAsking.filter(l => l.grade !== null && l.grade !== undefined);
-  const askSource = allAsking.length >= 3 ? allAsking : ebayAsking;
+  // 7. All-grade asking as last resort (type-filtered)
+  const allAsking = typedAsking.filter(l => l.grade !== null && l.grade !== undefined);
+  const askSource = allAsking.length >= 3 ? allAsking : typedAsking;
   if (askSource.length > 0) {
     const med = median(askSource.map(l => l.price));
     return {
       value: Math.round(med * 0.85),
+      low: null,
+      high: null,
       method: `Median of ${askSource.length} asking prices (all grades). Applied 15% discount.`,
       source: 'asking',
       recommendedAsk: Math.round(med),
     };
   }
 
-  return { value: null, method: "No recent sold or asking price data available.", source: 'none' };
+  return { value: null, low: null, high: null, method: "No recent sold or asking price data available.", source: 'none' };
 }
 
 // --- Price normalization ---

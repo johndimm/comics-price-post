@@ -624,3 +624,995 @@ Import trace:
  GET /comic/6638 200 in 655ms (compile: 8ms, generate-params: 4ms, render: 647ms)
  GET / 200 in 875ms (compile: 11ms, render: 864ms)
  GET /comic/6494 200 in 245ms (compile: 9ms, generate-params: 4ms, render: 237ms)
+✓ Compiled in 84ms
+ GET / 200 in 912ms (compile: 266ms, render: 645ms)
+ GET /comic-photos/slabbed-2025/4659813/CGC4659813-001_OBV.jpg 404 in 625ms (compile: 211ms, render: 414ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659813/CGC4659813-001_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659813/CGC4659813-002_OBV.jpg 404 in 656ms (compile: 255ms, render: 401ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659813/CGC4659813-002_OBV.jpg received null
+Error: The requested resource isn't a valid image.
+    at ignore-listed frames {
+  statusCode: 400
+}
+Error: The requested resource isn't a valid image.
+    at ignore-listed frames {
+  statusCode: 400
+}
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-017_OBV.jpg 404 in 166ms (compile: 21ms, render: 144ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-017_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-018_OBV.jpg 404 in 185ms (compile: 86ms, render: 98ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-018_OBV.jpg received null
+Error: The requested resource isn't a valid image.
+    at ignore-listed frames {
+  statusCode: 400
+}
+Error: The requested resource isn't a valid image.
+    at ignore-listed frames {
+  statusCode: 400
+}
+ GET /comic/7019 200 in 404ms (compile: 121ms, generate-params: 8ms, render: 283ms)
+ GET /comic/7019 200 in 1013ms (compile: 100ms, generate-params: 3ms, render: 913ms)
+ GET /comic/7019 200 in 574ms (compile: 4ms, generate-params: 52µs, render: 570ms)
+ GET /comic/13256 200 in 578ms (compile: 330ms, generate-params: 20µs, render: 248ms)
+ GET /comic/13256 200 in 450ms (compile: 6ms, generate-params: 36µs, render: 444ms)
+ GET /comic/7019 200 in 1163ms (compile: 79ms, generate-params: 3ms, render: 1084ms)
+ GET /comic/13256 200 in 818ms (compile: 3ms, generate-params: 36µs, render: 815ms)
+ GET /comic/13256 200 in 320ms (compile: 8ms, generate-params: 61µs, render: 312ms)
+ GET /comic/7019 200 in 819ms (compile: 238ms, generate-params: 25µs, render: 582ms)
+✓ Compiled in 22ms
+✓ Compiled in 24ms
+✓ Compiled in 20ms
+✓ Compiled in 15ms
+ GET / 200 in 340ms (compile: 103ms, render: 238ms)
+ GET /comic-photos/slabbed-2025/4659813/CGC4659813-001_OBV.jpg 404 in 73ms (compile: 6ms, render: 67ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659813/CGC4659813-001_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659813/CGC4659813-002_OBV.jpg 404 in 49ms (compile: 6ms, render: 44ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659813/CGC4659813-002_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-017_OBV.jpg 404 in 31ms (compile: 4ms, render: 27ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-017_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-018_OBV.jpg 404 in 38ms (compile: 9ms, render: 29ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-018_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-012_OBV.jpg 404 in 151ms (compile: 13ms, render: 138ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-012_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-013_OBV.jpg 404 in 182ms (compile: 63ms, render: 119ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-013_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-014_OBV.jpg 404 in 219ms (compile: 99ms, render: 119ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-014_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-015_OBV.jpg 404 in 138ms (compile: 54ms, render: 85ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-015_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-016_OBV.jpg 404 in 93ms (compile: 9ms, render: 84ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-016_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-020_OBV.jpg 404 in 110ms (compile: 39ms, render: 70ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-020_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-006_OBV.jpg 404 in 101ms (compile: 33ms, render: 68ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-006_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-007_OBV.jpg 404 in 68ms (compile: 17ms, render: 51ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-007_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-008_OBV.jpg 404 in 102ms (compile: 12ms, render: 90ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-008_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-009_OBV.jpg 404 in 38ms (compile: 4ms, render: 35ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-009_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-010_OBV.jpg 404 in 40ms (compile: 7ms, render: 33ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-010_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-011_OBV.jpg 404 in 37ms (compile: 4ms, render: 33ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-011_OBV.jpg received null
+✓ Compiled in 23ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 19ms
+ GET / 200 in 1403ms (compile: 162ms, render: 1241ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 22ms
+ GET / 200 in 1076ms (compile: 97ms, render: 979ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 48ms
+ GET / 200 in 827ms (compile: 1613µs, render: 825ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 21ms
+ GET / 200 in 808ms (compile: 4ms, render: 803ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 21ms
+ GET / 200 in 851ms (compile: 1995µs, render: 849ms)
+ GET / 200 in 883ms (compile: 4ms, render: 880ms)
+✓ Compiled in 59ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 85ms
+ GET / 200 in 1617ms (compile: 117ms, render: 1500ms)
+ GET /comic/13256 200 in 518ms (compile: 110ms, generate-params: 7ms, render: 407ms)
+✓ Compiled in 12ms
+✓ Compiled in 14ms
+✓ Compiled in 16ms
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-016_OBV.jpg 404 in 117ms (compile: 9ms, render: 108ms)
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-011_OBV.jpg 404 in 119ms (compile: 33ms, render: 87ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-016_OBV.jpg received null
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-011_OBV.jpg received null
+ GET /comic-photos/slabbed-2025/4659391/CGC4659391-005_OBV.jpg 404 in 125ms (compile: 80ms, render: 46ms)
+⨯ The requested resource isn't a valid image for /comic-photos/slabbed-2025/4659391/CGC4659391-005_OBV.jpg received null
+ GET / 200 in 1078ms (compile: 92ms, render: 986ms)
+ GET / 200 in 668ms (compile: 421ms, render: 247ms)
+ GET /comic/13256 200 in 677ms (compile: 96ms, generate-params: 8ms, render: 581ms)
+ GET /comic/13256 200 in 405ms (compile: 3ms, generate-params: 38µs, render: 402ms)
+ GET /comic/6582 200 in 249ms (compile: 8ms, generate-params: 3ms, render: 240ms)
+ GET /comic/13256 200 in 1070ms (compile: 426ms, generate-params: 58µs, render: 643ms)
+ GET /comic/6582 200 in 1075ms (compile: 138ms, generate-params: 3ms, render: 937ms)
+ GET /comic/6582 200 in 379ms (compile: 3ms, generate-params: 28µs, render: 376ms)
+ GET /comic/13256 200 in 344ms (compile: 4ms, generate-params: 24µs, render: 340ms)
+ GET /comic/6582 200 in 1289ms (compile: 84ms, generate-params: 3ms, render: 1205ms)
+ GET /comic/13256 200 in 943ms (compile: 2ms, generate-params: 19µs, render: 941ms)
+ GET /comic/13256 200 in 702ms (compile: 4ms, generate-params: 27µs, render: 698ms)
+ GET /comic/6582 200 in 708ms (compile: 303ms, generate-params: 29µs, render: 404ms)
+ GET /comic/6582 200 in 1448ms (compile: 114ms, generate-params: 6ms, render: 1334ms)
+ GET /comic/13256 200 in 1030ms (compile: 369ms, generate-params: 27µs, render: 661ms)
+ GET /comic/13256 200 in 1032ms (compile: 4ms, generate-params: 29µs, render: 1028ms)
+ GET /comic/6582 200 in 403ms (compile: 7ms, generate-params: 42µs, render: 396ms)
+ GET /comic/6582 200 in 1289ms (compile: 84ms, generate-params: 4ms, render: 1205ms)
+ GET /comic/13256 200 in 917ms (compile: 5ms, generate-params: 19µs, render: 912ms)
+ GET /comic/13256 200 in 634ms (compile: 4ms, generate-params: 21µs, render: 630ms)
+ GET /comic/6582 200 in 635ms (compile: 313ms, generate-params: 49µs, render: 322ms)
+ GET /comic/6582 200 in 1023ms (compile: 87ms, generate-params: 3ms, render: 936ms)
+ GET /comic/13256 200 in 662ms (compile: 3ms, generate-params: 28µs, render: 659ms)
+ GET /comic/6582 200 in 393ms (compile: 7ms, generate-params: 40µs, render: 386ms)
+ GET /comic/13256 200 in 334ms (compile: 7ms, generate-params: 4ms, render: 327ms)
+ GET /comic/6582 200 in 1462ms (compile: 331ms, generate-params: 20µs, render: 1131ms)
+ GET /comic/13256 200 in 1466ms (compile: 79ms, generate-params: 3ms, render: 1386ms)
+ GET /comic/6582 200 in 739ms (compile: 431ms, generate-params: 33µs, render: 308ms)
+ GET /comic/13256 200 in 743ms (compile: 6ms, generate-params: 36µs, render: 737ms)
+ GET / 200 in 346ms (compile: 99ms, render: 247ms)
+ GET /comic/6516 200 in 223ms (compile: 8ms, generate-params: 4ms, render: 215ms)
+ GET / 200 in 257ms (compile: 5ms, render: 252ms)
+ GET /comic/6516 200 in 216ms (compile: 12ms, generate-params: 5ms, render: 204ms)
+ GET / 200 in 255ms (compile: 10ms, render: 245ms)
+ GET / 200 in 1060ms (compile: 8ms, render: 1052ms)
+ GET / 200 in 828ms (compile: 3ms, render: 825ms)
+ GET / 200 in 732ms (compile: 2ms, render: 730ms)
+ GET /comic/16883 200 in 243ms (compile: 9ms, generate-params: 4ms, render: 234ms)
+ GET /comic/16883 200 in 1192ms (compile: 239ms, generate-params: 2ms, render: 953ms)
+ GET /comic/13256 200 in 667ms (compile: 3ms, generate-params: 38µs, render: 663ms)
+ GET /comic/16883 200 in 292ms (compile: 3ms, generate-params: 70µs, render: 289ms)
+ GET /comic/13256 200 in 326ms (compile: 12ms, generate-params: 8ms, render: 313ms)
+ GET / 200 in 919ms (compile: 477ms, render: 442ms)
+ GET /comic/16904 200 in 255ms (compile: 15ms, generate-params: 9ms, render: 239ms)
+ GET /comic/16904 200 in 901ms (compile: 7ms, generate-params: 3ms, render: 895ms)
+ GET / 200 in 245ms (compile: 5ms, render: 239ms)
+ GET /comic/16883 200 in 209ms (compile: 11ms, generate-params: 4ms, render: 199ms)
+ GET /comic/16883 200 in 993ms (compile: 85ms, generate-params: 2ms, render: 908ms)
+ GET /comic/13256 200 in 647ms (compile: 3ms, generate-params: 20µs, render: 644ms)
+ GET /comic/16883 200 in 652ms (compile: 242ms, generate-params: 38µs, render: 411ms)
+ GET /comic/13256 200 in 286ms (compile: 9ms, generate-params: 6ms, render: 276ms)
+ GET /comic/16883 200 in 458ms (compile: 8ms, generate-params: 4ms, render: 450ms)
+ GET / 200 in 974ms (compile: 105ms, render: 869ms)
+ GET /comic/9690 200 in 201ms (compile: 6ms, generate-params: 3ms, render: 195ms)
+✓ Compiled in 45ms
+ GET /comic/9690 200 in 1283ms (compile: 220ms, generate-params: 6ms, render: 1063ms)
+ GET /comic/9690 200 in 321ms (compile: 14ms, generate-params: 41µs, render: 307ms)
+ GET /comic/13256 200 in 546ms (compile: 3ms, generate-params: 33µs, render: 543ms)
+ GET /comic/13256 200 in 703ms (compile: 16ms, generate-params: 26µs, render: 687ms)
+ GET /comic/9690 200 in 1011ms (compile: 75ms, generate-params: 3ms, render: 937ms)
+ GET /comic/9690 200 in 422ms (compile: 212ms, generate-params: 28µs, render: 210ms)
+ GET /comic/13256 200 in 643ms (compile: 5ms, generate-params: 27µs, render: 638ms)
+ GET /comic/13256 200 in 427ms (compile: 4ms, generate-params: 22µs, render: 423ms)
+ GET / 200 in 2.0s (compile: 832ms, render: 1186ms)
+ GET /comic/6594 200 in 373ms (compile: 32ms, generate-params: 9ms, render: 341ms)
+ GET /comic/6594 200 in 1091ms (compile: 47ms, generate-params: 12ms, render: 1044ms)
+ GET /comic/6594 200 in 435ms (compile: 20ms, generate-params: 8ms, render: 415ms)
+ GET /comic/6594 200 in 1145ms (compile: 94ms, generate-params: 23ms, render: 1051ms)
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+ GET /_next/image?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjohndimm%2Fcomic-photos%2Frefs%2Fheads%2Fmain%2Fslabbed-2026%2FCGC4633500-003_OBV.jpg&w=3840&q=75 500 in 9.1s (compile: 9.0s, render: 86ms)
+ GET /_next/image?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjohndimm%2Fcomic-photos%2Frefs%2Fheads%2Fmain%2Fslabbed-2026%2FCGC4633500-003_OBV.jpg&w=3840&q=75 500 in 9.1s (compile: 9.0s, render: 86ms)
+ GET /comic/6594 200 in 546ms (compile: 14ms, generate-params: 8ms, render: 532ms)
+ GET / 200 in 405ms (compile: 6ms, render: 399ms)
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg 404
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-018_OBV.jpg 404
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659813-001_OBV.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4633500-001_OBV.jpg
+ GET /comic/6582 200 in 243ms (compile: 15ms, generate-params: 5ms, render: 228ms)
+ GET / 200 in 210ms (compile: 4ms, render: 206ms)
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg 404
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-021_OBV.jpg 404
+ GET /comic/6671 200 in 186ms (compile: 7ms, generate-params: 3ms, render: 178ms)
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg 404
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg 404
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg 404
+⨯ upstream image response failed for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_REV.jpg 404
+ GET /comic/6671 200 in 1507ms (compile: 126ms, generate-params: 36ms, render: 1382ms)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-017_OBV.jpg
+ GET /comic/6671 200 in 396ms (compile: 18ms, generate-params: 6ms, render: 379ms)
+ GET / 200 in 372ms (compile: 12ms, render: 360ms)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-012_OBV.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-010_OBV.jpg
+ GET / 200 in 1463ms (compile: 367ms, render: 1096ms)
+ GET / 200 in 817ms (compile: 4ms, render: 813ms)
+ GET /comic/13256 200 in 594ms (compile: 226ms, generate-params: 3ms, render: 368ms)
+ GET /comic/13256 200 in 454ms (compile: 5ms, generate-params: 20µs, render: 449ms)
+ GET / 200 in 1097ms (compile: 74ms, render: 1023ms)
+ GET / 200 in 757ms (compile: 2ms, render: 755ms)
+ GET /comic/13256 200 in 766ms (compile: 363ms, generate-params: 5ms, render: 403ms)
+ GET /comic/13256 200 in 442ms (compile: 4ms, generate-params: 28µs, render: 438ms)
+ GET /comic/9689 200 in 194ms (compile: 5ms, generate-params: 3ms, render: 189ms)
+ GET /comic/9689 200 in 1886ms (compile: 57ms, generate-params: 12ms, render: 1830ms)
+✓ Compiled in 550ms
+✓ Compiled in 85ms
+✓ Compiled in 73ms
+✓ Compiled in 54ms
+ GET /comic/9689 200 in 1042ms (compile: 321ms, generate-params: 7ms, render: 721ms)
+ GET /comic/9689 200 in 344ms (compile: 12ms, generate-params: 6ms, render: 333ms)
+ GET /comic/9689 200 in 378ms (compile: 9ms, generate-params: 5ms, render: 369ms)
+ GET /comic/9689 200 in 352ms (compile: 17ms, generate-params: 7ms, render: 335ms)
+ GET /comic/9689 200 in 331ms (compile: 13ms, generate-params: 5ms, render: 318ms)
+ GET /api/sync?id=9689 404 in 84ms (compile: 26ms, render: 59ms)
+ GET /comic/9689 200 in 950ms (compile: 72ms, generate-params: 30ms, render: 878ms)
+ GET /comic/9689 200 in 391ms (compile: 20ms, generate-params: 4ms, render: 371ms)
+ GET /comic/9689 200 in 486ms (compile: 15ms, generate-params: 8ms, render: 471ms)
+✓ Compiled in 153ms
+✓ Compiled in 887ms
+✓ Compiled in 78ms
+✓ Compiled in 42ms
+✓ Compiled in 96ms
+✓ Compiled in 241ms
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.244:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 1386ms
+⨯ ./components/ListingGrid.tsx:417:9
+Parsing ecmascript source code failed
+[0m [90m 415 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 416 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+[31m[1m>[22m[39m[90m 417 |[39m         {modalListing [33m&&[39m [33m<[39m[33mListingModal[39m listing[33m=[39m{modalListing} onClose[33m=[39m{() [33m=>[39m setModalListing([36mnull[39m)} [33m/[39m[33m>[39m}
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 418 |[39m     )[33m;[39m
+ [90m 419 |[39m }
+ [90m 420 |[39m[0m
+
+Expected ',', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./components/ListingGrid.tsx [Client Component Browser]
+    ./components/EvidenceClient.tsx [Client Component Browser]
+    ./components/EvidenceClient.tsx [Server Component]
+    ./app/comic/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ListingGrid.tsx [Client Component SSR]
+    ./components/EvidenceClient.tsx [Client Component SSR]
+    ./components/EvidenceClient.tsx [Server Component]
+    ./app/comic/[id]/page.tsx [Server Component]
+
+
+⨯ ./components/ListingGrid.tsx:417:9
+Parsing ecmascript source code failed
+[0m [90m 415 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 416 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+[31m[1m>[22m[39m[90m 417 |[39m         {modalListing [33m&&[39m [33m<[39m[33mListingModal[39m listing[33m=[39m{modalListing} onClose[33m=[39m{() [33m=>[39m setModalListing([36mnull[39m)} [33m/[39m[33m>[39m}
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 418 |[39m     )[33m;[39m
+ [90m 419 |[39m }
+ [90m 420 |[39m[0m
+
+Expected ',', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./components/ListingGrid.tsx [Client Component Browser]
+    ./components/EvidenceClient.tsx [Client Component Browser]
+    ./components/EvidenceClient.tsx [Server Component]
+    ./app/comic/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ListingGrid.tsx [Client Component SSR]
+    ./components/EvidenceClient.tsx [Client Component SSR]
+    ./components/EvidenceClient.tsx [Server Component]
+    ./app/comic/[id]/page.tsx [Server Component]
+
+
+ GET /comic/13256 500 in 730ms (compile: 514ms, render: 215ms)
+ GET /comic/9689 500 in 984ms (compile: 962ms, render: 23ms)
+⨯ ./components/ListingGrid.tsx:417:9
+Parsing ecmascript source code failed
+[0m [90m 415 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 416 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+[31m[1m>[22m[39m[90m 417 |[39m         {modalListing [33m&&[39m [33m<[39m[33mListingModal[39m listing[33m=[39m{modalListing} onClose[33m=[39m{() [33m=>[39m setModalListing([36mnull[39m)} [33m/[39m[33m>[39m}
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 418 |[39m     )[33m;[39m
+ [90m 419 |[39m }
+ [90m 420 |[39m[0m
+
+Expected ',', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./components/ListingGrid.tsx [Client Component Browser]
+    ./components/EvidenceClient.tsx [Client Component Browser]
+    ./components/EvidenceClient.tsx [Server Component]
+    ./app/comic/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ListingGrid.tsx [Client Component SSR]
+    ./components/EvidenceClient.tsx [Client Component SSR]
+    ./components/EvidenceClient.tsx [Server Component]
+    ./app/comic/[id]/page.tsx [Server Component]
+
+
+ GET /comic/9689 500 in 32ms (compile: 22ms, render: 11ms)
+✓ Compiled in 69ms
+ GET /comic/13256 200 in 2.1s (compile: 1133ms, generate-params: 808ms, render: 949ms)
+ GET /comic/9689 200 in 2.1s (compile: 1762ms, generate-params: 1402ms, render: 337ms)
+ GET /comic/9689 200 in 415ms (compile: 16ms, generate-params: 7ms, render: 399ms)
+ GET /comic/9689 200 in 329ms (compile: 11ms, generate-params: 5ms, render: 318ms)
+✓ Compiled in 78ms
+✓ Compiled in 74ms
+ GET /comic/9689/listing 200 in 1771ms (compile: 1409ms, generate-params: 1076ms, render: 362ms)
+ GET /comic/9689/listing 200 in 312ms (compile: 13ms, generate-params: 5ms, render: 299ms)
+ GET /comic/9689/listing 200 in 279ms (compile: 14ms, generate-params: 6ms, render: 266ms)
+ GET /comic/9689 200 in 530ms (compile: 126ms, generate-params: 3ms, render: 404ms)
+ GET / 200 in 967ms (compile: 440ms, render: 527ms)
+ GET /comic/12470 200 in 230ms (compile: 17ms, generate-params: 7ms, render: 213ms)
+ GET /comic/12470 200 in 581ms (compile: 10ms, generate-params: 4ms, render: 571ms)
+ GET /comic/12470 200 in 1060ms (compile: 100ms, generate-params: 3ms, render: 959ms)
+ GET /comic/13256 200 in 445ms (compile: 15ms, generate-params: 136µs, render: 430ms)
+✓ Compiled in 169ms
+ GET /comic/12470 200 in 491ms (compile: 7ms, generate-params: 3ms, render: 484ms)
+ GET /comic/13256 200 in 491ms (compile: 223ms, generate-params: 54µs, render: 268ms)
+ GET / 200 in 353ms (compile: 20ms, render: 333ms)
+ GET / 200 in 908ms (compile: 14ms, render: 894ms)
+✓ Compiled in 126ms
+✓ Compiled in 108ms
+ GET / 200 in 1023ms (compile: 11ms, render: 1011ms)
+ GET /comic/11402 200 in 414ms (compile: 129ms, generate-params: 4ms, render: 286ms)
+ GET / 200 in 203ms (compile: 5ms, render: 198ms)
+✓ Compiled in 135ms
+✓ Compiled in 183ms
+ GET / 200 in 1141ms (compile: 117ms, render: 1023ms)
+ GET /comic/13256 200 in 491ms (compile: 71ms, generate-params: 3ms, render: 420ms)
+ GET / 200 in 762ms (compile: 3ms, render: 759ms)
+ GET / 200 in 560ms (compile: 2ms, render: 558ms)
+ GET /comic/13256 200 in 378ms (compile: 177ms, generate-params: 22µs, render: 201ms)
+ GET /comic/13256 200 in 380ms (compile: 3ms, generate-params: 21µs, render: 377ms)
+ GET / 200 in 1013ms (compile: 3ms, render: 1009ms)
+ GET / 200 in 240ms (compile: 5ms, render: 236ms)
+ GET /comic/local-kid-colt-outlaw-123 200 in 245ms (compile: 10ms, generate-params: 4ms, render: 236ms)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/8698/Fantastic%20Four%20Annual%202/front.jpeg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/8708/Fantastic%20Four%20Annual%204/front.jpeg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/8707/Fantastic%20Four%20Annual%203/front.jpeg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/8709/Fantastic%20Four%20Annual%205/front.jpeg
+✓ Compiled in 80ms
+  Reload env: .env
+ GET / 200 in 585ms (compile: 227ms, render: 358ms)
+✓ Compiled in 0ms
+⨯ Error: Invalid src prop (https://comicvine.gamespot.com/a/uploads/scale_medium/6/67663/8511026-4223850769-20832.jpg) on `next/image`, hostname "comicvine.gamespot.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at ignore-listed frames {
+  digest: '4284477358@E231'
+}
+ GET / 500 in 1110ms (compile: 7ms, render: 1103ms)
+⨯ Error: Invalid src prop (https://comicvine.gamespot.com/a/uploads/scale_medium/6/67663/8511026-4223850769-20832.jpg) on `next/image`, hostname "comicvine.gamespot.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at ignore-listed frames {
+  digest: '4284477358@E231'
+}
+ GET / 500 in 968ms (compile: 5ms, render: 963ms)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.244:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 1316ms
+ GET / 200 in 1708ms (compile: 470ms, render: 1238ms)
+ GET / 200 in 1129ms (compile: 13ms, render: 1117ms)
+✓ Compiled in 30ms
+✓ Compiled in 14ms
+✓ Compiled in 25ms
+✓ Compiled in 51ms
+✓ Compiled in 16ms
+ GET /comic/local-captain-atom-75 200 in 1589ms (compile: 1285ms, generate-params: 1048ms, render: 304ms)
+ GET /comic/local-nick-fury-agent-of-shield-1 200 in 252ms (compile: 13ms, generate-params: 6ms, render: 240ms)
+ GET /comic/local-nick-fury-agent-of-shield-1/listing 200 in 1132ms (compile: 862ms, generate-params: 796ms, render: 270ms)
+ GET /comic/local-nick-fury-agent-of-shield-1 200 in 338ms (compile: 25ms, generate-params: 8ms, render: 313ms)
+ GET / 200 in 944ms (compile: 119ms, render: 825ms)
+ GET /comic/local-nick-fury-agent-of-shield-1 200 in 231ms (compile: 9ms, generate-params: 4ms, render: 223ms)
+ GET / 200 in 525ms (compile: 66ms, render: 459ms)
+ GET /comic/13264 200 in 317ms (compile: 29ms, generate-params: 8ms, render: 287ms)
+ GET /comic/13264 200 in 624ms (compile: 145ms, generate-params: 7ms, render: 478ms)
+ GET /comic/13264 200 in 700ms (compile: 3ms, generate-params: 29µs, render: 696ms)
+ GET /comic/13264 200 in 701ms (compile: 287ms, generate-params: 39µs, render: 414ms)
+✓ Compiled in 77ms
+ GET /comic/13264 200 in 672ms (compile: 117ms, generate-params: 5ms, render: 555ms)
+ GET /comic/13264 200 in 906ms (compile: 4ms, generate-params: 27µs, render: 902ms)
+ GET /comic/13264 200 in 917ms (compile: 322ms, generate-params: 45µs, render: 595ms)
+ GET / 200 in 287ms (compile: 9ms, render: 278ms)
+ GET /comic/6594 200 in 244ms (compile: 8ms, generate-params: 4ms, render: 236ms)
+ GET /comic/6594 200 in 855ms (compile: 108ms, generate-params: 6ms, render: 746ms)
+ GET /comic/6594 200 in 650ms (compile: 334ms, generate-params: 34µs, render: 316ms)
+ GET /comic/6594 200 in 651ms (compile: 4ms, generate-params: 36µs, render: 647ms)
+✓ Compiled in 156ms
+ GET /comic/6594 200 in 534ms (compile: 135ms, generate-params: 5ms, render: 400ms)
+ GET /comic/6594 200 in 384ms (compile: 188ms, generate-params: 19µs, render: 196ms)
+ GET /comic/6594 200 in 385ms (compile: 2ms, generate-params: 18µs, render: 382ms)
+ GET / 200 in 3.6s (compile: 1091ms, render: 2.5s)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659813-001_OBV.jpg
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+✓ Compiled in 431ms
+ GET / 200 in 1969ms (compile: 346ms, render: 1623ms)
+ GET / 200 in 819ms (compile: 3ms, render: 816ms)
+ GET /comic/6594 200 in 391ms (compile: 130ms, generate-params: 10ms, render: 261ms)
+ GET / 200 in 592ms (compile: 4ms, render: 588ms)
+ GET /comic/6594 200 in 538ms (compile: 298ms, generate-params: 23µs, render: 240ms)
+ GET /comic/6594 200 in 540ms (compile: 1950µs, generate-params: 22µs, render: 538ms)
+ GET / 200 in 1795ms (compile: 105ms, render: 1690ms)
+ GET / 200 in 1350ms (compile: 3ms, render: 1347ms)
+ GET / 200 in 1122ms (compile: 616ms, render: 506ms)
+ GET /comic/6594 200 in 1126ms (compile: 83ms, generate-params: 3ms, render: 1042ms)
+ GET /comic/6594 200 in 1127ms (compile: 899ms, generate-params: 22µs, render: 228ms)
+ GET /comic/6594 200 in 1130ms (compile: 361ms, generate-params: 20µs, render: 768ms)
+✓ Compiled in 75ms
+ GET / 200 in 987ms (compile: 3ms, render: 985ms)
+ GET /comic/6594 200 in 749ms (compile: 84ms, generate-params: 5ms, render: 665ms)
+✓ Compiled in 121ms
+✓ Compiled in 66ms
+ GET /comic/12521 200 in 232ms (compile: 11ms, generate-params: 6ms, render: 221ms)
+✓ Compiled in 227ms
+✓ Compiled in 40ms
+ GET /comic/12521 200 in 1745ms (compile: 510ms, generate-params: 11ms, render: 1235ms)
+ GET /comic/12521 200 in 942ms (compile: 70ms, generate-params: 30ms, render: 872ms)
+  Reload env: .env
+✓ Compiled in 393ms
+ GET /comic/12521 200 in 889ms (compile: 478ms, generate-params: 9ms, render: 412ms)
+ GET /comic/6594 200 in 234ms (compile: 2ms, generate-params: 21µs, render: 232ms)
+  Reload env: .env
+ GET /comic/12521 200 in 553ms (compile: 347ms, generate-params: 17µs, render: 205ms)
+ GET /comic/6594 200 in 552ms (compile: 79ms, generate-params: 5ms, render: 472ms)
+ GET /comic/12521 200 in 1006ms (compile: 110ms, generate-params: 28ms, render: 896ms)
+ GET /comic/12521 200 in 447ms (compile: 27ms, generate-params: 6ms, render: 420ms)
+✓ Compiled in 118ms
+ GET / 200 in 958ms (compile: 370ms, render: 587ms)
+ GET /comic/11295 200 in 455ms (compile: 151ms, generate-params: 5ms, render: 304ms)
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+ GET /comic/local-motor-city-comics-1 200 in 235ms (compile: 14ms, generate-params: 6ms, render: 221ms)
+ GET /comic/local-motor-city-comics-1 200 in 2.8s (compile: 205ms, generate-params: 64ms, render: 2.6s)
+ GET /comic/local-motor-city-comics-1 200 in 361ms (compile: 20ms, generate-params: 4ms, render: 341ms)
+ GET / 200 in 418ms (compile: 11ms, render: 407ms)
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+ GET /comic/9689 200 in 254ms (compile: 15ms, generate-params: 4ms, render: 239ms)
+✓ Compiled in 361ms
+✓ Compiled in 55ms
+✓ Compiled in 58ms
+✓ Compiled in 31ms
+ GET /comic/9689 200 in 2.1s (compile: 606ms, generate-params: 11ms, render: 1489ms)
+ GET /comic/6594 200 in 992ms (compile: 3ms, generate-params: 56µs, render: 988ms)
+ GET /comic/9689 200 in 993ms (compile: 252ms, generate-params: 26µs, render: 741ms)
+ GET /comic/9689 200 in 284ms (compile: 6ms, generate-params: 4ms, render: 278ms)
+ GET /comic/6594 200 in 407ms (compile: 199ms, generate-params: 20µs, render: 208ms)
+ GET /comic/6594 200 in 409ms (compile: 4ms, generate-params: 19µs, render: 406ms)
+ GET /comic/6594 200 in 1239ms (compile: 4ms, generate-params: 24µs, render: 1235ms)
+ GET /comic/9689 200 in 1618ms (compile: 84ms, generate-params: 2ms, render: 1534ms)
+ GET /comic/9689 200 in 915ms (compile: 245ms, generate-params: 22µs, render: 670ms)
+ GET /comic/6594 200 in 917ms (compile: 5ms, generate-params: 28µs, render: 912ms)
+ GET /comic/6594 200 in 456ms (compile: 12ms, generate-params: 7ms, render: 444ms)
+ GET /comic/9689 200 in 223ms (compile: 3ms, generate-params: 23µs, render: 221ms)
+ GET /comic/9689 200 in 1257ms (compile: 154ms, generate-params: 5ms, render: 1104ms)
+ GET /comic/6594 200 in 798ms (compile: 4ms, generate-params: 17µs, render: 794ms)
+ GET /comic/9689 200 in 602ms (compile: 4ms, generate-params: 49µs, render: 599ms)
+ GET /comic/9689 200 in 700ms (compile: 4ms, generate-params: 23µs, render: 696ms)
+ GET /comic/6594 200 in 443ms (compile: 6ms, generate-params: 3ms, render: 436ms)
+ GET /comic/6594 200 in 445ms (compile: 232ms, generate-params: 24µs, render: 213ms)
+ GET /comic/6594 200 in 989ms (compile: 3ms, generate-params: 18µs, render: 986ms)
+ GET /comic/9689 200 in 1331ms (compile: 77ms, generate-params: 4ms, render: 1254ms)
+ GET /comic/6594 200 in 784ms (compile: 3ms, generate-params: 18µs, render: 781ms)
+ GET /comic/6594 200 in 784ms (compile: 375ms, generate-params: 18µs, render: 409ms)
+ GET /comic/9689 200 in 785ms (compile: 198ms, generate-params: 25µs, render: 587ms)
+ GET /comic/9689 200 in 204ms (compile: 5ms, generate-params: 3ms, render: 199ms)
+ GET /comic/9689 200 in 1347ms (compile: 67ms, generate-params: 3ms, render: 1280ms)
+ GET /comic/6594 200 in 1017ms (compile: 4ms, generate-params: 22µs, render: 1013ms)
+ GET /comic/6594 200 in 821ms (compile: 195ms, generate-params: 22µs, render: 626ms)
+ GET /comic/6594 200 in 826ms (compile: 6ms, generate-params: 22µs, render: 821ms)
+ GET /comic/9689 200 in 631ms (compile: 224ms, generate-params: 3ms, render: 407ms)
+ GET /comic/9689 200 in 204ms (compile: 2ms, generate-params: 23µs, render: 202ms)
+ GET /comic/9689 200 in 1353ms (compile: 72ms, generate-params: 2ms, render: 1281ms)
+ GET /comic/6594 200 in 1036ms (compile: 3ms, generate-params: 25µs, render: 1033ms)
+ GET /comic/6594 200 in 770ms (compile: 191ms, generate-params: 16µs, render: 579ms)
+ GET /comic/9689 200 in 771ms (compile: 364ms, generate-params: 18µs, render: 406ms)
+ GET /comic/6594 200 in 773ms (compile: 3ms, generate-params: 18µs, render: 769ms)
+ GET /comic/9689 200 in 209ms (compile: 5ms, generate-params: 3ms, render: 205ms)
+ GET /comic/6594 200 in 1271ms (compile: 319ms, generate-params: 19µs, render: 951ms)
+ GET /comic/9689 200 in 1273ms (compile: 78ms, generate-params: 2ms, render: 1195ms)
+ GET /comic/6594 200 in 748ms (compile: 178ms, generate-params: 16µs, render: 569ms)
+ GET /comic/6594 200 in 750ms (compile: 2ms, generate-params: 17µs, render: 747ms)
+ GET /comic/9689 200 in 749ms (compile: 357ms, generate-params: 20µs, render: 393ms)
+ GET /comic/9689 200 in 210ms (compile: 5ms, generate-params: 3ms, render: 205ms)
+ GET /comic/9689 200 in 1607ms (compile: 81ms, generate-params: 3ms, render: 1526ms)
+ GET /comic/6594 200 in 1278ms (compile: 4ms, generate-params: 23µs, render: 1274ms)
+ GET /comic/6594 200 in 970ms (compile: 3ms, generate-params: 20µs, render: 966ms)
+ GET /comic/9689 200 in 795ms (compile: 222ms, generate-params: 3ms, render: 573ms)
+ GET /comic/6594 200 in 975ms (compile: 179ms, generate-params: 18µs, render: 796ms)
+ GET /comic/9689 200 in 301ms (compile: 5ms, generate-params: 34µs, render: 295ms)
+ GET /comic/6594 200 in 271ms (compile: 2ms, generate-params: 19µs, render: 269ms)
+ GET /comic/9689 200 in 735ms (compile: 134ms, generate-params: 4ms, render: 601ms)
+ GET /comic/9689 200 in 789ms (compile: 97ms, generate-params: 3ms, render: 692ms)
+ GET /comic/6594 200 in 291ms (compile: 2ms, generate-params: 25µs, render: 289ms)
+✓ Compiled in 122ms
+✓ Compiled in 11ms
+✓ Compiled in 196ms
+ GET / 200 in 1471ms (compile: 555ms, render: 916ms)
+ GET /comic/11302 200 in 625ms (compile: 201ms, generate-params: 11ms, render: 423ms)
+ GET /comic/11302/listing 200 in 403ms (compile: 162ms, generate-params: 4ms, render: 241ms)
+ GET /comic/11302 200 in 208ms (compile: 10ms, generate-params: 4ms, render: 198ms)
+ GET / 200 in 2.8s (compile: 124ms, render: 2.6s)
+ GET /comic/13261 200 in 1205ms (compile: 45ms, generate-params: 24ms, render: 1161ms)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659813-005_REV.jpg
+ GET /comic/13261 200 in 4.0s (compile: 398ms, generate-params: 153ms, render: 3.6s)
+ GET / 200 in 554ms (compile: 8ms, render: 546ms)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4634360-002_OBV.jpg
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+ GET /comic/13216 200 in 301ms (compile: 14ms, generate-params: 5ms, render: 286ms)
+ GET / 200 in 239ms (compile: 7ms, render: 232ms)
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4634360-004_OBV.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4634360-005_OBV.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4582949-001_OBV.jpg
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+ GET /comic/13251 200 in 220ms (compile: 10ms, generate-params: 3ms, render: 210ms)
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659813-004_REV.jpg
+✓ Compiled in 314ms
+ GET /comic/13251 200 in 2.9s (compile: 1009ms, generate-params: 12ms, render: 1916ms)
+ GET /comic/13251 200 in 1237ms (compile: 27ms, generate-params: 29µs, render: 1210ms)
+ GET /comic/6594 200 in 1231ms (compile: 684ms, generate-params: 37µs, render: 547ms)
+ GET /comic/13251 200 in 275ms (compile: 10ms, generate-params: 5ms, render: 264ms)
+ GET /comic/6594 200 in 610ms (compile: 4ms, generate-params: 22µs, render: 606ms)
+ GET /comic/6594 200 in 620ms (compile: 243ms, generate-params: 23µs, render: 377ms)
+✓ Compiled in 67ms
+ GET /comic/13251 200 in 2.1s (compile: 117ms, generate-params: 2ms, render: 1979ms)
+ GET /comic/13251 200 in 1501ms (compile: 6ms, generate-params: 260µs, render: 1495ms)
+ GET /comic/13251 200 in 1128ms (compile: 501ms, generate-params: 35µs, render: 627ms)
+ GET /comic/6594 200 in 1129ms (compile: 261ms, generate-params: 20µs, render: 869ms)
+ GET /comic/6594 200 in 350ms (compile: 15ms, generate-params: 4ms, render: 335ms)
+ GET /comic/6594 200 in 1134ms (compile: 4ms, generate-params: 23µs, render: 1129ms)
+  Reload env: .env
+✓ Compiled in 433ms
+ GET /comic/13251 200 in 2.6s (compile: 909ms, generate-params: 13ms, render: 1674ms)
+ GET /comic/6594 200 in 657ms (compile: 44ms, generate-params: 14ms, render: 613ms)
+✓ Compiled in 162ms
+ GET /comic/13251 200 in 3.5s (compile: 806ms, generate-params: 13ms, render: 2.7s)
+ GET /comic/13251 200 in 1939ms (compile: 1196ms, generate-params: 21µs, render: 743ms)
+ GET /comic/6594 200 in 1950ms (compile: 35ms, generate-params: 5ms, render: 1915ms)
+ GET /comic/13251 200 in 387ms (compile: 8ms, generate-params: 5ms, render: 379ms)
+ GET /comic/6594 200 in 880ms (compile: 2ms, generate-params: 23µs, render: 877ms)
+ GET /comic/6594 200 in 881ms (compile: 316ms, generate-params: 128µs, render: 565ms)
+ GET /comic/13251 200 in 2.5s (compile: 98ms, generate-params: 4ms, render: 2.4s)
+ GET /comic/13251 200 in 968ms (compile: 328ms, generate-params: 24µs, render: 640ms)
+ GET /comic/6594 200 in 1936ms (compile: 7ms, generate-params: 32µs, render: 1929ms)
+ GET /comic/6594 200 in 1934ms (compile: 374ms, generate-params: 39µs, render: 1560ms)
+ GET /comic/6594 200 in 975ms (compile: 13ms, generate-params: 6ms, render: 962ms)
+ GET /comic/13251 200 in 333ms (compile: 4ms, generate-params: 24µs, render: 329ms)
+ GET /comic/13251 200 in 1940ms (compile: 81ms, generate-params: 3ms, render: 1860ms)
+ GET /comic/6594 200 in 1533ms (compile: 617ms, generate-params: 24µs, render: 916ms)
+ GET /comic/6594 200 in 1539ms (compile: 6ms, generate-params: 96µs, render: 1532ms)
+ GET /comic/13251 200 in 1223ms (compile: 594ms, generate-params: 31µs, render: 629ms)
+ GET /comic/6594 200 in 1540ms (compile: 316ms, generate-params: 21µs, render: 1224ms)
+ GET /comic/13251 200 in 329ms (compile: 5ms, generate-params: 3ms, render: 323ms)
+ GET /comic/13251 200 in 1937ms (compile: 94ms, generate-params: 2ms, render: 1843ms)
+ GET /comic/6594 200 in 1518ms (compile: 7ms, generate-params: 44µs, render: 1510ms)
+ GET /comic/6594 200 in 1519ms (compile: 308ms, generate-params: 24µs, render: 1211ms)
+ GET /comic/13251 200 in 1518ms (compile: 892ms, generate-params: 25µs, render: 626ms)
+ GET /comic/6594 200 in 1522ms (compile: 608ms, generate-params: 31µs, render: 914ms)
+ GET /comic/13251 200 in 334ms (compile: 7ms, generate-params: 4ms, render: 327ms)
+✓ Compiled in 52ms
+ GET /comic/13251 200 in 5.1s (compile: 828ms, generate-params: 21ms, render: 4.2s)
+ GET /comic/6594 200 in 1134ms (compile: 11ms, generate-params: 7ms, render: 1123ms)
+ GET /comic/13251 200 in 673ms (compile: 3ms, generate-params: 19µs, render: 670ms)
+ GET /comic/13251 200 in 398ms (compile: 4ms, generate-params: 23µs, render: 394ms)
+ GET /comic/6594 200 in 682ms (compile: 336ms, generate-params: 21µs, render: 347ms)
+ GET /comic/6594 200 in 683ms (compile: 6ms, generate-params: 3ms, render: 677ms)
+ GET /comic/13251 200 in 2.8s (compile: 135ms, generate-params: 4ms, render: 2.7s)
+ GET /comic/13251 200 in 1907ms (compile: 917ms, generate-params: 22µs, render: 991ms)
+ GET /comic/6594 200 in 1913ms (compile: 9ms, generate-params: 76µs, render: 1904ms)
+ GET /comic/6594 200 in 1913ms (compile: 613ms, generate-params: 41µs, render: 1300ms)
+ GET /comic/6594 200 in 645ms (compile: 13ms, generate-params: 6ms, render: 632ms)
+ GET /comic/13251 200 in 312ms (compile: 12ms, generate-params: 26µs, render: 301ms)
+ GET / 200 in 1144ms (compile: 617ms, render: 527ms)
+ GET /comic/13216 200 in 385ms (compile: 37ms, generate-params: 4ms, render: 348ms)
+ GET / 200 in 2.5s (compile: 255ms, render: 2.2s)
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+ GET /comic/13261 200 in 1083ms (compile: 54ms, generate-params: 5ms, render: 1029ms)
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+✓ Compiled in 219ms
+✓ Compiled in 123ms
+✓ Compiled in 53ms
+✓ Compiled in 30ms
+ GET / 200 in 690ms (compile: 30ms, render: 660ms)
+ GET /comic/13261 200 in 3.0s (compile: 1660ms, generate-params: 19ms, render: 1329ms)
+✓ Compiled in 292ms
+ GET /comic/13261 200 in 2.7s (compile: 1083ms, generate-params: 15ms, render: 1655ms)
+ GET /comic/13261 200 in 716ms (compile: 12ms, generate-params: 4ms, render: 704ms)
+ GET /comic/13261 200 in 327ms (compile: 6ms, generate-params: 27µs, render: 321ms)
+ GET /comic/6594 200 in 544ms (compile: 3ms, generate-params: 27µs, render: 541ms)
+ GET /comic/6594 200 in 515ms (compile: 9ms, generate-params: 4ms, render: 506ms)
+ GET /comic/6594 200 in 376ms (compile: 3ms, generate-params: 19µs, render: 373ms)
+ GET /comic/13261 200 in 1428ms (compile: 7ms, generate-params: 3ms, render: 1421ms)
+✓ Compiled in 304ms
+✓ Compiled in 46ms
+✓ Compiled in 31ms
+✓ Compiled in 54ms
+✓ Compiled in 81ms
+✓ Compiled in 54ms
+ GET /comic/13261 200 in 2.2s (compile: 997ms, generate-params: 15ms, render: 1218ms)
+ GET / 200 in 1097ms (compile: 311ms, render: 787ms)
+ GET / 200 in 2.4s (compile: 75ms, render: 2.3s)
+✓ Compiled in 195ms
+✓ Compiled in 111ms
+ GET /comic/9690 200 in 3.0s (compile: 1580ms, generate-params: 32ms, render: 1431ms)
+ GET /comic/9690 200 in 386ms (compile: 18ms, generate-params: 4ms, render: 368ms)
+ GET /comic/9690 200 in 1813ms (compile: 111ms, generate-params: 5ms, render: 1702ms)
+ GET /comic/9690 200 in 1260ms (compile: 3ms, generate-params: 24µs, render: 1256ms)
+ GET /comic/9690 200 in 365ms (compile: 12ms, generate-params: 5ms, render: 354ms)
+ GET /comic/6594 200 in 773ms (compile: 5ms, generate-params: 21µs, render: 768ms)
+ GET /comic/6594 200 in 1256ms (compile: 3ms, generate-params: 23µs, render: 1253ms)
+ GET /comic/6594 200 in 1256ms (compile: 791ms, generate-params: 47µs, render: 465ms)
+ GET /comic/9690 200 in 4.1s (compile: 485ms, generate-params: 12ms, render: 3.6s)
+ GET /comic/6594 200 in 2.6s (compile: 7ms, generate-params: 66µs, render: 2.6s)
+ GET /comic/9690 200 in 2.1s (compile: 7ms, generate-params: 28µs, render: 2.1s)
+ GET /comic/9690 200 in 1401ms (compile: 51ms, generate-params: 27ms, render: 1349ms)
+ GET /comic/6594 200 in 1636ms (compile: 8ms, generate-params: 31µs, render: 1628ms)
+ GET /comic/6594 200 in 1637ms (compile: 680ms, generate-params: 34µs, render: 956ms)
+ GET /comic/9690 200 in 2.8s (compile: 90ms, generate-params: 3ms, render: 2.7s)
+ GET /comic/6594 200 in 2.1s (compile: 9ms, generate-params: 33µs, render: 2.1s)
+ GET /comic/9690 200 in 1264ms (compile: 449ms, generate-params: 39µs, render: 815ms)
+ GET /comic/6594 200 in 1676ms (compile: 10ms, generate-params: 4ms, render: 1666ms)
+ GET /comic/6594 200 in 1675ms (compile: 413ms, generate-params: 28µs, render: 1262ms)
+ GET /comic/9690 200 in 435ms (compile: 8ms, generate-params: 5ms, render: 427ms)
+ GET /comic/9690 200 in 2.2s (compile: 86ms, generate-params: 2ms, render: 2.1s)
+ GET /comic/9690 200 in 897ms (compile: 12ms, generate-params: 7ms, render: 886ms)
+ GET /comic/6594 200 in 1653ms (compile: 5ms, generate-params: 37µs, render: 1647ms)
+ GET /comic/9690 200 in 474ms (compile: 5ms, generate-params: 70µs, render: 468ms)
+ GET /comic/6594 200 in 1001ms (compile: 3ms, generate-params: 37µs, render: 998ms)
+ GET /comic/6594 200 in 1001ms (compile: 609ms, generate-params: 36µs, render: 392ms)
+ GET /comic/6594 200 in 2.4s (compile: 97ms, generate-params: 3ms, render: 2.3s)
+ GET /comic/9690 200 in 1908ms (compile: 5ms, generate-params: 23µs, render: 1903ms)
+ GET /comic/9690 200 in 773ms (compile: 6ms, generate-params: 4ms, render: 767ms)
+ GET /comic/6594 200 in 1908ms (compile: 391ms, generate-params: 51µs, render: 1517ms)
+ GET /comic/6594 200 in 1522ms (compile: 373ms, generate-params: 27µs, render: 1148ms)
+ GET /comic/9690 200 in 397ms (compile: 3ms, generate-params: 25µs, render: 394ms)
+ GET /comic/9690 200 in 3.9s (compile: 170ms, generate-params: 4ms, render: 3.8s)
+ GET /comic/9690 200 in 1412ms (compile: 420ms, generate-params: 44µs, render: 992ms)
+ GET /comic/6594 200 in 2.9s (compile: 39ms, generate-params: 558µs, render: 2.9s)
+ GET /comic/6594 200 in 1964ms (compile: 21ms, generate-params: 8ms, render: 1943ms)
+ GET /comic/6594 200 in 1960ms (compile: 541ms, generate-params: 24µs, render: 1419ms)
+ GET /comic/9690 200 in 530ms (compile: 15ms, generate-params: 5ms, render: 516ms)
+ GET /comic/9690 200 in 3.1s (compile: 125ms, generate-params: 6ms, render: 3.0s)
+ GET /comic/6594 200 in 2.5s (compile: 5ms, generate-params: 35µs, render: 2.5s)
+ GET /comic/6594 200 in 2.1s (compile: 4ms, generate-params: 26µs, render: 2.1s)
+ GET /comic/9690 200 in 1558ms (compile: 592ms, generate-params: 25µs, render: 966ms)
+ GET /comic/6594 200 in 1563ms (compile: 14ms, generate-params: 6ms, render: 1549ms)
+ GET /comic/9690 200 in 511ms (compile: 13ms, generate-params: 30µs, render: 498ms)
+ GET / 200 in 572ms (compile: 132ms, render: 440ms)
+ GET /comic/local-fantastic-four-replica-1 200 in 268ms (compile: 7ms, generate-params: 3ms, render: 260ms)
+ GET / 200 in 274ms (compile: 4ms, render: 270ms)
+ GET /comic/6594 200 in 1035ms (compile: 164ms, generate-params: 3ms, render: 871ms)
+ GET / 200 in 388ms (compile: 7ms, render: 380ms)
+✓ Compiled in 42ms
+ GET / 200 in 1000ms (compile: 2ms, render: 998ms)
+ GET /comic/6594 200 in 731ms (compile: 127ms, generate-params: 3ms, render: 603ms)
+✓ Compiled in 85ms
+ GET / 200 in 2.4s (compile: 211ms, render: 2.2s)
+ GET / 200 in 1552ms (compile: 21ms, render: 1531ms)
+ GET /comic/6594 200 in 727ms (compile: 112ms, generate-params: 5ms, render: 615ms)
+ GET / 200 in 255ms (compile: 2ms, render: 253ms)
+ GET /comic/6594 200 in 687ms (compile: 351ms, generate-params: 30µs, render: 336ms)
+ GET /comic/6594 200 in 689ms (compile: 4ms, generate-params: 47µs, render: 685ms)
+ GET /comic/13261 200 in 844ms (compile: 50ms, generate-params: 15ms, render: 794ms)
+✓ Compiled in 2.2s
+✓ Compiled in 69ms
+✓ Compiled in 49ms
+ GET /comic/13261 200 in 2.9s (compile: 1168ms, generate-params: 13ms, render: 1703ms)
+ GET /comic/6594 200 in 731ms (compile: 4ms, generate-params: 24µs, render: 727ms)
+✓ Compiled in 48ms
+ GET /comic/13261 200 in 972ms (compile: 139ms, generate-params: 3ms, render: 833ms)
+ GET /comic/6594 200 in 319ms (compile: 9ms, generate-params: 18µs, render: 310ms)
+ GET /comic/6594 200 in 1071ms (compile: 564ms, generate-params: 26µs, render: 507ms)
+ GET /comic/13261 200 in 1083ms (compile: 84ms, generate-params: 2ms, render: 1000ms)
+Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+Each child in a list should have a unique "key" prop. See https://react.dev/link/warning-keys for more information.
+ GET /comic/6594 200 in 691ms (compile: 4ms, generate-params: 47µs, render: 687ms)
+ GET /comic/13261 200 in 1327ms (compile: 80ms, generate-params: 2ms, render: 1247ms)
+ GET /comic/6594 200 in 435ms (compile: 3ms, generate-params: 23µs, render: 433ms)
+ GET /comic/13261 200 in 1105ms (compile: 112ms, generate-params: 7ms, render: 992ms)

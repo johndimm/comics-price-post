@@ -7,7 +7,7 @@ import { Comic } from "@/lib/types";
 
 type ViewMode = "cards" | "table";
 type CategoryFilter = "all" | "slabbed" | "community" | "raw";
-type SaleFilter = "all" | "unsold" | "for_sale" | "sold" | "nfs";
+type SaleFilter = "all" | "unsold" | "for_sale" | "sold";
 
 interface SavedQuery {
     name: string;
@@ -48,6 +48,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [columnFilters, setColumnFilters] = useState<Record<string, Set<string>>>({});
     const [rangeFilters, setRangeFilters] = useState<Record<string, RangeFilter>>({});
+    const [titleSortBy, setTitleSortBy] = useState<"count" | "name">("count");
     const [sortKey, setSortKey] = useState<SortKey>("title");
     const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
     const [savedQueries, setSavedQueries] = useState<SavedQuery[]>([]);
@@ -116,9 +117,9 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
             counts[c.title] = (counts[c.title] || 0) + 1;
         });
         return Object.entries(counts)
-            .sort((a, b) => b[1] - a[1]) // Sort by count desc
+            .sort((a, b) => titleSortBy === "name" ? a[0].localeCompare(b[0]) : b[1] - a[1])
             .map(([title, count]) => ({ title, count }));
-    }, [comics]);
+    }, [comics, titleSortBy]);
 
     const filtered = useMemo(() => {
         return comics.filter((c) => {
@@ -131,7 +132,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
             if (saleFilter === "unsold" && isSold) return false;
             if (saleFilter === "for_sale" && !isForSale) return false;
             if (saleFilter === "sold" && !isSold) return false;
-            if (saleFilter === "nfs" && !isNFS) return false;
+
 
             if (selectedTitle !== "all" && c.title !== selectedTitle) return false;
 
@@ -159,6 +160,25 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
             return true;
         });
     }, [comics, category, saleFilter, selectedTitle, columnFilters, rangeFilters, search]);
+
+    const filteredSorted = useMemo(() => {
+        return [...filtered].sort((a, b) => {
+            let av: any = (a as any)[sortKey] ?? "";
+            let bv: any = (b as any)[sortKey] ?? "";
+            if (sortKey === "grade" || sortKey === "year" || sortKey === "fmv" || sortKey === "recommended_ask" || sortKey === "slab_upside") {
+                av = Number(av) || 0; bv = Number(bv) || 0;
+            } else if (sortKey === "number") {
+                av = parseInt(String(av), 10) || 0; bv = parseInt(String(bv), 10) || 0;
+            } else {
+                av = String(av).toLowerCase(); bv = String(bv).toLowerCase();
+            }
+            const cmp = av < bv ? -1 : av > bv ? 1 : 0;
+            const dir = sortDir === "asc" ? 1 : -1;
+            if (cmp !== 0) return cmp * dir;
+            if (sortKey === "title") return (parseInt(String(a.number), 10) || 0) - (parseInt(String(b.number), 10) || 0);
+            return 0;
+        });
+    }, [filtered, sortKey, sortDir]);
 
     const fmvTotal = useMemo(() => {
         const source = selectedIds.size > 0
@@ -303,7 +323,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                 {/* Sale Filter */}
                 <div className="toolbar-group">
                     <span className="toolbar-label">Status</span>
-                    {(["all", "unsold", "for_sale", "sold", "nfs"] as SaleFilter[]).map((sf) => (
+                    {(["all", "unsold", "for_sale", "sold"] as SaleFilter[]).map((sf) => (
                         <button
                             key={sf}
                             className={`btn ${saleFilter === sf ? "active" : ""}`}
@@ -315,9 +335,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                                     ? `Unsold (${counts.unsold})`
                                     : sf === "for_sale"
                                         ? `For Sale (${counts.for_sale})`
-                                        : sf === "sold"
-                                            ? `Sold (${counts.sold})`
-                                            : "NFS"}
+                                        : `Sold (${counts.sold})`}
                         </button>
                     ))}
                 </div>
@@ -377,7 +395,13 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
             <div className="main-with-sidebar">
                 {/* Title Sidebar */}
                 <aside className="title-sidebar">
-                    <div className="sidebar-title">Filter by Title</div>
+                    <div className="sidebar-title" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <span>Title</span>
+                        <button className="btn-text" style={{ fontSize: 11 }}
+                            onClick={() => setTitleSortBy(s => s === "count" ? "name" : "count")}>
+                            {titleSortBy === "count" ? "A–Z" : "#"}
+                        </button>
+                    </div>
                     <div className="sidebar-list">
                         <button
                             className={`sidebar-item ${selectedTitle === "all" ? "active" : ""}`}
@@ -402,7 +426,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                 <div style={{ flex: 1 }}>
                     {view === "cards" ? (
                         <div className="card-grid">
-                            {filtered.map((comic) => (
+                            {filteredSorted.map((comic) => (
                                 <ComicCard key={comic.marvel_id} comic={comic} />
                             ))}
                         </div>

@@ -11,6 +11,8 @@ interface EvidenceClientProps {
     askingByTime: any[];
     askingByGrade: any[];
     marketValue?: number;
+    fmvLow?: number;
+    fmvHigh?: number;
     recommendedAsk?: number;
     soldDotY?: number;
     askingDotY?: number;
@@ -27,6 +29,8 @@ export default function EvidenceClient({
     askingByTime,
     askingByGrade,
     marketValue,
+    fmvLow,
+    fmvHigh,
     recommendedAsk,
     fmvMethod,
     fmvSource,
@@ -49,17 +53,18 @@ export default function EvidenceClient({
                     <div>
                         <div className="fmv-label">{fmvLabel}</div>
                         {marketValue != null ? (
-                            <div className="fmv-value">${marketValue.toLocaleString()}</div>
+                            <div className="fmv-value">
+                                ${marketValue.toLocaleString()}
+                                {fmvLow != null && fmvHigh != null && fmvLow !== fmvHigh && (
+                                    <span style={{ fontSize: 16, color: '#aaa', marginLeft: 8 }}>
+                                        (${fmvLow.toLocaleString()}–${fmvHigh.toLocaleString()})
+                                    </span>
+                                )}
+                            </div>
                         ) : (
                             <div className="fmv-value" style={{ fontSize: 28, paddingTop: 8 }}>No data yet</div>
                         )}
                     </div>
-                    {recommendedAsk != null && (
-                        <div>
-                            <div className="fmv-label">Suggested Ask</div>
-                            <div className="fmv-value fmv-ask">${recommendedAsk.toLocaleString()}</div>
-                        </div>
-                    )}
                 </div>
                 {fmvMethod && <div className="fmv-explanation">{fmvMethod}</div>}
                 <div className="fmv-explanation" style={{ marginTop: 6, fontStyle: "italic" }}>
@@ -77,7 +82,7 @@ export default function EvidenceClient({
                 currentGrade={currentGrade}
                 highlightedId={hoveredId}
                 onHoverItem={setHoveredId}
-                onClickItem={(id) => { setHoveredId(id); setScrollToId(id); }}
+                onClickItem={(id) => { setHoveredId(id); setScrollToId(null); setTimeout(() => setScrollToId(id), 0); }}
                 gradeCurve={gradeCurve}
             />
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Comic, getGradeLabel } from "@/lib/types";
 import GradeBadge from "./GradeBadge";
 
@@ -27,7 +27,7 @@ function RangeFilterDropdown({ initialMin, initialMax, onApply, onClear, onClose
     const [min, setMin] = useState(initialMin != null ? String(initialMin) : "");
     const [max, setMax] = useState(initialMax != null ? String(initialMax) : "");
     return (
-        <div className="filter-dropdown" onClick={(e) => e.stopPropagation()}>
+        <div className="filter-dropdown" onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
             <div className="filter-dropdown-header">
                 <span style={{ fontWeight: 600 }}>Range</span>
                 <button className="btn-text" onClick={() => { setMin(""); setMax(""); onClear(); }}>Clear</button>
@@ -57,7 +57,7 @@ function CheckboxFilterDropdown({ uniqueValues, selected, onUpdate, onClose }: {
     onClose: () => void;
 }) {
     return (
-        <div className="filter-dropdown" onClick={(e) => e.stopPropagation()}>
+        <div className="filter-dropdown" onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
             <div className="filter-dropdown-header">
                 <button className="btn-text" onClick={() => onUpdate(new Set())}>Clear</button>
                 <button className="btn-text" onClick={() => onUpdate(new Set(uniqueValues))}>Select All</button>
@@ -83,7 +83,7 @@ function CheckboxFilterDropdown({ uniqueValues, selected, onUpdate, onClose }: {
     );
 }
 
-export type SortKey = keyof Pick<Comic, "title" | "number" | "year" | "grade" | "fmv" | "recommended_ask" | "grade_category" | "artist">;
+export type SortKey = keyof Pick<Comic, "title" | "number" | "year" | "grade" | "fmv" | "recommended_ask" | "slab_upside" | "grade_category" | "artist">;
 
 export type RangeFilter = { min?: number; max?: number };
 
@@ -102,7 +102,7 @@ interface ComicTableProps {
     onUpdateRangeFilter: (column: string, range: RangeFilter) => void;
 }
 
-const NUMERIC_COLS = new Set<SortKey>(["fmv", "recommended_ask", "grade", "year"]);
+const NUMERIC_COLS = new Set<SortKey>(["fmv", "recommended_ask", "slab_upside", "grade", "year"]);
 
 export default function ComicTable({
     comics,
@@ -125,6 +125,13 @@ export default function ComicTable({
     const [lastClickedId, setLastClickedId] = useState<string | null>(null);
     const [activeFilterCol, setActiveFilterCol] = useState<string | null>(null);
 
+    useEffect(() => {
+        if (!activeFilterCol) return;
+        const handler = () => setActiveFilterCol(null);
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, [activeFilterCol]);
+
     function handleSort(key: SortKey) {
         const newDir = key === sortKey ? (sortDir === "asc" ? "desc" : "asc") : "asc";
         if (onSortChange) {
@@ -139,7 +146,7 @@ export default function ComicTable({
         return [...comics].sort((a, b) => {
             let av: string | number = a[sortKey] ?? "";
             let bv: string | number = b[sortKey] ?? "";
-            if (sortKey === "grade" || sortKey === "year" || sortKey === "fmv" || sortKey === "recommended_ask") {
+            if (sortKey === "grade" || sortKey === "year" || sortKey === "fmv" || sortKey === "recommended_ask" || sortKey === "slab_upside") {
                 av = Number(av) || 0;
                 bv = Number(bv) || 0;
             } else if (sortKey === "number") {
@@ -151,6 +158,10 @@ export default function ComicTable({
             }
             if (av < bv) return sortDir === "asc" ? -1 : 1;
             if (av > bv) return sortDir === "asc" ? 1 : -1;
+            // Secondary sort by issue number when primary values are equal
+            if (sortKey === "title") {
+                return (parseInt(String(a.number), 10) || 0) - (parseInt(String(b.number), 10) || 0);
+            }
             return 0;
         });
     }, [comics, sortKey, sortDir]);
@@ -243,7 +254,10 @@ export default function ComicTable({
                         {renderHeader("Category", "grade_category")}
                         {renderHeader("FMV", "fmv")}
                         {renderHeader("Ask", "recommended_ask")}
+                        <th title="PriceCharting ungraded">PC Raw</th>
+                        <th title="PriceCharting CGC graded">PC CGC</th>
                         {renderHeader("Artist", "artist")}
+                        {renderHeader("Slab ↑", "slab_upside")}
                         <th>CGC</th>
                     </tr>
                 </thead>
@@ -310,7 +324,16 @@ export default function ComicTable({
                             <td className="num-cell">
                                 {comic.recommended_ask ? `$${comic.recommended_ask.toLocaleString()}` : "—"}
                             </td>
+                            <td className="num-cell" style={{ color: '#888', fontSize: 12 }}>
+                                {comic.pc_ungraded ? `$${comic.pc_ungraded.toLocaleString()}` : "—"}
+                            </td>
+                            <td className="num-cell" style={{ color: '#888', fontSize: 12 }}>
+                                {comic.pc_graded ? `$${comic.pc_graded.toLocaleString()}` : "—"}
+                            </td>
                             <td className="artist-cell">{comic.artist || "—"}</td>
+                            <td className="num-cell" style={{ color: (comic.slab_upside ?? 0) > 100 ? 'var(--gold)' : undefined }}>
+                                {comic.slab_upside != null && comic.slab_upside > 0 ? `+$${comic.slab_upside.toLocaleString()}` : "—"}
+                            </td>
                             <td className="num-cell">{comic.cgc || "—"}</td>
                         </tr>
                     ))}
@@ -320,4 +343,3 @@ export default function ComicTable({
     );
 }
 
-import { useMemo } from "react"; // Added missing import

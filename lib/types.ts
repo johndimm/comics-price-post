@@ -33,7 +33,12 @@ export interface Comic {
     is_qualified: boolean;
     fmv_multiplier: number;
     fmv?: number | null;
+    fmv_low?: number | null;
+    fmv_high?: number | null;
     recommended_ask?: number | null;
+    slab_upside?: number | null;
+    pc_ungraded?: number | null;  // PriceCharting ungraded market price
+    pc_graded?: number | null;    // PriceCharting CGC graded market price
 }
 
 export function getGradeLabel(grade: number): string {

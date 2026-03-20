@@ -62,9 +62,19 @@ export async function getAccessToken(): Promise<string> {
 function parseGrade(title: string, issueNumber?: string, year?: string | number): number | undefined {
     let t = title.toUpperCase();
 
-    // Remove the issue number and year from the title to avoid grade collisions (e.g. ASM #10 != Grade 10)
+    // Priority 1: CGC/CBCS/PGX grade — must run BEFORE issue-number removal
+    // because "CGC 7.0" would become "CGC .0" if issue #7 is stripped first.
+    // Handles: "CGC 7.0", "CGC7.0", "CGC .5", "CGC5.5", but NOT "CGC NG"/"CGC PG"/"CGC SS"
+    const slabMatch = t.match(/\b(?:CGC|CBCS|PGX)\s*(\d+\.?\d*|\.\d+)\b(?!\s*(?:NG|PG|SS|OW|PQ)\b)/);
+    if (slabMatch) {
+        const val = parseFloat(slabMatch[1]);
+        if (val >= 0.5 && val <= 10.0) return val;
+    }
+
+    // Remove the issue number, but NOT when followed by a decimal point
+    // (avoids stripping the "7" from a bare "7.5" grade when issue is #7)
     if (issueNumber) {
-        const numPattern = new RegExp(`\\b${issueNumber}\\b`, 'g');
+        const numPattern = new RegExp(`\\b${issueNumber}(?!\\.)`, 'g');
         t = t.replace(numPattern, ' ');
     }
     if (year) {
@@ -72,9 +82,8 @@ function parseGrade(title: string, issueNumber?: string, year?: string | number)
         t = t.replace(yearPattern, ' ');
     }
 
-    // Priority 1: Exact Numeric Match (9.4, 4.0, 0.5, etc.)
-    // We only match 10 if it's 10.0 specifically to avoid more collisions.
-    const numMatch = t.match(/\b(10\.0|[0-9]\.[0-5|8])\b/);
+    // Priority 2: Bare decimal grade (9.6, 7.5, 4.0, 0.5, etc.)
+    const numMatch = t.match(/\b(10\.0|\d\.\d)\b/);
     if (numMatch) {
         const val = parseFloat(numMatch[1]);
         if (val >= 0.5 && val <= 10.0) return val;
@@ -104,7 +113,7 @@ function parseGrade(title: string, issueNumber?: string, year?: string | number)
     return undefined;
 }
 
-export async function searchActiveItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number): Promise<eBayListing[]> {
+export async function searchActiveItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number, requiredWords?: string[]): Promise<eBayListing[]> {
     const token = await getAccessToken();
     const encodedQuery = encodeURIComponent(query);
     const url = `https://api.ebay.com/buy/browse/v1/item_summary/search?q=${encodedQuery}&limit=${limit}`;
@@ -138,18 +147,25 @@ export async function searchActiveItems(query: string, limit: number = 20, issue
         }
 
         return {
-            itemId: item.itemId,
+            itemId: (item.itemId as string)?.replace(/^v\d+\|/, '').replace(/\|\d+$/, '') ?? item.itemId,
             title,
             price: parseFloat(item.price?.value || "0"),
             currency: item.price?.currency || "USD",
             saleDate,
-            listingUrl: item.itemWebUrl,
+            listingUrl: item.itemWebUrl?.replace(/[?&]epid=[^&]+/, (m) => m.startsWith('?') ? '?' : ''),
             imageUrl: item.image?.imageUrl,
             isSlabbed,
             grade,
             type: 'asking'
         };
-    }).filter((l: eBayListing) => !issueNumber || new RegExp(`\\b${issueNumber}\\b`).test(l.title));
+    }).filter((l: eBayListing) => {
+        if (issueNumber && !new RegExp(`\\b${issueNumber}\\b`).test(l.title)) return false;
+        if (requiredWords) {
+            const t = l.title.toLowerCase();
+            if (!requiredWords.every(w => t.includes(w.toLowerCase()))) return false;
+        }
+        return true;
+    });
 }
 
 export async function searchSoldItems(query: string): Promise<eBayListing[]> {
