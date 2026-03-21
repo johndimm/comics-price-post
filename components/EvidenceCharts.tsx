@@ -321,11 +321,23 @@ export default function EvidenceCharts({
                                         data={jg.filter((p) => p.type === "slabbed")}
                                         fill={SLABBED_COLOR}
                                         opacity={0.8}
+                                        onMouseEnter={(data: any) => onHoverItem(data.id)}
+                                        onMouseLeave={() => onHoverItem(null)}
+                                        onClick={(data: any) => onClickItem?.(data.id)}
+                                        shape={(props: any) => (
+                                            <circle cx={props.cx} cy={props.cy} r={highlightedId === props.id ? 7 : 4} fill={SLABBED_COLOR} style={{ cursor: 'pointer' }} />
+                                        )}
                                     />
                                     <Scatter
                                         data={jg.filter((p) => p.type === "raw")}
                                         fill={RAW_COLOR}
                                         opacity={0.8}
+                                        onMouseEnter={(data: any) => onHoverItem(data.id)}
+                                        onMouseLeave={() => onHoverItem(null)}
+                                        onClick={(data: any) => onClickItem?.(data.id)}
+                                        shape={(props: any) => (
+                                            <circle cx={props.cx} cy={props.cy} r={highlightedId === props.id ? 7 : 4} fill={RAW_COLOR} style={{ cursor: 'pointer' }} />
+                                        )}
                                     /></>); })()}
                                     {gradeCurve?.sold.slabbed && gradeCurve.sold.slabbed.length > 1 && (
                                         <Scatter
@@ -448,11 +460,23 @@ export default function EvidenceCharts({
                                         data={askingByGrade.filter((p) => p.type === "slabbed")}
                                         fill={SLABBED_COLOR}
                                         opacity={0.8}
+                                        onMouseEnter={(data: any) => onHoverItem(data.id)}
+                                        onMouseLeave={() => onHoverItem(null)}
+                                        onClick={(data: any) => onClickItem?.(data.id)}
+                                        shape={(props: any) => (
+                                            <circle cx={props.cx} cy={props.cy} r={highlightedId === props.id ? 7 : 4} fill={SLABBED_COLOR} style={{ cursor: 'pointer' }} />
+                                        )}
                                     />
                                     <Scatter
                                         data={askingByGrade.filter((p) => p.type === "raw")}
                                         fill={RAW_COLOR}
                                         opacity={0.8}
+                                        onMouseEnter={(data: any) => onHoverItem(data.id)}
+                                        onMouseLeave={() => onHoverItem(null)}
+                                        onClick={(data: any) => onClickItem?.(data.id)}
+                                        shape={(props: any) => (
+                                            <circle cx={props.cx} cy={props.cy} r={highlightedId === props.id ? 7 : 4} fill={RAW_COLOR} style={{ cursor: 'pointer' }} />
+                                        )}
                                     />
                                     {gradeCurve?.asking.slabbed && gradeCurve.asking.slabbed.length > 1 && (
                                         <Scatter

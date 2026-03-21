@@ -1616,3 +1616,756 @@ Each child in a list should have a unique "key" prop. See https://react.dev/link
  GET /comic/13261 200 in 1327ms (compile: 80ms, generate-params: 2ms, render: 1247ms)
  GET /comic/6594 200 in 435ms (compile: 3ms, generate-params: 23µs, render: 433ms)
  GET /comic/13261 200 in 1105ms (compile: 112ms, generate-params: 7ms, render: 992ms)
+ GET / 200 in 1471ms (compile: 208ms, render: 1262ms)
+ GET / 200 in 2.6s (compile: 736ms, render: 1819ms)
+ GET / 200 in 1359ms (compile: 4ms, render: 1355ms)
+ GET / 200 in 347ms (compile: 3ms, render: 343ms)
+ GET /comic/6594 200 in 1362ms (compile: 577ms, generate-params: 8ms, render: 786ms)
+ GET /comic/6594 200 in 716ms (compile: 386ms, generate-params: 31µs, render: 331ms)
+ GET /comic/6594 200 in 712ms (compile: 4ms, generate-params: 20µs, render: 707ms)
+ GET /comic/12470 200 in 876ms (compile: 68ms, generate-params: 5ms, render: 808ms)
+ GET /comic/12470 200 in 591ms (compile: 17ms, generate-params: 4ms, render: 573ms)
+  Reload env: .env
+✓ Compiled in 398ms
+ GET /comic/12470 200 in 2.4s (compile: 1441ms, generate-params: 12ms, render: 986ms)
+ GET /comic/6594 200 in 277ms (compile: 5ms, generate-params: 2ms, render: 273ms)
+  Reload env: .env
+ GET /comic/12470 200 in 2.2s (compile: 799ms, generate-params: 8ms, render: 1374ms)
+ GET /comic/6594 200 in 585ms (compile: 3ms, generate-params: 34µs, render: 581ms)
+  Reload env: .env
+ GET /comic/12470 200 in 2.5s (compile: 1210ms, generate-params: 12ms, render: 1251ms)
+ GET /comic/6594 200 in 340ms (compile: 18ms, generate-params: 4ms, render: 322ms)
+  Reload env: .env
+ GET /comic/12470 200 in 1035ms (compile: 143ms, generate-params: 2ms, render: 892ms)
+ GET /comic/6594 200 in 278ms (compile: 3ms, generate-params: 35µs, render: 275ms)
+ GET / 200 in 2.0s (compile: 987ms, render: 1038ms)
+ GET /comic/13261 200 in 591ms (compile: 33ms, generate-params: 12ms, render: 559ms)
+ GET /comic/13261 200 in 1993ms (compile: 13ms, generate-params: 5ms, render: 1980ms)
+ GET /comic/6594 200 in 2.0s (compile: 5ms, generate-params: 21µs, render: 2.0s)
+ GET /comic/13261 200 in 2.4s (compile: 460ms, generate-params: 33µs, render: 1983ms)
+ GET /comic/13261 200 in 4.7s (compile: 11ms, generate-params: 6ms, render: 4.7s)
+ GET /comic/13261 200 in 5.0s (compile: 8ms, generate-params: 29µs, render: 5.0s)
+ GET /comic/13261 200 in 5.2s (compile: 12ms, generate-params: 39µs, render: 5.2s)
+ GET /comic/6594 200 in 5.3s (compile: 11ms, generate-params: 6ms, render: 5.3s)
+ GET /comic/6594 200 in 5.3s (compile: 444ms, generate-params: 26µs, render: 4.8s)
+ GET /comic/6594 200 in 5.3s (compile: 824ms, generate-params: 52µs, render: 4.5s)
+ GET /comic/6594 200 in 4.1s (compile: 426ms, generate-params: 18ms, render: 3.6s)
+ GET /comic/6594 200 in 5.3s (compile: 1221ms, generate-params: 28µs, render: 4.1s)
+ GET /comic/6594 200 in 3.7s (compile: 709ms, generate-params: 30µs, render: 3.0s)
+ GET /comic/13261 200 in 3.0s (compile: 8ms, generate-params: 20µs, render: 3.0s)
+ GET /comic/13261 200 in 5.1s (compile: 12ms, generate-params: 4ms, render: 5.0s)
+ GET /comic/13261 200 in 4.3s (compile: 8ms, generate-params: 60µs, render: 4.3s)
+ GET /comic/13261 200 in 3.7s (compile: 9ms, generate-params: 28µs, render: 3.7s)
+ GET /comic/13261 200 in 3.1s (compile: 17ms, generate-params: 6ms, render: 3.1s)
+ GET /comic/6594 200 in 2.6s (compile: 7ms, generate-params: 28µs, render: 2.6s)
+ GET /comic/6594 200 in 2.6s (compile: 607ms, generate-params: 1077µs, render: 1981ms)
+ GET /comic/6594 200 in 2.6s (compile: 1293ms, generate-params: 28µs, render: 1297ms)
+ GET /comic/6594 200 in 1995ms (compile: 1177ms, generate-params: 31µs, render: 818ms)
+✓ Compiled in 489ms
+ GET /comic/6594 200 in 615ms (compile: 305ms, generate-params: 19µs, render: 310ms)
+ GET /comic/13261 200 in 2.4s (compile: 1244ms, generate-params: 2ms, render: 1181ms)
+ GET /comic/13261 200 in 618ms (compile: 2ms, generate-params: 21µs, render: 616ms)
+ GET /comic/13261 200 in 1003ms (compile: 7ms, generate-params: 2ms, render: 996ms)
+ GET /comic/6594 200 in 1029ms (compile: 355ms, generate-params: 5ms, render: 674ms)
+ GET /comic/13261 200 in 1036ms (compile: 741ms, generate-params: 21µs, render: 295ms)
+ GET /comic/13261 200 in 3.1s (compile: 380ms, generate-params: 15ms, render: 2.8s)
+ GET /comic/6594 200 in 1650ms (compile: 7ms, generate-params: 23µs, render: 1642ms)
+ GET /comic/13261 200 in 1068ms (compile: 5ms, generate-params: 23µs, render: 1063ms)
+○ Compiling /comic/[id]/heritage ...
+⨯ Failed to generate static paths for /comic/[id]/listing:
+SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+ GET /comic/13261/listing 200 in 6.6s (compile: 1756ms, generate-params: 12ms, render: 4.8s)
+ GET /comic/13261/heritage 200 in 12.5s (compile: 11.3s, generate-params: 5.4s, render: 1230ms)
+ GET /comic/13261/listing 200 in 1962ms (compile: 1051ms, generate-params: 1010ms, render: 911ms)
+ GET /comic/13261/listing 200 in 360ms (compile: 25ms, generate-params: 8ms, render: 335ms)
+ GET /comic/13261/listing 200 in 365ms (compile: 13ms, generate-params: 3ms, render: 352ms)
+ GET /comic/13261/listing 200 in 2.8s (compile: 1067ms, generate-params: 12ms, render: 1737ms)
+ GET /comic/6594 200 in 950ms (compile: 38ms, generate-params: 10ms, render: 913ms)
+ GET /comic/13261/listing 200 in 3.6s (compile: 113ms, generate-params: 2ms, render: 3.5s)
+ GET /comic/6594 200 in 2.3s (compile: 54ms, generate-params: 20ms, render: 2.2s)
+ GET /comic/13261/listing 200 in 472ms (compile: 88ms, generate-params: 3ms, render: 384ms)
+ GET /comic/6594 200 in 537ms (compile: 13ms, generate-params: 7ms, render: 524ms)
+✓ Compiled in 234ms
+✓ Compiled in 224ms
+ GET / 200 in 1989ms (compile: 31ms, render: 1958ms)
+ GET /comic/13261 200 in 1798ms (compile: 1137ms, generate-params: 8ms, render: 661ms)
+ GET /comic/13261/heritage 200 in 450ms (compile: 20ms, generate-params: 6ms, render: 430ms)
+✓ Compiled in 250ms
+✓ Compiled in 75ms
+ GET /comic/13261 200 in 1395ms (compile: 95ms, generate-params: 32ms, render: 1300ms)
+✓ Compiled in 132ms
+✓ Compiled in 72ms
+ GET / 200 in 2.5s (compile: 1544ms, render: 960ms)
+✓ Compiled in 58ms
+ GET / 200 in 2.3s (compile: 167ms, render: 2.2s)
+✓ Compiled in 55ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 53ms
+⨯ ReferenceError: publisherFilter is not defined
+    at CollectionClient (components/CollectionClient.tsx:165:91)
+  163 |             return true;
+  164 |         });
+> 165 |     }, [comics, category, saleFilter, selectedTitle, columnFilters, rangeFilters, search, publisherFilter]);
+      |                                                                                           ^
+  166 |
+  167 |     const filteredSorted = useMemo(() => {
+  168 |         return [...filtered].sort((a, b) => { {
+  digest: '2257650478'
+}
+ GET / 500 in 1518ms (compile: 521ms, render: 998ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 82ms
+⨯ ReferenceError: publisherFilter is not defined
+    at CollectionClient (components/CollectionClient.tsx:303:43)
+  301 |                     <span className="toolbar-label">Publisher</span>
+  302 |                     <button
+> 303 |                         className={`btn ${publisherFilter === "marvel" ? "active" : ""}`}
+      |                                           ^
+  304 |                         onClick={() => setPublisherFilter("marvel")}
+  305 |                     >
+  306 |                         Marvel {
+  digest: '2257650478'
+}
+ GET / 500 in 975ms (compile: 133ms, render: 843ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 70ms
+ GET / 200 in 1459ms (compile: 205ms, render: 1254ms)
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+ GET / 200 in 1032ms (compile: 28ms, render: 1003ms)
+✓ Compiled in 71ms
+✓ Compiled in 43ms
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+✓ Compiled in 55ms
+ GET / 200 in 4.0s (compile: 1088ms, render: 2.9s)
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+ GET / 200 in 1053ms (compile: 5ms, render: 1048ms)
+✓ Compiled in 96ms
+ GET / 200 in 1657ms (compile: 172ms, render: 1485ms)
+✓ Compiled in 369ms
+ GET / 200 in 3.8s (compile: 1244ms, render: 2.5s)
+ GET / 200 in 1462ms (compile: 71ms, render: 1392ms)
+ GET /comic/12499 200 in 752ms (compile: 28ms, generate-params: 9ms, render: 725ms)
+ GET / 200 in 295ms (compile: 11ms, render: 284ms)
+ GET /comic/11406 200 in 305ms (compile: 18ms, generate-params: 9ms, render: 287ms)
+ GET / 200 in 296ms (compile: 9ms, render: 286ms)
+ GET / 200 in 1468ms (compile: 21ms, render: 1447ms)
+ GET / 200 in 1017ms (compile: 7ms, render: 1009ms)
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+⨯ upstream image response failed for https://comicvine.gamespot.com/a/bundles/phoenixsite/images/core/loose/img_broken.png 403
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-018_OBV.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/6727/Spider-Man%2032/front.jpeg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/6738/spider-man%2033/front.jpeg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/6760/Spider-Man%2035/20241009_190642.jpg
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/images/6771/Spider-Man%2036/front.jpeg
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+⨯ upstream image response timed out for https://raw.githubusercontent.com/johndimm/comic-photos/refs/heads/main/slabbed-2026/CGC4659391-004_OBV.jpg
+⨯ upstream image response timed out for https://i.annihil.us/u/prod/marvel/i/mg/4/70/4bb567698726f/portrait_uncanny.jpg
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+Error: "url" parameter is valid but upstream response timed out
+    at ignore-listed frames {
+  statusCode: 504
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+Error [TimeoutError]: The operation was aborted due to timeout
+    at ignore-listed frames {
+  code: 23,
+  INDEX_SIZE_ERR: 1,
+  DOMSTRING_SIZE_ERR: 2,
+  HIERARCHY_REQUEST_ERR: 3,
+  WRONG_DOCUMENT_ERR: 4,
+  INVALID_CHARACTER_ERR: 5,
+  NO_DATA_ALLOWED_ERR: 6,
+  NO_MODIFICATION_ALLOWED_ERR: 7,
+  NOT_FOUND_ERR: 8,
+  NOT_SUPPORTED_ERR: 9,
+  INUSE_ATTRIBUTE_ERR: 10,
+  INVALID_STATE_ERR: 11,
+  SYNTAX_ERR: 12,
+  INVALID_MODIFICATION_ERR: 13,
+  NAMESPACE_ERR: 14,
+  INVALID_ACCESS_ERR: 15,
+  VALIDATION_ERR: 16,
+  TYPE_MISMATCH_ERR: 17,
+  SECURITY_ERR: 18,
+  NETWORK_ERR: 19,
+  ABORT_ERR: 20,
+  URL_MISMATCH_ERR: 21,
+  QUOTA_EXCEEDED_ERR: 22,
+  TIMEOUT_ERR: 23,
+  INVALID_NODE_TYPE_ERR: 24,
+  DATA_CLONE_ERR: 25
+}
+ GET / 200 in 3.8s (compile: 104ms, render: 3.7s)

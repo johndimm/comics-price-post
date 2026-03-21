@@ -8,6 +8,7 @@ import { Comic } from "@/lib/types";
 type ViewMode = "cards" | "table";
 type CategoryFilter = "all" | "slabbed" | "community" | "raw";
 type SaleFilter = "all" | "unsold" | "for_sale" | "sold";
+type GenreFilter = "Super-hero" | "Military" | "Cowboy" | "Reprints" | "Humor" | "Fantasy" | "Alt" | "all";
 
 interface SavedQuery {
     name: string;
@@ -43,13 +44,14 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
     const [view, setView] = useState<ViewMode>("cards");
     const [category, setCategory] = useState<CategoryFilter>("all");
     const [saleFilter, setSaleFilter] = useState<SaleFilter>("all");
+    const [genreFilter, setGenreFilter] = useState<GenreFilter>("all");
     const [selectedTitle, setSelectedTitle] = useState<string>("all");
     const [search, setSearch] = useState("");
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [columnFilters, setColumnFilters] = useState<Record<string, Set<string>>>({});
     const [rangeFilters, setRangeFilters] = useState<Record<string, RangeFilter>>({});
     const [titleSortBy, setTitleSortBy] = useState<"count" | "name">("count");
-    const [sortKey, setSortKey] = useState<SortKey>("title");
+    const [sortKey, setSortKey] = useState<SortKey>("year");
     const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
     const [savedQueries, setSavedQueries] = useState<SavedQuery[]>([]);
     // hydrated: true only after sessionStorage restore is complete — prevents save from overwriting on mount
@@ -67,8 +69,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                 if (s.saleFilter) setSaleFilter(s.saleFilter);
                 if (s.selectedTitle) setSelectedTitle(s.selectedTitle);
                 if (s.search != null) setSearch(s.search);
-                if (s.sortKey) setSortKey(s.sortKey);
-                if (s.sortDir) setSortDir(s.sortDir);
+                // sortKey/sortDir intentionally not restored — year-asc is the permanent default
                 if (s.columnFilters) setColumnFilters(
                     Object.fromEntries(Object.entries(s.columnFilters).map(([k, v]) => [k, new Set(v as string[])]))
                 );
@@ -123,6 +124,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
 
     const filtered = useMemo(() => {
         return comics.filter((c) => {
+            if (genreFilter !== "all" && c.genre !== genreFilter) return false;
             if (category !== "all" && c.grade_category !== category) return false;
 
             const isSold = c.sold_price && c.sold_price.trim().length > 0;
@@ -159,13 +161,21 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
             }
             return true;
         });
-    }, [comics, category, saleFilter, selectedTitle, columnFilters, rangeFilters, search]);
+    }, [comics, category, saleFilter, selectedTitle, columnFilters, rangeFilters, search, genreFilter]);
 
     const filteredSorted = useMemo(() => {
+        function pubDateNum(c: typeof filtered[0]): number {
+            // date is MM/DD/YYYY → convert to YYYYMMDD for sorting
+            const m = String(c.date ?? "").match(/^(\d{1,2})\/\d{1,2}\/(\d{4})$/);
+            if (m) return parseInt(m[2]) * 100 + parseInt(m[1]);
+            return (c.year || 0) * 100;
+        }
         return [...filtered].sort((a, b) => {
             let av: any = (a as any)[sortKey] ?? "";
             let bv: any = (b as any)[sortKey] ?? "";
-            if (sortKey === "grade" || sortKey === "year" || sortKey === "fmv" || sortKey === "recommended_ask" || sortKey === "slab_upside") {
+            if (sortKey === "year") {
+                av = pubDateNum(a); bv = pubDateNum(b);
+            } else if (sortKey === "grade" || sortKey === "fmv" || sortKey === "recommended_ask" || sortKey === "slab_upside") {
                 av = Number(av) || 0; bv = Number(bv) || 0;
             } else if (sortKey === "number") {
                 av = parseInt(String(av), 10) || 0; bv = parseInt(String(bv), 10) || 0;
@@ -293,6 +303,20 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                     </button>
                 </div>
 
+                {/* Genre Filter */}
+                <div className="toolbar-group">
+                    <span className="toolbar-label">Genre</span>
+                    {(["Super-hero", "Military", "Cowboy", "Reprints", "Humor", "Fantasy", "Alt", "all"] as GenreFilter[]).map((g) => (
+                        <button
+                            key={g}
+                            className={`btn ${genreFilter === g ? "active" : ""}`}
+                            onClick={() => setGenreFilter(g)}
+                        >
+                            {g === "all" ? "All" : g}
+                        </button>
+                    ))}
+                </div>
+
                 {/* Category Filter */}
                 <div className="toolbar-group">
                     <span className="toolbar-label">Grade</span>
@@ -339,6 +363,22 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                         </button>
                     ))}
                 </div>
+
+                {/* Sort (cards view) */}
+                {view === "cards" && (
+                    <div className="toolbar-group">
+                        <span className="toolbar-label">Sort</span>
+                        {([["year", "Date"], ["title", "Title"], ["fmv", "FMV"], ["grade", "Grade"]] as [SortKey, string][]).map(([key, label]) => (
+                            <button
+                                key={key}
+                                className={`btn ${sortKey === key ? "active" : ""}`}
+                                onClick={() => { setSortKey(key); setSortDir(key === sortKey && sortDir === "asc" ? "desc" : "asc"); }}
+                            >
+                                {label}{sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : ""}
+                            </button>
+                        ))}
+                    </div>
+                )}
 
                 {/* Search */}
                 <input

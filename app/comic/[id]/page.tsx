@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllComics, getComicById, getGradeLabel } from "@/lib/comics";
 import { getListingsByComic, eBayListing, calcFMV, getGradeCurvePoints, getComicMetadata } from "@/lib/db";
+import { getListingForComic } from "@/lib/listings";
 import GradeBadge from "@/components/GradeBadge";
 import StatusBadge from "@/components/StatusBadge";
 import EvidenceClient from "@/components/EvidenceClient";
@@ -24,6 +25,7 @@ export default async function EvidencePage({ params }: Params) {
 
     const isReplica = /replica|facsimile|reprint/i.test(comic.title);
     const listings = isReplica ? [] : getListingsByComic(id);
+    const heritageListing = getListingForComic(id);
     const metadata = getComicMetadata(id);
     const soldListings = listings.filter(l => l.type === 'sold');
     const askingListings = listings.filter(l => l.type === 'asking');
@@ -145,6 +147,11 @@ export default async function EvidencePage({ params }: Params) {
                     <Link href={`/comic/${id}/listing`} className="btn" style={{ marginLeft: 'auto', fontSize: 12 }}>
                         eBay Listing →
                     </Link>
+                    {heritageListing && (
+                        <Link href={`/comic/${id}/heritage`} className="btn" style={{ fontSize: 12 }}>
+                            Heritage Listing →
+                        </Link>
+                    )}
                 </div>
             </div>
 

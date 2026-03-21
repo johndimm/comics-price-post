@@ -55,7 +55,7 @@ function conditionFromGrade(grade: number): string {
     return "Fair / Poor";
 }
 
-function buildDescription(comic: Comic, gradeLabel: string, metadata: ReturnType<typeof getComicMetadata>): string {
+function buildDescription(comic: Comic, gradeLabel: string, metadata: ReturnType<typeof getComicMetadata>, comicId: string): string {
     const era = comicEra(comic.year);
     const condition = conditionFromGrade(comic.grade);
     const isSlabbed = comic.grade_category === "slabbed";
@@ -131,6 +131,9 @@ function buildDescription(comic: Comic, gradeLabel: string, metadata: ReturnType
 
     lines.push(`<p><em>Please review all photos carefully before purchasing. Ask any questions before bidding. All sales final.</em></p>`);
 
+    const appUrl = `https://comics-price-post.vercel.app/comic/${comicId}`;
+    lines.push(`<p><strong>Market Data:</strong> <a href="${appUrl}">View comparable sales →</a></p>`);
+
     return lines.join("\n");
 }
 
@@ -158,7 +161,7 @@ export default async function ListingPage({ params }: Params) {
     const title = ebayTitle(comic, gradeLabel);
     const condition = conditionFromGrade(comic.grade);
     const era = comicEra(comic.year);
-    const description = buildDescription(comic, gradeLabel, metadata);
+    const description = buildDescription(comic, gradeLabel, metadata, id);
 
     const specifics: [string, string][] = [
         ["Publisher", comic.publisher || "Marvel Comics"],
