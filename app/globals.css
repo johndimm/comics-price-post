@@ -1545,3 +1545,7 @@ a {
   font-weight: 700;
   color: var(--text);
 }
+
+.next-action-row:hover {
+  background: rgba(255,255,255,0.04);
+}

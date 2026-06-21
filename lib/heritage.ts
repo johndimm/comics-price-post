@@ -67,7 +67,8 @@ export async function scrapeHeritageSold(
     limit: number = 30,
     issueNumber?: string,
     year?: string | number,
-    requiredWords?: string[]
+    requiredWords?: string[],
+    excludedWords?: string[]
 ): Promise<HeritageLot[]> {
     const cookies = loadCookies();
     if (!cookies) {
@@ -136,7 +137,16 @@ export async function scrapeHeritageSold(
                 const t = lot.title.toLowerCase();
                 if (!requiredWords.every(w => t.includes(w.toLowerCase()))) continue;
             }
+            if (excludedWords) {
+                const t = lot.title.toLowerCase();
+                if (excludedWords.some(w => t.includes(w.toLowerCase()))) continue;
+            }
             if (issueNumber && !new RegExp(`\\b${issueNumber}\\b`).test(lot.title)) continue;
+            if (year) {
+                const targetYearNum = parseInt(String(year), 10);
+                const titleYears = [...lot.title.matchAll(/\b(1[89]\d{2}|20[012]\d)\b/g)].map(m => parseInt(m[1], 10));
+                if (titleYears.some(y => y > targetYearNum + 5)) continue;
+            }
 
             // Parse date
             let saleDate: string | null = null;

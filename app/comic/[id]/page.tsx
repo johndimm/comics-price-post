@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllComics, getComicById, getGradeLabel } from "@/lib/comics";
+import { SHORTBOXED_CATALOG } from "@/lib/shortboxed-catalog";
 import { getListingsByComic, eBayListing, calcFMV, getGradeCurvePoints, getComicMetadata } from "@/lib/db";
 import { getListingForComic } from "@/lib/listings";
 import GradeBadge from "@/components/GradeBadge";
 import StatusBadge from "@/components/StatusBadge";
 import EvidenceClient from "@/components/EvidenceClient";
 import PhotoGallery from "@/components/PhotoGallery";
+import ComicPipeline from "@/components/ComicPipeline";
 
 interface Params {
     params: Promise<{ id: string }>;
@@ -144,15 +146,44 @@ export default async function EvidencePage({ params }: Params) {
                     {comic.artist && (
                         <span className="evidence-year">Art: {comic.artist}</span>
                     )}
-                    <Link href={`/comic/${id}/listing`} className="btn" style={{ marginLeft: 'auto', fontSize: 12 }}>
-                        eBay Listing →
-                    </Link>
+                    {comic.for_sale && comic.for_sale !== "NFS" && comic.for_sale !== "" ? (
+                        <a href={comic.for_sale} target="_blank" rel="noopener noreferrer" className="btn" style={{ marginLeft: 'auto', fontSize: 12 }}>
+                            eBay Listing ↗
+                        </a>
+                    ) : (
+                        <Link href={`/comic/${id}/listing`} className="btn" style={{ marginLeft: 'auto', fontSize: 12 }}>
+                            eBay Listing →
+                        </Link>
+                    )}
                     {heritageListing && (
                         <Link href={`/comic/${id}/heritage`} className="btn" style={{ fontSize: 12 }}>
                             Heritage Listing →
                         </Link>
                     )}
                 </div>
+            </div>
+
+            {/* Sale pipeline */}
+            <div style={{ padding: "12px 24px", borderBottom: "1px solid #1a1a1a" }}>
+                <ComicPipeline
+                    marvelId={id}
+                    comicTitle={`${comic.title} #${comic.number}`}
+                    gradeCategory={comic.grade_category}
+                    communityLow={comic.community_low}
+                    forSale={comic.for_sale}
+                    soldPrice={comic.sold_price}
+                    soldDate={comic.sold_date}
+                    slabUpside={comic.slab_upside ?? null}
+                    platforms={[
+                        ...(comic.for_sale && comic.for_sale !== "NFS" && comic.for_sale !== ""
+                            ? [{ name: "ebay" as const, url: comic.for_sale }]
+                            : []),
+                        ...(() => {
+                            const sb = SHORTBOXED_CATALOG.find(e => e.marvelId === id && e.status === "active");
+                            return sb ? [{ name: "shortboxed" as const, url: sb.url }] : [];
+                        })(),
+                    ]}
+                />
             </div>
 
             {/* Body: photos + charts */}

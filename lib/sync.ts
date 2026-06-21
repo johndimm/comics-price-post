@@ -16,15 +16,18 @@ export async function syncEbayData(marvelId: string, title: string, number: stri
     const keywordMatches = TITLE_KEYWORDS.filter(kw => tl.includes(kw));
     // Require the full title as a phrase so "Motor City Comic Con" doesn't match "Motor City Comics"
     const requiredWords = [...keywordMatches, tl];
+    // Exclude special-edition keywords that don't appear in the original title (e.g. "annual", "special")
+    // so "Fantastic Four Annual #9" doesn't pollute data for "Fantastic Four #9"
+    const excludedKeywords = TITLE_KEYWORDS.filter(kw => !tl.includes(kw));
 
     try {
         // Fetch sold listings using our Stealth Puppeteer scraper
-        const soldItems = await scrapeSoldItems(query, 50, number, year, requiredWords);
+        const soldItems = await scrapeSoldItems(query, 50, number, year, requiredWords, excludedKeywords);
 
         // Fetch active listings using the official eBay Browse API (failures are non-fatal)
         let activeItems: eBayListing[] = [];
         try {
-            activeItems = await searchActiveItems(query, 50, number, year, requiredWords);
+            activeItems = await searchActiveItems(query, 50, number, year, requiredWords, excludedKeywords);
         } catch (activeErr) {
             console.warn(`Active listings fetch failed for ${query}: ${(activeErr as Error).message}`);
         }
@@ -32,7 +35,7 @@ export async function syncEbayData(marvelId: string, title: string, number: stri
         // Fetch Heritage auction sold results (requires data/heritage-cookies.json)
         let heritageItems: eBayListing[] = [];
         try {
-            const hLots = await scrapeHeritageSold(query, 30, number, year, requiredWords);
+            const hLots = await scrapeHeritageSold(query, 30, number, year, requiredWords, excludedKeywords);
             heritageItems = hLots.map(lot => ({
                 itemId: lot.itemId,
                 title: lot.title,

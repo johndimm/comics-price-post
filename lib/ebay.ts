@@ -113,7 +113,7 @@ function parseGrade(title: string, issueNumber?: string, year?: string | number)
     return undefined;
 }
 
-export async function searchActiveItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number, requiredWords?: string[]): Promise<eBayListing[]> {
+export async function searchActiveItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number, requiredWords?: string[], excludedWords?: string[]): Promise<eBayListing[]> {
     const token = await getAccessToken();
     const encodedQuery = encodeURIComponent(query);
     const url = `https://api.ebay.com/buy/browse/v1/item_summary/search?q=${encodedQuery}&limit=${limit}`;
@@ -163,6 +163,15 @@ export async function searchActiveItems(query: string, limit: number = 20, issue
         if (requiredWords) {
             const t = l.title.toLowerCase();
             if (!requiredWords.every(w => t.includes(w.toLowerCase()))) return false;
+        }
+        if (excludedWords) {
+            const t = l.title.toLowerCase();
+            if (excludedWords.some(w => t.includes(w.toLowerCase()))) return false;
+        }
+        if (year) {
+            const targetYearNum = parseInt(String(year), 10);
+            const titleYears = [...l.title.matchAll(/\b(1[89]\d{2}|20[012]\d)\b/g)].map(m => parseInt(m[1], 10));
+            if (titleYears.some(y => y > targetYearNum + 5)) return false;
         }
         return true;
     });

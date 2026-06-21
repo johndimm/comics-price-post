@@ -50,7 +50,7 @@ favorite
 Thor #134
 CGC 5.5
 
-$111
+$67
 
 
 Journey Into Mystery #118
@@ -81,11 +81,6 @@ $250
 favorite
 3
 
-
-X-Men #23
-CGC 5.0
-
-Sold, Pending Clearance
 
 X-Men #18
 CGC 5.0
@@ -125,7 +120,7 @@ favorite
 X-Men #10
 CGC 7.0
 
-FMV $262–$320
+FMV $266–$326
 
 $368
 
@@ -243,3 +238,7 @@ chevron_right
 
 Fantastic Four #16
 CGC 5.0
+
+List for Sale
+chevron_right
+

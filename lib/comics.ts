@@ -52,7 +52,17 @@ function parseComicsCSV(): Record<string, Omit<Comic, "photos" | "grade_category
       number: row[idx("number")]?.trim() ?? "",
       box: row[idx("box")]?.trim() ?? "",
       norm_grade: parseFloat(row[idx("norm grade")] ?? "0") || 0,
-      grade: parseFloat(row[idx("grade")] ?? "0") || 0,
+      grade: (() => {
+        const cgc = row[idx("CGC")]?.trim() ?? "";
+        const communityUrl = row[idx("community url")]?.trim() ?? "";
+        const lo = parseFloat(row[idx("community low")] ?? "");
+        const hi = parseFloat(row[idx("community high")] ?? "");
+        // For community-graded comics (no CGC slab), derive grade from low/high range
+        if (!cgc && !isNaN(lo) && !isNaN(hi)) {
+          return Math.round(((lo + hi) / 2) * 10) / 10;
+        }
+        return parseFloat(row[idx("grade")] ?? "0") || 0;
+      })(),
       cgc: row[idx("CGC")]?.trim() ?? "",
       community_url: row[idx("community url")]?.trim() ?? "",
       community_low: row[idx("community low")]?.trim() ?? "",

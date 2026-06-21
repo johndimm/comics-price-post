@@ -53,7 +53,7 @@ function parseGrade(title: string, issueNumber?: string, year?: string | number)
     return undefined;
 }
 
-export async function scrapeSoldItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number, requiredWords?: string[]): Promise<eBayListing[]> {
+export async function scrapeSoldItems(query: string, limit: number = 20, issueNumber?: string, year?: string | number, requiredWords?: string[], excludedWords?: string[]): Promise<eBayListing[]> {
     const encodedQuery = encodeURIComponent(query);
     // LH_Sold=1 and LH_Complete=1 are required to view completed/sold listings
     const url = `https://www.ebay.com/sch/i.html?_nkw=${encodedQuery}&LH_Sold=1&LH_Complete=1&_ipg=60`;
@@ -162,12 +162,23 @@ export async function scrapeSoldItems(query: string, limit: number = 20, issueNu
         });
 
         // Filter out zero-price or invalid items, ensure issue number matches, and respect the limit
+        const targetYearNum = year ? parseInt(String(year), 10) : null;
         return listings.filter(l => {
             if (l.price <= 0 || l.itemId.length <= 5) return false;
             if (issueNumber && !new RegExp(`\\b${issueNumber}\\b`).test(l.title)) return false;
             if (requiredWords) {
                 const t = l.title.toLowerCase();
                 if (!requiredWords.every(w => t.includes(w.toLowerCase()))) return false;
+            }
+            if (excludedWords) {
+                const t = l.title.toLowerCase();
+                if (excludedWords.some(w => t.includes(w.toLowerCase()))) return false;
+            }
+            // Reject listings whose title contains a year more than 5 years beyond the target year
+            // (catches modern reprints like "Fantastic Four #10 Marvel 2022" for a 1962 comic)
+            if (targetYearNum) {
+                const titleYears = [...l.title.matchAll(/\b(1[89]\d{2}|20[012]\d)\b/g)].map(m => parseInt(m[1], 10));
+                if (titleYears.some(y => y > targetYearNum + 5)) return false;
             }
             return true;
         }).slice(0, limit);

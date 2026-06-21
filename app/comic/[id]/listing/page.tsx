@@ -2,8 +2,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllComics, getComicById, getGradeLabel } from "@/lib/comics";
 import { getListingsByComic, calcFMV, getGradeCurvePoints, getComicMetadata } from "@/lib/db";
-import { Comic } from "@/lib/types";
 import ListingClient from "./ListingClient";
+import { comicEra, ebayTitle, conditionFromGrade, buildDescription } from "@/lib/ebay-listing";
+import { getOffersForComic } from "@/lib/offer-ledger";
 
 interface Params {
     params: Promise<{ id: string }>;
@@ -14,128 +15,6 @@ export async function generateStaticParams() {
     return comics.map((c) => ({ id: c.marvel_id }));
 }
 
-function comicEra(year: number): string {
-    if (year >= 1938 && year <= 1955) return "Golden Age";
-    if (year >= 1956 && year <= 1969) return "Silver Age";
-    if (year >= 1970 && year <= 1979) return "Bronze Age";
-    if (year >= 1980 && year <= 1991) return "Copper Age";
-    return "Modern Age";
-}
-
-function ebayTitle(comic: Comic, gradeLabel: string): string {
-    const era = comicEra(comic.year);
-    const pub = comic.publisher || "Marvel Comics";
-    const grade = comic.grade_category === "slabbed" && comic.grade > 0
-        ? `CGC ${comic.grade.toFixed(1)}`
-        : comic.grade > 0 ? gradeLabel : "";
-    const qualified = comic.is_qualified ? " Qualified" : "";
-    const parts = [
-        `${comic.title} #${comic.number}`,
-        grade + qualified,
-        era,
-        pub,
-        String(comic.year),
-    ].filter(Boolean);
-    const title = parts.join(" ");
-    return title.length > 80 ? title.slice(0, 77) + "…" : title;
-}
-
-function conditionFromGrade(grade: number): string {
-    if (grade >= 9.8) return "Near Mint / Mint";
-    if (grade >= 9.4) return "Near Mint";
-    if (grade >= 9.0) return "Near Mint (-)";
-    if (grade >= 8.5) return "Very Fine (+)";
-    if (grade >= 8.0) return "Very Fine";
-    if (grade >= 7.0) return "Fine / Very Fine";
-    if (grade >= 6.0) return "Fine";
-    if (grade >= 5.0) return "Very Good / Fine";
-    if (grade >= 4.0) return "Very Good";
-    if (grade >= 3.0) return "Good / Very Good";
-    if (grade >= 2.0) return "Good";
-    return "Fair / Poor";
-}
-
-function buildDescription(comic: Comic, gradeLabel: string, metadata: ReturnType<typeof getComicMetadata>, comicId: string): string {
-    const era = comicEra(comic.year);
-    const condition = conditionFromGrade(comic.grade);
-    const isSlabbed = comic.grade_category === "slabbed";
-
-    const lines: string[] = [];
-
-    lines.push(`<h2>${comic.title} #${comic.number} — ${era} Marvel Comics (${comic.year})</h2>`);
-    lines.push(`<p><strong>Condition:</strong> ${condition}${comic.is_qualified ? " (Qualified — see notes)" : ""}</p>`);
-
-    if (isSlabbed) {
-        const hasCert = comic.cgc && comic.cgc.toLowerCase() !== "yes";
-        const certLink = hasCert
-            ? ` Cert <a href="https://www.cgccomics.com/certlookup/${comic.cgc}/" target="_blank">#${comic.cgc}</a>.`
-            : " (cert # not recorded — verify on CGC registry before listing).";
-        lines.push(`<p><strong>CGC Graded:</strong> ${comic.grade.toFixed(1)} (${gradeLabel})${certLink} Professionally graded and encapsulated by CGC (Certified Guaranty Company). No restoration detected.</p>`);
-        if (comic.community_url) {
-            const range = (comic.community_low && comic.community_high)
-                ? ` (community range: ${comic.community_low}–${comic.community_high})`
-                : "";
-            lines.push(`<p><strong>CGC Community Census:</strong> See how other collectors rate this issue${range}: <a href="${comic.community_url}">${comic.community_url}</a></p>`);
-        }
-    } else {
-        // Raw or community-graded — community URL is primary evidence for the grade
-        if (comic.community_url) {
-            const range = (comic.community_low && comic.community_high)
-                ? `${comic.community_low}–${comic.community_high}` : null;
-            lines.push(`<p><strong>Grade: ${comic.grade.toFixed(1)} (${gradeLabel})</strong> — assigned based on the CGC Community grading census. The community consensus provides a reliable estimate of the grade this book would receive if professionally submitted to CGC.</p>`);
-            lines.push(`<p>Community grade range${range ? `: <strong>${range}</strong>` : " available"} — view the full census and all community votes here: <a href="${comic.community_url}">${comic.community_url}</a></p>`);
-        } else {
-            lines.push(`<p><strong>Grade:</strong> ${comic.grade > 0 ? `${comic.grade.toFixed(1)} (${gradeLabel}) — raw ungraded copy.` : "Ungraded raw copy."}</p>`);
-        }
-    }
-
-    if (comic.is_qualified) {
-        lines.push(`<p><strong>⚠️ Qualified Grade:</strong> ${comic.notes || "See photos for details."}</p>`);
-    }
-
-    if (metadata?.description) {
-        const sentences = metadata.description.match(/[^.!?]+[.!?]+/g) ?? [];
-        const synopsis = sentences.slice(0, 4).join(" ").trim();
-        if (synopsis) {
-            lines.push(`<h3>Story Synopsis</h3><p>${synopsis}</p>`);
-        }
-    }
-
-    if (metadata?.writers || metadata?.pencilers || metadata?.inkers) {
-        lines.push(`<h3>Credits</h3><ul>`);
-        if (metadata?.writers) lines.push(`<li><strong>Writer:</strong> ${metadata.writers}</li>`);
-        if (metadata?.pencilers) lines.push(`<li><strong>Pencils:</strong> ${metadata.pencilers}</li>`);
-        if (metadata?.inkers) lines.push(`<li><strong>Inks:</strong> ${metadata.inkers}</li>`);
-        lines.push(`</ul>`);
-    }
-
-    if (comic.artist) {
-        lines.push(`<p><strong>Cover Artist:</strong> ${comic.artist}</p>`);
-    }
-
-    if (comic.nice_panels) {
-        lines.push(`<p><strong>Notable:</strong> ${comic.nice_panels}</p>`);
-    }
-
-    if (comic.notes && !comic.is_qualified) {
-        lines.push(`<p><strong>Notes:</strong> ${comic.notes}</p>`);
-    }
-
-    lines.push(`<h3>What You're Getting</h3><ul>`);
-    lines.push(`<li>The comic book shown in the photos</li>`);
-    if (isSlabbed) {
-        lines.push(`<li>CGC-certified slab — sealed and tamper-evident</li>`);
-    }
-    lines.push(`<li>Carefully packaged for safe shipping</li>`);
-    lines.push(`</ul>`);
-
-    lines.push(`<p><em>Please review all photos carefully before purchasing. Ask any questions before bidding. All sales final.</em></p>`);
-
-    const appUrl = `https://comics-price-post.vercel.app/comic/${comicId}`;
-    lines.push(`<p><strong>Market Data:</strong> <a href="${appUrl}">View comparable sales →</a></p>`);
-
-    return lines.join("\n");
-}
 
 export default async function ListingPage({ params }: Params) {
     const { id } = await params;
@@ -162,6 +41,7 @@ export default async function ListingPage({ params }: Params) {
     const condition = conditionFromGrade(comic.grade);
     const era = comicEra(comic.year);
     const description = buildDescription(comic, gradeLabel, metadata, id);
+    const offers = getOffersForComic(id);
 
     const specifics: [string, string][] = [
         ["Publisher", comic.publisher || "Marvel Comics"],
@@ -181,6 +61,42 @@ export default async function ListingPage({ params }: Params) {
                 <Link href={`/comic/${id}`} className="evidence-back">← Back to comic</Link>
                 <span className="listing-nav-label">Simulated eBay Listing</span>
             </div>
+
+            {offers.length > 0 && (
+                <div style={{ maxWidth: 900, margin: '0 auto 16px', padding: '12px 16px', background: '#0d1a0d', border: '1px solid #2a5c2a', borderRadius: 8, fontSize: 13 }}>
+                    <div style={{ fontWeight: 'bold', color: '#6fcf6f', marginBottom: 8 }}>eBay Offer History</div>
+                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead>
+                            <tr style={{ color: '#888', textAlign: 'left' }}>
+                                <th style={{ padding: '3px 10px 3px 0' }}>Date</th>
+                                <th style={{ padding: '3px 10px 3px 0' }}>Status</th>
+                                <th style={{ padding: '3px 10px 3px 0' }}>Price</th>
+                                <th style={{ padding: '3px 10px 3px 0' }}>Offer ID</th>
+                                <th style={{ padding: '3px 10px 3px 0' }}>Listing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {[...offers].reverse().map((o, i) => (
+                                <tr key={i} style={{ color: '#ccc', borderTop: '1px solid #1a2a1a' }}>
+                                    <td style={{ padding: '4px 10px 4px 0' }}>{new Date(o.createdAt).toLocaleDateString()}</td>
+                                    <td style={{ padding: '4px 10px 4px 0' }}>
+                                        <span style={{ color: o.status === 'published' ? '#6fcf6f' : o.status === 'ended' ? '#f87171' : '#e2c97e' }}>
+                                            {o.status ?? 'draft'}
+                                        </span>
+                                    </td>
+                                    <td style={{ padding: '4px 10px 4px 0' }}>${o.price}</td>
+                                    <td style={{ padding: '4px 10px 4px 0', fontFamily: 'monospace', fontSize: 12 }}>{o.offerId}</td>
+                                    <td style={{ padding: '4px 10px 4px 0' }}>
+                                        {o.listingId
+                                            ? <a href={`https://www.ebay.com/itm/${o.listingId}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>View ↗</a>
+                                            : <span style={{ color: '#555' }}>—</span>}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
 
             <ListingClient
                 title={title}

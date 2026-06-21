@@ -14,7 +14,7 @@ interface SavedQuery {
     name: string;
     category: CategoryFilter;
     saleFilter: SaleFilter;
-    selectedTitle: string;
+    selectedTitles: string[];
     search: string;
     columnFilters: Record<string, string[]>;
     rangeFilters: Record<string, RangeFilter>;
@@ -36,6 +36,35 @@ function saveQueries(queries: SavedQuery[]) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(queries));
 }
 
+const EXPORT_COLUMNS = [
+    "marvel_id", "title", "number", "year", "month", "publisher", "genre",
+    "norm_grade", "fmv", "grade_category",
+] as const;
+
+function csvEscape(value: unknown): string {
+    if (value === null || value === undefined) return "";
+    const s = String(value);
+    if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+    return s;
+}
+
+function exportComicsToCSV(comics: Comic[], filename: string) {
+    const lines = [EXPORT_COLUMNS.join(",")];
+    for (const comic of comics) {
+        lines.push(EXPORT_COLUMNS.map((col) => {
+            const value = col === "marvel_id" && comic.marvel_id.startsWith("local-") ? "" : (comic as any)[col];
+            return csvEscape(value);
+        }).join(","));
+    }
+    const blob = new Blob([lines.join("\n") + "\n"], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
 interface CollectionClientProps {
     comics: Comic[];
 }
@@ -45,7 +74,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
     const [category, setCategory] = useState<CategoryFilter>("all");
     const [saleFilter, setSaleFilter] = useState<SaleFilter>("all");
     const [genreFilter, setGenreFilter] = useState<GenreFilter>("all");
-    const [selectedTitle, setSelectedTitle] = useState<string>("all");
+    const [selectedTitles, setSelectedTitles] = useState<Set<string>>(new Set());
     const [search, setSearch] = useState("");
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [columnFilters, setColumnFilters] = useState<Record<string, Set<string>>>({});
@@ -67,7 +96,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                 if (s.view) setView(s.view);
                 if (s.category) setCategory(s.category);
                 if (s.saleFilter) setSaleFilter(s.saleFilter);
-                if (s.selectedTitle) setSelectedTitle(s.selectedTitle);
+                if (s.selectedTitles) setSelectedTitles(new Set(s.selectedTitles as string[]));
                 if (s.search != null) setSearch(s.search);
                 // sortKey/sortDir intentionally not restored — year-asc is the permanent default
                 if (s.columnFilters) setColumnFilters(
@@ -87,14 +116,14 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
         if (!hydrated) return;
         try {
             sessionStorage.setItem(PAGE_STATE_KEY, JSON.stringify({
-                view, category, saleFilter, selectedTitle, search,
+                view, category, saleFilter, selectedTitles: Array.from(selectedTitles), search,
                 sortKey, sortDir,
                 columnFilters: Object.fromEntries(Object.entries(columnFilters).map(([k, v]) => [k, Array.from(v)])),
                 rangeFilters,
                 selectedIds: Array.from(selectedIds),
             }));
         } catch { /* ignore */ }
-    }, [hydrated, view, category, saleFilter, selectedTitle, search, sortKey, sortDir, columnFilters, rangeFilters, selectedIds]);
+    }, [hydrated, view, category, saleFilter, selectedTitles, search, sortKey, sortDir, columnFilters, rangeFilters, selectedIds]);
 
     // Save scroll position directly to sessionStorage (doesn't need a re-render)
     useEffect(() => {
@@ -112,40 +141,25 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    const titlesWithCounts = useMemo(() => {
-        const counts: Record<string, number> = {};
-        comics.forEach(c => {
-            counts[c.title] = (counts[c.title] || 0) + 1;
-        });
-        return Object.entries(counts)
-            .sort((a, b) => titleSortBy === "name" ? a[0].localeCompare(b[0]) : b[1] - a[1])
-            .map(([title, count]) => ({ title, count }));
-    }, [comics, titleSortBy]);
-
-    const filtered = useMemo(() => {
+    // Base filter: everything except selectedTitles — used to populate the sidebar
+    const filteredBase = useMemo(() => {
         return comics.filter((c) => {
             if (genreFilter !== "all" && c.genre !== genreFilter) return false;
             if (category !== "all" && c.grade_category !== category) return false;
 
             const isSold = c.sold_price && c.sold_price.trim().length > 0;
             const isForSale = !isSold && c.for_sale?.includes("ebay.com");
-            const isNFS = !isSold && !isForSale;
 
             if (saleFilter === "unsold" && isSold) return false;
             if (saleFilter === "for_sale" && !isForSale) return false;
             if (saleFilter === "sold" && !isSold) return false;
 
-
-            if (selectedTitle !== "all" && c.title !== selectedTitle) return false;
-
-            // Apply generic column filters
             for (const [col, selectedValues] of Object.entries(columnFilters)) {
                 if (selectedValues.size === 0) continue;
                 const value = String((c as any)[col] ?? "");
                 if (!selectedValues.has(value)) return false;
             }
 
-            // Apply range filters
             for (const [col, range] of Object.entries(rangeFilters)) {
                 const val = Number((c as any)[col] ?? 0);
                 if (range.min != null && val < range.min) return false;
@@ -154,14 +168,34 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
 
             if (search) {
                 const q = search.toLowerCase();
-                const titleMatch = c.title.toLowerCase().includes(q);
-                const numMatch = c.number.toString().includes(q);
-                const artistMatch = (c.artist ?? "").toLowerCase().includes(q);
-                if (!titleMatch && !numMatch && !artistMatch) return false;
+                if (!c.title.toLowerCase().includes(q) && !c.number.toString().includes(q) && !(c.artist ?? "").toLowerCase().includes(q)) return false;
             }
             return true;
         });
-    }, [comics, category, saleFilter, selectedTitle, columnFilters, rangeFilters, search, genreFilter]);
+    }, [comics, category, saleFilter, columnFilters, rangeFilters, search, genreFilter]);
+
+    const titlesWithCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        filteredBase.forEach(c => {
+            counts[c.title] = (counts[c.title] || 0) + 1;
+        });
+        return Object.entries(counts)
+            .sort((a, b) => titleSortBy === "name" ? a[0].localeCompare(b[0]) : b[1] - a[1])
+            .map(([title, count]) => ({ title, count }));
+    }, [filteredBase, titleSortBy]);
+
+    // Drop any selected titles no longer present in the filtered set
+    useEffect(() => {
+        setSelectedTitles(prev => {
+            const next = new Set([...prev].filter(t => titlesWithCounts.some(tc => tc.title === t)));
+            return next.size === prev.size ? prev : next;
+        });
+    }, [titlesWithCounts]);
+
+    const filtered = useMemo(() => {
+        if (selectedTitles.size === 0) return filteredBase;
+        return filteredBase.filter(c => selectedTitles.has(c.title));
+    }, [filteredBase, selectedTitles]);
 
     const filteredSorted = useMemo(() => {
         function pubDateNum(c: typeof filtered[0]): number {
@@ -224,6 +258,33 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
         }
     };
 
+    const handleExportCSV = () => {
+        const source = selectedIds.size > 0
+            ? filteredSorted.filter(c => selectedIds.has(c.marvel_id))
+            : filteredSorted;
+
+        const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        const parts: string[] = [];
+        if (selectedIds.size > 0) parts.push("selected");
+        if (category !== "all") parts.push(slug(category));
+        if (saleFilter !== "all") parts.push(slug(saleFilter));
+        if (genreFilter !== "all") parts.push(slug(genreFilter));
+        if (selectedTitles.size > 0) parts.push(...[...selectedTitles].map(slug));
+        if (search.trim()) parts.push(`search-${slug(search.trim())}`);
+        if (parts.length === 0) parts.push("all");
+
+        exportComicsToCSV(source, `comics-${parts.join("-")}-${source.length}.csv`);
+    };
+
+    const toggleTitleSelection = (title: string) => {
+        setSelectedTitles(prev => {
+            const next = new Set(prev);
+            if (next.has(title)) next.delete(title);
+            else next.add(title);
+            return next;
+        });
+    };
+
     const handleRangeSelection = (ids: string[]) => {
         setSelectedIds(prev => {
             const next = new Set(prev);
@@ -252,7 +313,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
             name: name.trim(),
             category,
             saleFilter,
-            selectedTitle,
+            selectedTitles: Array.from(selectedTitles),
             search,
             columnFilters: Object.fromEntries(
                 Object.entries(columnFilters).map(([k, v]) => [k, Array.from(v)])
@@ -273,7 +334,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
     const handleRestoreQuery = (q: SavedQuery) => {
         setCategory(q.category);
         setSaleFilter(q.saleFilter);
-        setSelectedTitle(q.selectedTitle);
+        setSelectedTitles(new Set(q.selectedTitles));
         setSearch(q.search);
         setColumnFilters(
             Object.fromEntries(
@@ -408,7 +469,7 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                 <button className="btn" onClick={() => {
                     setCategory("all");
                     setSaleFilter("all");
-                    setSelectedTitle("all");
+                    setSelectedTitles(new Set());
                     setSearch("");
                     setColumnFilters({});
                     setRangeFilters({});
@@ -418,6 +479,14 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
 
                 <button className="btn" onClick={handleSaveQuery} title="Save current filters as a named query">
                     + Save Query
+                </button>
+
+                <button
+                    className="btn"
+                    onClick={handleExportCSV}
+                    title={selectedIds.size > 0 ? "Export selected comics to CSV" : "Export currently filtered comics to CSV (clear filters first to export all)"}
+                >
+                    Export CSV
                 </button>
             </div>
 
@@ -437,23 +506,33 @@ export default function CollectionClient({ comics }: CollectionClientProps) {
                 <aside className="title-sidebar">
                     <div className="sidebar-title" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <span>Title</span>
-                        <button className="btn-text" style={{ fontSize: 11 }}
-                            onClick={() => setTitleSortBy(s => s === "count" ? "name" : "count")}>
-                            {titleSortBy === "count" ? "A–Z" : "#"}
-                        </button>
+                        <span>
+                            <button className="btn-text" style={{ fontSize: 11 }}
+                                onClick={() => setSelectedTitles(new Set(titlesWithCounts.map(t => t.title)))}
+                                title="Select all titles, then click any to deselect">
+                                Select All
+                            </button>
+                            {" "}
+                            <button className="btn-text" style={{ fontSize: 11 }}
+                                onClick={() => setTitleSortBy(s => s === "count" ? "name" : "count")}>
+                                {titleSortBy === "count" ? "A–Z" : "#"}
+                            </button>
+                        </span>
                     </div>
                     <div className="sidebar-list">
                         <button
-                            className={`sidebar-item ${selectedTitle === "all" ? "active" : ""}`}
-                            onClick={() => setSelectedTitle("all")}
+                            className={`sidebar-item ${selectedTitles.size === 0 ? "active" : ""}`}
+                            onClick={() => setSelectedTitles(new Set())}
+                            title="Clear title selection"
                         >
                             All Titles
                         </button>
                         {titlesWithCounts.map(({ title, count }) => (
                             <button
                                 key={title}
-                                className={`sidebar-item ${selectedTitle === title ? "active" : ""}`}
-                                onClick={() => setSelectedTitle(title)}
+                                className={`sidebar-item ${selectedTitles.has(title) ? "active" : ""}`}
+                                onClick={() => toggleTitleSelection(title)}
+                                title="Click to toggle — select multiple titles"
                             >
                                 {title}
                                 <span className="sidebar-count">{count}</span>
