@@ -38,7 +38,7 @@ function saveQueries(queries: SavedQuery[]) {
 
 const EXPORT_COLUMNS = [
     "marvel_id", "title", "number", "year", "month", "publisher", "genre",
-    "norm_grade", "fmv", "grade_category",
+    "norm_grade", "fmv", "grade_category", "qualified", "community_url",
 ] as const;
 
 function csvEscape(value: unknown): string {
